@@ -7,7 +7,7 @@ Extensible Timetag Analyzer
 
 
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
-](https://timetag.github.io/)
+](https://timetag.github.io/tutorial.html)
 
 ## ETA for realtime analysis (NEW!)
 
