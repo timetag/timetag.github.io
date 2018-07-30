@@ -3,18 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ETA's documentation!
+Intro
 ===============================
 
+Fast - Flexible - User-Friendly
 
-
-
-Indices and tables
-==================
+Tutorial
+===============================
 
 .. toctree::
 
    installation
-   tutorial
-   recipe
+   workflow
+   recipes
    advanced
