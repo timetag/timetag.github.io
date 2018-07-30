@@ -22,10 +22,10 @@ This is the place where you define how exactly the ETAbackend analyses your data
 You create an analysis instrument in two steps:
 
 * Create a state diagram (https://en.wikipedia.org/wiki/State_diagram) trough which the program transitions that covers all 
-relevant states that your analysis undergoes (left-hand side of the instrument)
+  relevant states that your analysis undergoes (left-hand side of the instrument)
 
 * Create some (simple) code to define what actions should be performed upon one (or several) specific transitions (right-hand 
-side of the Instrument Designer)
+  side of the Instrument Designer)
 
 To get a better understanding let’s first consider a simple example of a state diagram with two state before we move on to a 
 working ETA example.

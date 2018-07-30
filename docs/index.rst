@@ -16,6 +16,6 @@ Indices and tables
 ==================
 
 * :ref:`installation`
-* :ref:`tutorial`
+
 
 * :ref:`search`
