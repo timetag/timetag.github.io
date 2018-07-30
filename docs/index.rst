@@ -9,13 +9,14 @@ Welcome to ETA's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   installation
+   tutorial
 
 
 Indices and tables
 ==================
 
-* :ref:`installation`
+* 
 
 
 * :ref:`search`
