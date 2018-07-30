@@ -16,6 +16,5 @@ Indices and tables
 
    installation
    tutorial
-
-
-* :ref:`search`
+   recipe
+   advanced
