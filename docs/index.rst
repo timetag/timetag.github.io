@@ -15,6 +15,7 @@ Welcome to ETA's documentation!
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
+* :ref:`installation`
+* :ref:`tutorial`
+
 * :ref:`search`
