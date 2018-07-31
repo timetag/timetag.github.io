@@ -73,13 +73,15 @@ To define an action you select a transition after which you would like the actio
 
 With this transition selected press SHIFT + T (think: Trigger). You will see state_at_arrow_tail--list_of_channel_numbers-->state_at_arrow_head followed by a colon (:) appear in the code on the right-hand side. By using indentations you can now specify actions that should be performed upon completion of the transition. In case of a start-stop measurement we want to start the clock when there is an event on channel 0. We therefore write:
 
-.. code-block:: python
+.. code:: python
+
   idle--0-->taking_time:
     c1.start()
 
 To stop the clock and record the time difference in our histogram we write:
 
-.. code-block:: python
+.. code:: python
+
   taking_time--1-->idle:
     c1.stop()
     h1.record(c1)
@@ -91,15 +93,21 @@ Labels can be written underneath the state (e.g. when they become too long to fi
 
 
 SHIFT + M (think: Mark)
-.. code-block:: python
+
+.. code:: python
+
   COINCIDENCE()
   TABLE()
 
 Allowed action definitions
-.. code-block:: python
-  a--1-->b:
-    action1
-  a--2,4-->b
-    action2
-  b: #involves all transitions arriving to b
-    action3
+
+.. code:: python
+
+    a--1-->b:
+      action1
+    a--2,4-->b
+      action2
+    b: #involves all transitions arriving to b
+      action3
+
+
