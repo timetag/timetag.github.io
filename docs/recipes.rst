@@ -23,6 +23,22 @@ You can choose to display an interactive histogram plot with plotly or bokeh or 
 
 Correlation
 ------------
+Start-Stop (w/ and w/o reset)
+------------------------------
+This recipe is determining the time differences between all events on the zeroeth and first physical channel, starting the time on each event on channel 0 and stopping on each event on channel 1 for each start. These time differences are then logged into a histogram.
+
+Delay
+......
+The channels are duplicated (0->2 and 1->3) with a configurable delay by the dealy line instruments. Afterwards the actual time differences are taken from the delayed copies.
+To adjust the delay, change the second argument of the emit(channel_number, delay_in_ps) function. This feature lets you compensate for physical differences in fiber patchcord and coaxial cable length for the two optical and electrical signal paths in an HBT setup.
+
+When to use
+......................
+It should be the first recipe you think about for auto- and cross correlation. It is also the right choice for investigating features far away from 0 time delay.
+
+Output
+.......
+You can choose to display an interactive histogram plot with plotly or you can save a *.txt file by running the corresponding code panel. You can also have a look at the examples for fitting in the interactive plot and the examples for saving figures of a zoom-in and a full auto-correlation including analysis.
 
 Two-time correlation
 ---------------------
