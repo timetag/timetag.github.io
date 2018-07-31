@@ -1,5 +1,5 @@
 ============
-Tutorial
+Workflow
 ============
 
 if not using ready-made recipe
@@ -34,7 +34,8 @@ The states we want to consider for our abstract example are “music_playing” 
 triggered by either “play” or “stop”, depending on the current state.
 
 
-TODO: IMAGE
+.. figure:: _static/etamanualexample.jpg
+    :align: center
 
 We start in the “silent” state, indicated by the arrow with it’s tail attached 
 nowhere.
@@ -60,7 +61,8 @@ the chairs.
 
 From this point on I will assume that the state diagram is labelled as follows:
 
-TODO: IMAGE
+.. figure:: _static/etamanualexample1.png
+    :align: center
 
 We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
 
@@ -71,31 +73,33 @@ To define an action you select a transition after which you would like the actio
 
 With this transition selected press SHIFT + T (think: Trigger). You will see state_at_arrow_tail--list_of_channel_numbers-->state_at_arrow_head followed by a colon (:) appear in the code on the right-hand side. By using indentations you can now specify actions that should be performed upon completion of the transition. In case of a start-stop measurement we want to start the clock when there is an event on channel 0. We therefore write:
 
-``
-idle--0-->taking_time:
-	c1.start()
-``
+.. code-block:: python
+  idle--0-->taking_time:
+    c1.start()
+
 To stop the clock and record the time difference in our histogram we write:
 
-``
-taking_time--1-->idle:
-	c1.stop()
-	h1.record(c1)
-``
+.. code-block:: python
+  taking_time--1-->idle:
+    c1.stop()
+    h1.record(c1)
+
 
 Additional Info:
 States can loop to themselves
 Labels can be written underneath the state (e.g. when they become too long to fit) with 
 
-``
+
 SHIFT + M (think: Mark)
-COINCIDENCE()
-TABLE()
+.. code-block:: python
+  COINCIDENCE()
+  TABLE()
+
 Allowed action definitions
- a--1-->b:
-action1
-a--2,4-->b
-	action2
-b: #involves all transitions arriving to b
-	action3
-``
+.. code-block:: python
+  a--1-->b:
+    action1
+  a--2,4-->b
+    action2
+  b: #involves all transitions arriving to b
+    action3
