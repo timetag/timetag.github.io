@@ -21,13 +21,13 @@ This is the place where you define how exactly the ETAbackend analyses your data
 
 You create an analysis instrument in two steps:
 
-* Create a state diagram (https://en.wikipedia.org/wiki/State_diagram) trough which the program transitions that covers all 
+* Create a state diagram (https://en.wikipedia.org/wiki/State_diagram) through which the program transitions that covers all 
   relevant states that your analysis undergoes (left-hand side of the instrument)
 
 * Create some (simple) code to define what actions should be performed upon one (or several) specific transitions (right-hand 
   side of the Instrument Designer)
 
-To get a better understanding let’s first consider a simple example of a state diagram with two state before we move on to a 
+To get a better understanding, let’s first consider a simple example of a state diagram with two state before we move on to a 
 working ETA example.
 
 The states we want to consider for our abstract example are “music_playing” and “silence”. A transition between the states is 
@@ -62,14 +62,14 @@ From this point on I will assume that the state diagram is labelled as follows:
 
 TODO: IMAGE
 
-We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record tie differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
+We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
 
 
-I will also assumed the histogram is names h1 and the clock is named c1.
+I will also assume the histogram is named h1 and the clock is named c1.
 
 To define an action you select a transition after which you would like the action to happen.
 
-With this transition selected press SHIFT + T (think: Trigger). You will see state_at_arrow_tail--list_of_channel_numbers-->state_at_arrow_head followed by a colon (:) appear in the code on the right-hand side. Indented you can now specify actions that should be performed upon completion of the transition. In case of a start-stop measurement we want to start the clock when there is an event on channel 0. We, therefore, write:
+With this transition selected press SHIFT + T (think: Trigger). You will see state_at_arrow_tail--list_of_channel_numbers-->state_at_arrow_head followed by a colon (:) appear in the code on the right-hand side. By using indentations you can now specify actions that should be performed upon completion of the transition. In case of a start-stop measurement we want to start the clock when there is an event on channel 0. We therefore write:
 
 ``
 idle--0-->taking_time:
