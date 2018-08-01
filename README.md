@@ -4,36 +4,34 @@ Extensible Timetag Analyzer
 [![License](https://img.shields.io/github/license/timetag/ETAServer.svg)](https://github.com/timetag/ETAServer/blob/master/LICENSE)
 [![Github All Releases](https://img.shields.io/github/downloads/timetag/ETABackend/total.svg)](https://github.com/timetag/ETABackend/releases)
 [![DOI](https://zenodo.org/badge/125106142.svg)](https://zenodo.org/badge/latestdoi/125106142)
-
+[![Documentation Status](https://readthedocs.org/projects/eta/badge/?version=latest)](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
 ](https://timetag.github.io/tutorial.html)
 
-## ETA for realtime analysis (NEW!)
 
-[![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
-
-
-## Installation
-1. [Download](https://github.com/timetag/ETA/releases) and run [ETA-Setup-*.*.*.exe] to install the GUI.
-2. Download and unzip [ETA_LIB.zip] to a path that contains more than 6 slashes (C:/f1/f2/f3/f4/f5/site-packages).
-3. Download and run [ETABackend.exe].
-4. Input the path to ETA_LIB and your IP address (type "127.0.0.1" or "localhost" if you want to use 
-ETA locally) in the ETA Backend.
-5. Input the Backend URL in the GUI.
-
-[ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/)
-
-## Methods
-* [Time correlated photon counting](https://raw.githubusercontent.com/timetag/timetag.github.io/master/ETAHub/correlation.eta)
+## Usage of Time-tagging
+* Time correlated photon counting
 * Fluorescence lifetime imaging
-* [Anti-bunching](https://raw.githubusercontent.com/timetag/timetag.github.io/master/ETAHub/correlation.eta)
+* Anti-bunching
 * Linear optics quantum computing
 * Quantum process tomography
 * Scanning fluorescence microscopy
 * Photo-activated localization microscopy (PALM)
 * Stochastic optical reconstruction microscopy (STORM)
 * Stimulated emission depletion (STED) microscopy
+
+## ETA for realtime analysis (NEW!)
+
+[![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
+
+
+## Installation / Web GUI
+For a full installation, [Download](https://github.com/timetag/ETA/releases) and unzip ``ETA_LIB.zip`` and ``ETA_QuickStart.zip``.
+Install the backend and GUI according to the [mannual](https://eta.readthedocs.io/en/latest/installation.html).
+
+Alternatively, you can run [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
+
 
 ### Recipie Submition Guide
 
