@@ -21,18 +21,19 @@ Extensible Timetag Analyzer
 * Stochastic optical reconstruction microscopy (STORM)
 * Stimulated emission depletion (STED) microscopy
 
-## ETA for realtime analysis (NEW!)
+### ETA for realtime analysis (NEW!)
 
 [![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
 
 
-## Installation / Web GUI
+## Get Started!
+### Install ETA
 
 For a full installation, [Download](https://github.com/timetag/ETA/releases) and install GUI, backend and the ``ETA_LIB`` according to the [Documentation](https://eta.readthedocs.io/en/latest/installation.html).
 
-You can also run [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
-
+You can also try [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
 
 ### Recipies
+Here are some [recipies](https://eta.readthedocs.io/en/latest/recipes.html) that could be used for your experiments.
 
-📊🎉[ETA Hub][Submit your recipie]
+We are also planning for a 📊🎉[ETA Hub] which allows you to [download and share the recipie].
