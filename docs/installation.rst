@@ -7,12 +7,12 @@ Windows
 
 * Download
 
-  You can download ETA from here: https://github.com/timetag/ETA/releases . What you should download for the first includes:
+  You can download ETA from here: https://github.com/timetag/ETA/releases . What you should download:
 
   *       the ``ETA_Install-win64.zip``
   *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used)
 
-* Install
+* Installation
 
   *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
@@ -22,16 +22,14 @@ Windows
 
 * Configure (Backend)
     
-  The backend asks for this path when you run it for the first time.
+  The backend asks for the path to the extracted site-packages when you run it for the first time.
 
-  The computer which runs the backend will do the number crunching and it would make sense 
-  to put it on the computer which has the timetag files so the (potentially large) files do
-  not have to be copied around. That is just a recommendation, though. In the frontend
+  The computer which runs the backend will do the number crunching and it might be advantageous 
+  to run it on the computer which has the timetag files so the (potentially large) files do
+  not have to be copied around. This is just a recommendation, though. In the frontend
   (installed by the ETA-Setup-x.x.x.exe) you can then specify the ip of the computer 
-  running the backend, which can just be localhost and a port of your choice if you run
-  back and front end on the same PC. 
+  running the backend, which can just be localhost if you run back and front end on the same PC. 
     
-  TODO: The ip stuff should maybe be more precise but I was not sure anymore...
 
 * Verify the Installation
 
