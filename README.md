@@ -4,11 +4,12 @@ Extensible Timetag Analyzer
 [![License](https://img.shields.io/github/license/timetag/ETAServer.svg)](https://github.com/timetag/ETAServer/blob/master/LICENSE)
 [![Github All Releases](https://img.shields.io/github/downloads/timetag/ETABackend/total.svg)](https://github.com/timetag/ETABackend/releases)
 [![DOI](https://zenodo.org/badge/125106142.svg)](https://zenodo.org/badge/latestdoi/125106142)
-
+[![Documentation Status](https://readthedocs.org/projects/eta/badge/?version=latest)](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
 ](https://timetag.github.io/tutorial.html)
 
+[ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/)
 ## ETA for realtime analysis (NEW!)
 
 [![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
@@ -22,12 +23,11 @@ Extensible Timetag Analyzer
 ETA locally) in the ETA Backend.
 5. Input the Backend URL in the GUI.
 
-[ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/)
 
-## Methods
-* [Time correlated photon counting](https://raw.githubusercontent.com/timetag/timetag.github.io/master/ETAHub/correlation.eta)
+## Usage of Time-tagging
+* Time correlated photon counting
 * Fluorescence lifetime imaging
-* [Anti-bunching](https://raw.githubusercontent.com/timetag/timetag.github.io/master/ETAHub/correlation.eta)
+* Anti-bunching
 * Linear optics quantum computing
 * Quantum process tomography
 * Scanning fluorescence microscopy
