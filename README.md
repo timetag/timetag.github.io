@@ -7,7 +7,7 @@ Extensible Timetag Analyzer
 [![Documentation Status](https://readthedocs.org/projects/eta/badge/?version=latest)](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
-](https://timetag.github.io/tutorial.html)
+](https://readthedocs.org/projects/eta/badge/?version=latest)
 
 
 ## Usage of Time-tagging
@@ -33,7 +33,6 @@ Install the backend and GUI according to the [mannual](https://eta.readthedocs.i
 Alternatively, you can run [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
 
 
-### Recipie Submition Guide
+### Recipies
 
-📊🎉[ETA Hub](https://github.com/timetag/ETA/wiki/ETA-Hub)
-[Submit your recipie](https://github.com/timetag/ETA/wiki/ETA-Hub)
+📊🎉[ETA Hub][Submit your recipie]
