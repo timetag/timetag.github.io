@@ -1,7 +1,8 @@
 ============
 Recipes
 ============
-Here we want to provide some information about the pre-made recipes.
+Here we want to provide some information about the `pre-made recipes
+<https://drive.google.com/drive/folders/1d3CQJS5BMPNb_UgSTPeT-DsAJt-uG_EZ?usp=sharing>`_.
 
 Start-Stop (w/ and w/o reset)
 ------------------------------
