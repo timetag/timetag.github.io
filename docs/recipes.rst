@@ -23,8 +23,6 @@ You can choose to display an interactive histogram plot with plotly or bokeh or 
 
 Correlation
 ------------
-Start-Stop (w/ and w/o reset)
-------------------------------
 This recipe is determining the time differences between all events on the zeroeth and first physical channel, starting the time on each event on channel 0 and stopping on each event on channel 1 for each start. These time differences are then logged into a histogram.
 
 Delay
