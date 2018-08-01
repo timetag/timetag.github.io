@@ -11,20 +11,18 @@ Windows
 
     What you should download for the first run:
 
-    *       the ``ETA_QuickStart.zip``
-    *       the ``ETA_LIB.zip`` (recommended, alternatively an existing python3 site-packages location can be used)
+    *       the ``ETA_Install-win64.zip``
+    *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used)
 
 * Install
 
-    Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI. Alternatively, you can run ETA Web GUI without installation.
+    1) Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
-    The ``ETA_LIB.zip`` should be extracted to a folder at least 6 levels deep in the file system to
+    2) The ``ETA_LIB.zip`` should be extracted to a folder at least 6 levels deep in the file system to
     ensure you do not encounter a bug with windows 
     (e.g. ``C:\folder1\folder2\folder3\folder4\folder5\site-packages``).
 
-* Configure
-    
-    Run the extracted ``ETABackend.exe``.
+* Configure (Backend)
     
     The backend asks for this path when you run it for the first time.
 
