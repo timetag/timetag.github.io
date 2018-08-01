@@ -9,20 +9,6 @@ Extensible Timetag Analyzer
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
 ](https://timetag.github.io/tutorial.html)
 
-[ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/)
-## ETA for realtime analysis (NEW!)
-
-[![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
-
-
-## Installation
-1. [Download](https://github.com/timetag/ETA/releases) and run [ETA-Setup-*.*.*.exe] to install the GUI.
-2. Download and unzip [ETA_LIB.zip] to a path that contains more than 6 slashes (C:/f1/f2/f3/f4/f5/site-packages).
-3. Download and run [ETABackend.exe].
-4. Input the path to ETA_LIB and your IP address (type "127.0.0.1" or "localhost" if you want to use 
-ETA locally) in the ETA Backend.
-5. Input the Backend URL in the GUI.
-
 
 ## Usage of Time-tagging
 * Time correlated photon counting
@@ -34,6 +20,18 @@ ETA locally) in the ETA Backend.
 * Photo-activated localization microscopy (PALM)
 * Stochastic optical reconstruction microscopy (STORM)
 * Stimulated emission depletion (STED) microscopy
+
+## ETA for realtime analysis (NEW!)
+
+[![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
+
+
+## Installation / Web GUI
+For a full installation, [Download](https://github.com/timetag/ETA/releases) and unzip ``ETA_LIB.zip`` and ``ETA_QuickStart.zip``.
+Install the backend and GUI according to the [mannual](https://eta.readthedocs.io/en/latest/installation.html).
+
+Alternatively, you can run [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
+
 
 ### Recipie Submition Guide
 
