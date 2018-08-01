@@ -16,4 +16,5 @@ Tutorial
    installation
    workflow
    recipes
+   python
    advanced
