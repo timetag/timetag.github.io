@@ -9,20 +9,23 @@ Windows
 
     You can download ETA from here: https://github.com/timetag/ETA/releases
 
-    What you should download:
+    What you should download for the first run:
 
-    *       the ``ETA-Setup-x.x.x.exe``
-    *       the ``ETABackend.exe``
+    *       the ``ETA_QuickStart.zip``
     *       the ``ETA_LIB.zip`` (recommended, alternatively an existing python3 site-packages location can be used)
 
-* Extract
+* Install
 
-    The ETA_lib should be extracted to a folder at least 6 levels deep in the file system to
+    Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI. Alternatively, you can run ETA Web GUI without installation.
+
+    The ``ETA_LIB.zip`` should be extracted to a folder at least 6 levels deep in the file system to
     ensure you do not encounter a bug with windows 
     (e.g. ``C:\folder1\folder2\folder3\folder4\folder5\site-packages``).
 
 * Configure
-
+    
+    Run the extracted ``ETABackend.exe``.
+    
     The backend asks for this path when you run it for the first time.
 
     The computer which runs the backend will do the number crunching and it would make sense 
@@ -39,3 +42,12 @@ Windows
     After running the frontend you can drag a recipe (``recipe_name.eta``) onto the main
     screen to load it. In order to analyze your time tag file you have to specify path 
     and filename in the variables and click “Run” on the code panel you want to execute.
+
+Linux & Mac OS
+-------
+
+TODO: Compile and install on Linux
+
+Web GUI
+-------
+You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
