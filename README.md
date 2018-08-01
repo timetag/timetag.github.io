@@ -27,7 +27,7 @@ Extensible Timetag Analyzer
 
 
 ## Installation / Web GUI
-For a full installation, [Download](https://github.com/timetag/ETA/releases) and unzip ``ETA_LIB.zip`` and ``ETA_QuickStart.zip``.
+For a full installation, [Download](https://github.com/timetag/ETA/releases) and unzip ``ETA_LIB.zip`` and ``ETA_Install.zip``.
 Install the backend and GUI according to the [mannual](https://eta.readthedocs.io/en/latest/installation.html).
 
 Alternatively, you can run [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
