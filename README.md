@@ -7,7 +7,7 @@ Extensible Timetag Analyzer
 [![Documentation Status](https://readthedocs.org/projects/eta/badge/?version=latest)](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 [![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
-](https://readthedocs.org/projects/eta/badge/?version=latest)
+](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 
 ## Usage of Time-tagging
