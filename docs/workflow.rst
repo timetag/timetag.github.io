@@ -90,19 +90,17 @@ To stop the clock and record the time difference in our histogram we write:
 
 
 Additional Info:
-States can loop to themselves
-Labels can be written underneath the state (e.g. when they become too long to fit) with 
+ - States can loop to themselves.
+ - Labels can be written underneath the state (e.g. when they become too long to fit) with SHIFT + M (think: Mark)
 
-
-SHIFT + M (think: Mark)
-
+TODO:explain the following and add more functions
 .. code::
 
   COINCIDENCE()
   TABLE()
 
 Allowed action definitions
-
+TODO: Insert graph
 .. code::
 
     a--1-->b:
