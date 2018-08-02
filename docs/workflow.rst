@@ -77,7 +77,7 @@ With this transition selected press SHIFT + T (think: Trigger). You will see sta
 
 .. code:: python
 
-  idle-\ -0-\ ->taking_time:
+  idle--0-->taking_time:
     c1.start()
 
 To stop the clock and record the time difference in our histogram we write:
