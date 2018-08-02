@@ -36,6 +36,7 @@ triggered by either “play” or “stop”, depending on the current state.
 
 .. figure:: _static/etamanualexample.jpg
     :align: center
+    :width: 50 %
 
 We start in the “silent” state, indicated by the arrow with it’s tail attached 
 nowhere.
@@ -63,6 +64,7 @@ From this point on I will assume that the state diagram is labelled as follows:
 
 .. figure:: _static/etamanualexample1.png
     :align: center
+    :width: 50 %
 
 We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
 
