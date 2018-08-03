@@ -15,49 +15,33 @@ Supported libraries for the standard distribution (ETA_LIB)
 Users can also use the site-packages from his own python installation, 
 which is usually located at `C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages`
 
-Minimum example
+Cutting the timetag files
+-----
+eta.simple_cut()
+
+eta.incremental_cut()
+
+eta.wait_for()
+
+Executing recipies
 -----
 
-.. code:: python
+eta.run()
 
-    import numpy as np
-    result =eta.run(filename, 4)
-    histogram = result["h1"] #get the table from result
-    np.savetxt("h1.txt",histogram) #save the txt file for the histogram
-    eta.send("processing succeed.")
+eta.display()
+
+eta.send()
 
 
-Full example with plotly (dash)
------
 
-.. code:: python
+Modifying the recipies
+------
 
-    import numpy as np
-    import dash
-    import dash_core_components as dcc
-    import dash_html_components as html
-    import plotly.graph_objs as go
-    result =eta.run(filename, 4)
-    histogram= result["h1"] #get the table from result
+eta.recipe_update()
 
-    app = dash.Dash()
-    app.layout = html.Div(children=[
-        html.H1(children='Result from ETA'),
-        html.P(children='+inf_bin={}'.format(inf)),
-        dcc.Graph(
-            id='example-graph',
-            figure={
-                'data': [
-                    {'x': np.arange(histogram.size), 'y': histogram, 'type': 'bar', 'name': 'SF'},
-                ],
-                'layout': {
-                    'title': expname
-                }
-            }
-        )
-    ])
+eta.recipe_get_parameter()
 
-    eta.display(app)
+eta.recipe_set_parameter()
 
 
 More Examples
