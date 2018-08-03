@@ -92,6 +92,7 @@ Additional Info:
  - Labels can be written underneath the state (e.g. when they become too long to fit) with SHIFT + M (think: Mark)
 
 TODO:explain the following and add more functions
+
 .. code::
 
   COINCIDENCE()
@@ -99,6 +100,7 @@ TODO:explain the following and add more functions
 
 Allowed action definitions
 TODO: Insert graph
+
 .. code::
 
     a--1-->b:
@@ -115,6 +117,7 @@ Add a "Display Panel"
 In the ´´Display Panel´´ you tell ETA to run your analysis and define what happens with the result.
 
 A minimum example that saves the data as an Origin-compatitable ´´*.txt´´ file looks as follows:
+
 .. code:: python
 
     import numpy as np
