@@ -15,7 +15,7 @@ Supported libraries for the standard distribution (ETA_LIB)
 Users can also use the site-packages from his own python installation, 
 which is usually located at `C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages`
 
-Cutting the timetag files
+Cutting time-tag files
 -----
 eta.simple_cut()
 
@@ -33,8 +33,7 @@ eta.display()
 eta.send()
 
 
-
-Modifying the recipies
+Modifying recipies
 ------
 
 eta.recipe_update()
