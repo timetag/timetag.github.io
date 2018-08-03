@@ -112,8 +112,9 @@ TODO: Insert graph
 
 
 
-Displaying the results
+Add display panels
 --------
+
 
 Display panels can be added in recipes to further process and visualzie the output from the virtual instruments. 
 
@@ -129,7 +130,11 @@ A minimum example that saves the histogram as a Origin-competitable text file is
     
 
 
-Here is another example which uses dash from plotly to create a interactive graph from a histogram. In this example, ``app`` is a Dash object which gets modified with the style configruations. ``eta.display(app)`` is used for displaying the Dash on the GUI side.
+Here is another example which uses dash from plotly to create a interactive graph from a histogram. 
+
+In this example, ``app`` is a Dash object which gets modified with the style configruations. 
+
+``eta.display(app)`` is used for displaying the Dash on the GUI side.
 
 .. code:: python
 
