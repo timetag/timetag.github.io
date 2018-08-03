@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ***********************************
-Extensible Timetag Analyzer
+`Extensible Timetag Analyzer<https://timetag.github.io>`_
 ***********************************
 
 .. toctree::
