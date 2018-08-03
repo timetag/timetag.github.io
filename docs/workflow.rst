@@ -5,7 +5,7 @@ Workflow
 if not using ready-made recipe
 
 
-Add hardware
+Add time-tagger hardware
 --------
 
 Click the “Acquisition Device” button on the main screen to open a dialogue.
@@ -111,3 +111,51 @@ TODO: Insert graph
       action3
 
 
+
+Displaying the results
+--------
+
+Display panels can be added in recipes to further process and visualzie the output from the virtual instruments. 
+
+A minimum example that saves the histogram as a Origin-competitable text file is as follows.
+
+.. code:: python
+
+    import numpy as np
+    result = eta.run(filename, 4)
+    histogram = result["h1"] #get the table from result
+    np.savetxt("h1.txt",histogram) #save the txt file for the histogram
+    eta.send("processing succeed.")
+    
+
+
+Here is another example which uses dash from plotly to create a interactive graph from a histogram. In this example, ``app`` is a Dash object which gets modified with the style configruations. ``eta.display(app)`` is used for displaying the Dash on the GUI side.
+
+.. code:: python
+
+    import numpy as np
+    import dash
+    import dash_core_components as dcc
+    import dash_html_components as html
+    import plotly.graph_objs as go
+    result =eta.run(filename, 4)
+    histogram = result["h1"] #get the table from result
+
+    app = dash.Dash()
+    app.layout = html.Div(children=[
+        html.H1(children='Result from ETA'),
+        html.P(children='+inf_bin={}'.format(inf)),
+        dcc.Graph(
+            id='example-graph',
+            figure={
+                'data': [
+                    {'x': np.arange(histogram.size), 'y': histogram, 'type': 'bar', 'name': 'SF'},
+                ],
+                'layout': {
+                    'title': expname
+                }
+            }
+        )
+    ])
+
+    eta.display(app)
