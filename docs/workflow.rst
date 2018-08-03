@@ -6,14 +6,14 @@ if not using ready-made recipe
 
 
 Add time-tagger hardware
---------
+--------------------------
 
 Click the “Acquisition Device” button on the main screen to open a dialogue.
 Specify a relatable name, the number of physically available channels and 
 the number of marker channels (specific to PicoQuant HydraHarp400). 
 
 Add analysis instrument via “Instrument Designer”
----------
+--------------------------------------------------
 
 Click the “Instrument Designer” button on the main screen to create a new analysis routine and open it in the Instrument Designer. 
 
@@ -36,7 +36,6 @@ triggered by either “play” or “stop”, depending on the current state.
 
 .. figure:: _static/etamanualexample.jpg
     :align: center
-    :width: 50 %
 
 We start in the “silent” state, indicated by the arrow with it’s tail attached 
 nowhere.
@@ -64,7 +63,6 @@ From this point on I will assume that the state diagram is labelled as follows:
 
 .. figure:: _static/etamanualexample1.png
     :align: center
-    :width: 50 %
 
 We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
 
@@ -112,28 +110,22 @@ TODO: Insert graph
 
 
 
-Add display panels
---------
+Add a "Display Panel"
+-----------------------
+In the ´´Display Panel´´ you tell ETA to run your analysis and define what happens with the result.
 
-
-Display panels can be added in recipes to further process and visualzie the output from the virtual instruments. 
-
-A minimum example that saves the histogram as a Origin-competitable text file is as follows.
-
+A minimum example that saves the data as an Origin-compatitable ´´*.txt´´ file looks as follows:
 .. code:: python
 
     import numpy as np
-    result = eta.run(filename, 4)
+    result =eta.run(filename, 4) #tell ETA to run the analysis on "filename" in 4 chunks (automatic multi-threading)
     histogram = result["h1"] #get the table from result
     np.savetxt("h1.txt",histogram) #save the txt file for the histogram
-    eta.send("processing succeed.")
-    
+    eta.send("processing succeed.") #display message on GUI popup
 
-
-Here is another example which uses dash from plotly to create a interactive graph from a histogram. 
-
-In this example, ``app`` is a Dash object which gets modified with the style configruations. 
-
+Instead or in addition to saving a file, the data can be displayed/treated in various ways.
+In the following example dash from plotly is used to create an interactive graph from a histogram. 
+``app`` is a Dash object which gets modified with the style configurations. 
 ``eta.display(app)`` is used for displaying the Dash on the GUI side.
 
 .. code:: python
@@ -164,3 +156,10 @@ In this example, ``app`` is a Dash object which gets modified with the style con
     ])
 
     eta.display(app)
+
+
+Please refer to our pre-made recipes for inspiration.
+
+Run your analysis
+----------------------
+Once you have added ´´Hardware´´, ´´Instrument Designer´´ and ´´Display Panel´´, return to the home screen and press ´´Run´´ on the ´´Display Panel´´ of your choice.
