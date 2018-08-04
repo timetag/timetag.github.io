@@ -29,7 +29,7 @@ eta.recipe_get_parameter()
 
 eta.recipe_set_parameter()
 
-Included packages for ETA_LIB
+List of packages in ETA_LIB
 -----
 
 ETA_LIB is the standard distribution for ETA packages, which includes some commonly used libraries.
