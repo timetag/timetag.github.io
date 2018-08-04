@@ -13,7 +13,7 @@ Windows
   *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used,
           which is usually located at ``C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages``)
 
-* Installation
+* Install
 
   *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
@@ -21,7 +21,7 @@ Windows
           ensure you do not encounter a bug with windows 
           (e.g. ``C:\folder1\folder2\folder3\folder4\folder5\site-packages``).
 
-* Configure (Backend)
+* Configure Backend
     
   The backend asks for the path to the extracted site-packages when you run it for the first time.
 
