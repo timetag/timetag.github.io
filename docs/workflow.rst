@@ -123,7 +123,7 @@ A minimum example that saves the data as an Origin-compatitable ``*.txt`` file l
 .. code:: python
 
     import numpy as np
-    result =eta.run(filename, 4) #tell ETA to run the analysis on "filename" in 4 chunks (automatic multi-threading)
+    result =eta.run(eta.simple_cut(filename,4)) #tell ETA to run the analysis on "filename" in 4 chunks (automatic multi-threading)
     histogram = result["h1"] #get the table from result
     np.savetxt("h1.txt",histogram) #save the txt file for the histogram
     eta.send("processing succeed.") #display message on GUI popup
