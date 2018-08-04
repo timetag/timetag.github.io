@@ -1,19 +1,6 @@
 Embedded Python
 ===============================
 
-Supported libraries for the standard distribution (ETA_LIB)
------
-
-- numpy
-- scipy
-- lmfit
-- matplotlib
-- dash
-- plotly
-- bokeh
-
-Users can also use the site-packages from his own python installation, 
-which is usually located at `C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages`
 
 Cutting time-tag files
 -----
@@ -42,6 +29,20 @@ eta.recipe_get_parameter()
 
 eta.recipe_set_parameter()
 
+Included packages for ETA_LIB
+-----
+
+ETA_LIB is the standard distribution for ETA packages, which includes some commonly used libraries.
+
+- numpy
+- scipy
+- lmfit
+- matplotlib
+- dash
+- plotly
+- bokeh
+
+Users can also use the packages from any Python 3 (x64) installation, if ETA_LIB is configured to the path to the Python site-packages.
 
 More Examples
 -----
