@@ -10,7 +10,8 @@ Windows
   You can download ETA from here: https://github.com/timetag/ETA/releases . What you should download:
 
   *       the ``ETA_Install-win64.zip``
-  *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used)
+  *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used,
+          which is usually located at ``C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages``)
 
 * Installation
 
