@@ -140,7 +140,7 @@ In the following example dash from plotly is used to create an interactive graph
     import dash_core_components as dcc
     import dash_html_components as html
     import plotly.graph_objs as go
-    result =eta.run(filename, 4)
+    result =eta.run(eta.simple_cut(filename,4))
     histogram = result["h1"] #get the table from result
 
     app = dash.Dash()
