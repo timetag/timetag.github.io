@@ -6,7 +6,7 @@ Extensible Timetag Analyzer
 [![DOI](https://zenodo.org/badge/125106142.svg)](https://zenodo.org/badge/latestdoi/125106142)
 [![Documentation Status](https://readthedocs.org/projects/eta/badge/?version=latest)](https://eta.readthedocs.io/en/latest/?badge=latest)
 
-[![ETA](https://s3.amazonaws.com/media-p.slid.es/uploads/852422/images/4743073/eta.png)
+[![ETA](https://eta.readthedocs.io/en/latest/_static/logo.png)
 ](https://eta.readthedocs.io/en/latest/?badge=latest)
 
 
