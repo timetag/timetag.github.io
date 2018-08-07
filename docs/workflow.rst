@@ -66,10 +66,9 @@ From this point on I will assume that the state diagram is labelled as follows:
     :align: center
     :width: 50 %
 
-We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
-
 
 I will also assume the histogram is named h1 and the clock is named c1.
+We will define actions so that we use channel 0 as the start channel and channel 1 as the stop channel. (Note, that this analysis will not record time differences between closest events, since the start is not reset if a second event occurs on channel 0 before an event occurs on channel 1. See Section “Coincidence Measurements”)
 
 To define an action you select a transition after which you would like the action to happen.
 
