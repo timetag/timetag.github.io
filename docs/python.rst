@@ -39,6 +39,9 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 - lmfit
 - matplotlib
 - dash
+- dash-renderer 
+- dash-html-components 
+- dash-core-components
 - plotly
 - bokeh
 
@@ -52,14 +55,8 @@ ETA Dependencies:
 - numpy
 - llvmlite
 - numba 
-- astunparse
-- matplotlib
-- dash
-- dash-renderer 
-- dash-html-components 
-- dash-core-components
-- plotly
-- bokeh
+- astunparse (only works in Python <3.7.0)
+
 
 More Examples
 -----
