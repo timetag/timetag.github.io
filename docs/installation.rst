@@ -2,7 +2,7 @@
 Installation
 ============
 
-Windows (as a standalone distribution)
+Windows (as a standalone program)
 --------
 
 * Download
@@ -22,14 +22,14 @@ Windows (as a standalone distribution)
 
 * Configure Backend
     
-  The backend asks for the path to the extracted site-packages when you run it for the first time.
+  The backend asks for the path to the extracted ``site-packages`` and your IP address when you run it for the first time.
 
   The computer which runs the backend will do the number crunching and it might be advantageous 
   to run it on the computer which has the timetag files so the (potentially large) files do
   not have to be copied around. This is just a recommendation, though.
   
-  In the frontend (installed by the ETA-Setup-x.x.x.exe) you can then specify the ip of the computer 
-  running the backend, which can just be localhost if you run back and front end on the same PC. 
+  In the frontend (installed by the ETA-Setup-x.x.x.exe) you can then specify the IP address of the computer 
+  running the backend, which can just be localhost if you run backand and frontend on the same PC. 
     
 
 * Verify the Installation
