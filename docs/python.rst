@@ -45,17 +45,6 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 - plotly
 - bokeh
 
-Using your own  Python site-packages.
------
-Users can also use the packages from any Python 3 (x64) installation, if ETA_LIB is configured to the path to the Python site-packages.
-
-ETA Dependencies:
-
-- cffi 
-- numpy
-- llvmlite
-- numba 
-- astunparse (only works in Python <3.7.0)
 
 
 More Examples
