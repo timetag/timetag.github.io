@@ -10,16 +10,15 @@ Windows
   You can download ETA from here: https://github.com/timetag/ETA/releases . What you should download:
 
   *       the ``ETA_Install-win64.zip``
-  *       the ``ETA_LIB-win64.zip`` (recommended, alternatively an existing Python 3 (x64) site-packages location can be used,
-          which is usually located at ``C:\Users\***\AppData\Local\Programs\Python\Python36\Lib\site-packages``)
+  *       the ``ETA_LIB-win64.zip`` 
 
 * Install
 
   *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
-  *       The ``ETA_LIB.zip`` should be extracted to a folder at least 6 levels deep in the file system to
-          ensure you do not encounter a bug with windows 
-          (e.g. ``C:\folder1\folder2\folder3\folder4\folder5\site-packages``).
+  *       Extract ``ETA_LIB.zip`` to ``C:\Users\***\AppData\Local\Programs\ETA\site-packages``
+          (or any folder at least 6 levels deep in the file system to
+          ensure you do not encounter a bug with Python module loader).
 
 * Configure Backend
     
