@@ -6,13 +6,15 @@ Advanced
 Talking to ETA backend via Websocket
 -------------------------------------
 
-ETA backend implements a Remote Procedure Call mechanism using JSON format, with which you can upload an existing recipe, modifying variables, like filename, execute the analysis and even get the realtime streamming of the results.
+ETA backend implements a Remote Procedure Call mechanism using JSON format, with which you can upload an existing recipe, modifying parameters like ``filename``, run the analysis, and even get the realtime streamming of the result.
 
-Before invoking a remote method, your program (client) need to connect to the backend (server) using the Websocket protocal. (Examples in LabVIEW and Javascript are provided. [TODO:link to .vi] )
+Before invoking a remote method, connect your program (client) to ETA backend (server) using the Websocket protocal. 
 
-Sending a JSON string in a format like ``{"method": "<name of method>", "args": [<arg1>,<arg2>,...] }`` to the Websocket will invoke the corresponding method immediately. Once the method is invoked, the following requests will be queued until the current method finishes.
+(Examples in LabVIEW and Javascript are provided. [TODO:link to .vi] )
 
-The method might send JSON strings as responses, and the format is ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking the method.
+Sending a JSON string in a format of ``{"method": "<name of method>", "args": [<arg1>,<arg2>,...] }`` to the Websocket will invoke the corresponding method immediately. When invoked method is running, new requests will be queued until the current method finishes.
+
+The method might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking one method.
 
 List of the methods provided in ETA Backend 
 -------------------------------------
@@ -44,16 +46,64 @@ List of the methods provided in ETA Backend
 Type of responses from ETA Backend 
 -------------------------------------
 
-1. Errors (`err`)
+1. Errors 
 
-2. Generic Information (`log`)
+    Type: ``err``
+    
+    JSON: ``["err","<text>"]``
+    
+    Args: ``<text>`` is a string of the error message.
 
-3. Main Table (`table`)
+2. Generic Information
 
-4. Switch state to running (`running`)
+    Type: ``log``
+    
+    JSON: ``["log","<text>"]``
+    
+    Args: ``<text>`` is a string of the message.
 
-5. Switch state to stopped  (`stopped`)
+3. Update Main Table 
 
-6. URL of dashboard (`dash`)
+    Type: ``table``
+    
+    JSON: ``["table","<json>"]``
+    
+    Args: ``<json>`` is a JSON string of the main table.
 
-7. Switch state to discarded (`discard`)
+4. Switch state to running 
+
+    Type: ``running``
+    
+    JSON: ``["running"]``
+    
+   
+5. Switch state to stopped  
+
+    Type: ``stopped``
+    
+    JSON: ``["stopped"]``
+
+6. Switch state to discarded
+
+    Type: ``discard``
+    
+    JSON: ``["discard"]``
+
+
+7. URL of dashboard 
+
+    Type: ``dash``
+    
+    JSON: ``["dash",<url>]``
+    
+    Args: ``<url>`` is a string of URL to the dashboard.
+
+8. User-defined message (eg. streamming histogram or GUI updates)
+
+    Type: defined using eta.send(message,type)
+    
+    JSON: ``["<type>","<message>"]``
+    
+    Args: ``<message>`` is a string of a user-defined message.
+
+
