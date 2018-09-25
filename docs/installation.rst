@@ -42,8 +42,10 @@ Other enviroments
 -------
 
 * Install
-
-  * Install ETA Dependencies:
+  
+  * Install Python 3
+  
+  * Install ETA Dependencies
   
     - cffi 
     - numpy
@@ -51,7 +53,11 @@ Other enviroments
     - numba 
     - astunparse (only works in Python <3.7.0)
 
-  * Install the ETA backend from git repository or your package manager. (TODO: pip install) 
+  * Install ETA backend
+  
+    ETA backend can be installed from git repository or your package manager. 
+    
+    (TODO: pip install) 
   
 * Configure Backend
 
