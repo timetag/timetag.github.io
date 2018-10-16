@@ -5,7 +5,11 @@ Here we want to provide some information about the pre-made recipes.
 
 Simple Lifetime
 ------------------------------
-This recipe is determining the time differences between events on the zeroeth and first physical channel, starting the time on channel 0 and stopping on channel 1. These time differences are then logged into a histogram.
+This recipe is determining time differences between events on two different channels. This means starting the stopwatch on an event on one channel and stopping on an event on another channel. These time differences are then logged into a histogram. Depending on the ``ch_sel`` (read: channel select) variable it can record differences between the ``SYNC`` and the delayed channel 0 (``t1``), between the ``SYNC`` the delayed channel 1 (``t2``) or between the delayed channels 0 and 1 (``t3``). 
+
+Input
+......
+You can browse your file system to select a timetagged file using the folder icon on the right of the ``file`` variable. If the filename is removed afterwards, leaving only a folder as ``file`` input, the code will run over all the files in the given folder.
 
 Delay
 ......
@@ -15,16 +19,20 @@ To adjust the delay, change the second argument of the ``emit(channel_number, de
 With or without reset
 ......................
 A Start-Stop measurement can be performed with or without resetting the start time.
-To understand the difference, imagine the starting of the clock is triggered by an event on channel 0. If the next event happens to occur on channel 1 everything is clear: the clock is stopped and the time difference is recorded to the histogram. But if the second event occurs on channel 0 we have to decide how to handle this case. We can either ignore this event and all other events on channel 0 until an event shows up on channel 1 (start-stop without reset) or we can reset the clock on every event on channel 0, only measuring the shortest time differences (start-stop with reset). The latter case approximates a proper correlation at time delays close to 0 and is typically used as an analysis if full correlation is not available. Note, that for long time scales it is absolutely neccesarry to do a full correlation to get an accurate result, especially if interresting features are not at 0 time delay (e.g. if the antibunching dip is shifted away from 0 time delay).
-You can switch between reset modes by adding/removing a transition from the ``running`` state to itself with the channel number of the start channel (default: channel 2).
+To understand the difference, imagine the starting of the clock being triggered by an event on channel 0. If the next event happens to occur on channel 1 everything is clear: the clock is stopped and the time difference is recorded to the histogram. But if the second event occurs on channel 0 we have to decide how to handle this case. We can either ignore this event and all other events on channel 0 until an event shows up on channel 1 (start-stop without reset) or we can reset the clock on every event on channel 0, only measuring the shortest time differences (start-stop with reset). The latter case approximates a proper correlation at time delays close to 0 and is typically used as an analysis if full correlation is not available. Note, that for long time scales it is absolutely neccesarry to do a full correlation to get an accurate result, especially if interresting features are not at 0 time delay (e.g. if the antibunching dip in an autocorrelation of single photons is shifted away from 0 time delay).
+You can switch between reset modes by adding/removing a transition from the ``running`` state to itself with the channel number of the start channel.
 
 Output
 .......
-You can choose to display an interactive histogram plot with plotly or bokeh or you can save a ``*.txt``, ``*.png`` and ``*.eps`` file by running the corresponding code panel.
+You can choose to display an interactive histogram plot with plotly or pyplot or you can save a ``*.txt``, ``*.png`` and ``*.eps`` file by running the corresponding code panel.
 
 Correlation
 ------------
-This recipe is determining the time differences between all events on the zeroeth and first physical channel, starting the time on each event on channel 0 and stopping on each event on channel 1 for each start. These time differences are then logged into a histogram.
+This recipe is determining the time differences between all events on the zeroeth and first physical channel, starting the time on each event on channel 0 and stopping on each event on channel 1 for each start (full correlation). These time differences are then logged into a histogram.
+
+Input
+......
+You can browse your file system to select a timetagged file using the folder icon on the right of the ``file`` variable. If the filename is removed afterwards, leaving only a folder as ``file`` input, the code will run over all the files in the given folder.
 
 Delay
 ......
@@ -61,8 +69,8 @@ Usage
 ......
 As explained in the start-stop and correlation recipes, you can adjust a delay if the feature you are interested in is at the edge or outside the histogram area. You can do this by opening the “Instrument Designer” for the delay lines ``DL0-2`` and ``DL1-3``. The delay lines copy the events on channel 0 (or 1 in case of ``DL1-3``) to a new channel (first argument of the emit function) with a delay specified in the second argument of the ``emit`` function: ``emit(new channel number, delay in ps)``.
 You can adjust the width of the histogram. This is done with a combination of the ``bins`` and ``binsize`` variables in the start screen. 
-You can use the ``y_max`` variable on the home screen to adjust the desired plot height.
+The y-axis will automatically rescale to accomodate the growing histogram.
 An important adjustment is the speed at which the file is processed. This is done by selecting how many events one chunk should have before the program bothers to analyse this chunk. Use the variable ``records_per_cut`` on the home screen to adjust this.
+(note: this will happen automatically soon)
 
-You might want to switch from accumulation mode to “show me only the most recent chunk” mode aka alignment mode. For this we would like to implement a button, but so far you have to go to the “Code” panel again and change line 44.
-It should say ``ctxs= ctx1,sum_results=True,iterate_ctxs=True,verbose=False)`` for accumulation mode and ``ctxs= None,sum_results=True,iterate_ctxs=True,verbose=False)`` for alignment mode.
+You might want to switch between accumulating the histogram to showing only the most recent chunk. We call these modes accumulation and alignment mode, respectively. By default the graph will start accumulating the histogram but a button can switch to alignment mode if desired. There is also a button to switch between logarithmic and linear plotting of the y-axis.
