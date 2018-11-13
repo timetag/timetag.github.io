@@ -1,6 +1,7 @@
-Embedded Python for Display Panel
+Customize the Display Panel
 ===============================
 
+EAT provides embedded Python and corresponding API to allow customization of the Display Panel.
 
 Cutting time-tag files
 -----
@@ -11,6 +12,7 @@ If the original file is recorded with absolute timing (like in HHT2 mode), then 
 
 If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
+APIs:
 
 eta.simple_cut()
 
@@ -29,6 +31,8 @@ If the number of cuts fed into eta.run() is less then the number of threads, the
 
 If the number of cuts is larger than the number of threads, they will queue up. The thread who finishes processing his cut, will go fetch the next cut in the queue.
 
+APIs:
+
 eta.run()
 
 eta.display()
@@ -38,6 +42,8 @@ eta.send()
 
 Modifying recipies
 ------
+
+APIs:
 
 eta.recipe_update()
 
@@ -66,5 +72,5 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 More Examples
 -----
 
-For more examples please refer to the recipes.
+For more examples, please refer to the recipes.
 
