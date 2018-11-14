@@ -7,6 +7,13 @@ The common useage of Display Panel is to start an analysis on a existing time-ta
 
 EAT provides embedded Python and corresponding API to allow customization of the Display Panel. Here we list all the API in the latest version of ETA. For examples, please refer to the pre-made recipes.
 
+.. note::
+    When running the Display Panel, the entire recipe will be sent to ETA Backend. ETA will first check the Virtual Instruments and then start exectuing the code for the current Display Panel. 
+    The code is executed in an isolated enviroment with an ``eta`` object and other user-defiened parameters (only those in the same group of Display Panel will be visible) as global variables.
+    You can also import third-party Python libraries like ``numpy`` or ``matplotlib``, etc. 
+    Please note that ETA Backend can only run one Display Panel at the same time. If you have multiple ETA GUI conneted to ETA Backend, the running requests will be put in a queue. 
+
+
 Cutting time-tag files
 ------------------------------
 
@@ -73,13 +80,14 @@ eta.wait_till_presnese(cut, timeout=1, raiseerr=False):
 - ``raiseerr``
     Specify if an ValueError will be raised when timeout happens.
 
-Executing recipies
+Executing Analysis
 -----
 
-Once you have cuts, you can run Virtual Instruments and fed the cuts into the instruments.
-
-eta.run(cuts, ctxs=None, sum_results=True, iterate_ctxs=False, group="main", verbose=True)
+eta.run(cuts, ctxs=None, sum_results=True, return_ctxs=False, group="main", verbose=True)
 ......
+
+Once you have cuts, you can run Virtual Instruments and fed the cuts into the instruments and obtain results. The analysis resutls will be returend in a Python dictionaray, with the histogram names as the keys.
+
 - ``cuts``
     The cut descriptors that is fed into the instruments.
     
@@ -100,27 +108,54 @@ eta.run(cuts, ctxs=None, sum_results=True, iterate_ctxs=False, group="main", ver
 - ``sum_results``
     Specifies if the results will be sumed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggreation methods, like concating the histograms to generate large images.
 
-- ``iterate_ctxs``
+- ``return_ctxs``
+    Specifies if the extra context information should be returned, so that you can iteratively call this function using the returned context. If this value is set to False then only the results will be returned. 
     
 - ``group``
-  The group of instruments that you want to run analysis on.
-  
-eta.display()
-......
+    The group of instruments that you want to run analysis on.
 
-eta.send()
-......
+- ``verbose``
+    Specifies if the inforamtion of analysis will be displayed on the GUI.
 
+eta.display(app)
+......
+You can send results to ETA GUI using this function. The value of app can be either a Dash or Bokeh graph currently.
+.. note::
+    Use ``app = dash.Dash()`` to create a Dash graph.
+
+eta.send(text,endpoint="log"):
+......
+This is the ETA alternatve for ``print()`` in Python.
+
+- ``text``
+    String of information to be sent to ETA GUI. 
+    
+- ``endpoint``
+    Can either be ``log`` or ``err``, for indicating the type of message.
+    
 Modifying recipies
 ------
 
-
 eta.recipe_update()
 ......
-eta.recipe_get_parameter()
+Send the updated recipe on ETA Backend back to ETA GUI.
+
+eta.recipe_get_parameter(name)
 ......
-eta.recipe_set_parameter()
+Get a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be returned.
+
+- ``name``
+    Name of the parameter, as shown in the ETA GUI.
+    
+eta.recipe_set_parameter(name, value)
 ......
+Set value of a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
+- ``name``
+    Name of the parameter, as shown in the ETA GUI.
+    
+- ``value``
+    Value of the parameter, as shown in the ETA GUI.
+    
 List of packages in ETA_LIB
 -----
 
