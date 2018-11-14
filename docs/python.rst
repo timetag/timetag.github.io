@@ -136,7 +136,7 @@ You can send results to ETA GUI using this function. The value of app can be eit
 
 eta.send(text,endpoint="log"):
 ......
-This is the ETA alternatve for ``print()`` in Python.
+This is the ETA alternatve for ``print()`` in Python.  This is useful when you use another program to talk to ETA via Websockets (see Advanced Useages). You can stream the results back using this function.
 
 - ``text``
     String of information to be sent to ETA GUI. 
@@ -144,12 +144,9 @@ This is the ETA alternatve for ``print()`` in Python.
 - ``endpoint``
     Can either be ``log`` or ``err``, for indicating the type of message.
     
-Modifying recipies
+Modify recipies programatically
 ------
-
-eta.recipe_update()
-......
-Send the updated recipe on ETA Backend back to ETA GUI.
+You can also modify recipies programatically. This is useful when you use another program to talk to ETA via Websockets (see Advanced Useages). You can upload the template recipe to ETA Backend, and then change the parameters (like bin size for histograms) to get different results.
 
 eta.recipe_get_parameter(name)
 ......
