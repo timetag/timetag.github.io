@@ -25,8 +25,7 @@ For a new installation, you need to
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
 *       Extract ``ETA_LIB.zip`` to ``C:\Users\***\AppData\Local\Programs\ETA\site-packages``
-          (or any folder at least 6 levels deep in the file system to
-          ensure you do not encounter a bug with Python module loader).
+        (or any folder at least 6 levels deep in the file system to ensure you do not encounter a bug with Python module loader).
           
 For updating the existing installation, you need to
 
