@@ -9,9 +9,9 @@ You can install ETA GUI and ETA Backend as a standalone program. Currently Windo
 Download
 ......
 
-  You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
+You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
   
-  You need to download two files for the first installation,
+You need to download two files for the first installation,
   
   *       the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend.
   *       the ``ETA_LIB-win64.zip`` for the site-packages for embedded Python.
@@ -19,12 +19,20 @@ Download
 Install
 ......
 
+For a new installation, you need to
+
   *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
   *       Extract ``ETA_LIB.zip`` to ``C:\Users\***\AppData\Local\Programs\ETA\site-packages``
           (or any folder at least 6 levels deep in the file system to
           ensure you do not encounter a bug with Python module loader).
+          
+For updating the existing installation, you need to
 
+  *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
+  
+  *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the site-packages should be updated or not.
+  
 Configure Backend
 ......
 
