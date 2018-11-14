@@ -1,22 +1,44 @@
-Customize the Display Panel
+Customizing Display Panel
 ===============================
 
-EAT provides embedded Python and corresponding API to allow customization of the Display Panel.
+In each ETA recipe, Display Panel provides the user interface for each experiment. 
+
+The common useage of Display Panel is to start an analysis on a existing time-tag file and display results, or provide interactive controls of the acquistion device (time-tagger) or the analysis.
+
+EAT provides embedded Python and corresponding API to allow customization of the Display Panel. Here we list all the API in the latest version of ETA. For examples, please refer to the pre-made recipes.
 
 Cutting time-tag files
------
+------------------------------
 
-A cut is a section of an existing file.
+You need to cut the time-tag file into sections before running the analysis on these sections. When cutting the time-tag file, ETA will read the header of the time-tag and then generate cut discriptors that can be later used in the analysis. You can think of ``_cut()`` as the timetag-specific way of ``open()`` in Python.  
 
-If the original file is recorded with absolute timing (like in HHT2 mode), then every cut should keep the same absolute timing. 
+eta.simple_cut(filename, cuts=1, trunc=-1, format=-1):
+......
 
-If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
+``simple_cut`` takes the file name and number of cuts, and cuts the file into equal size sections. It is useful in a correlational analyis if we cut the file into some sections an run parallel analysis to get speed boosts. 
 
-APIs:
+- ``filename``
+    File name of the timetag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path on that computer.
+    
+- ``cuts``
+    The number of cuts that you want to generate. Default value is set to 1, thus the full time-tag will be returned in the cut descriptor.
+    
+- ``trunc``
+    The number of cuts that is returned in the cut descriptor. By setting it to ``-1`` will give you the number of cuts specified in the ``cuts`` parameter. By setting it to any number smaller than ``cuts`` you can truncate a large timetag file. 
+    
+- ``format``
+    Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto dection of PicoQuant devices. You can also use the integer constant ``FORMAT_SI`` for Swebian Instrument timetags, ``quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format, or  ``quTAG_FORMAT_COMPRESSED`` for quTAG COMPRESSED Binary format. 
+    
+        The format of time-tag you use might influece the time tag analysis results.
+        
+        If the original file is recorded with absolute timing (like in HHT2 mode), then every cut should keep the same absolute timing. 
 
-eta.simple_cut()
+        If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
+
 
 eta.incremental_cut()
+......
+
 
 eta.wait_for()
 
@@ -67,10 +89,4 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 - plotly
 - bokeh
 
-
-
-More Examples
------
-
-For more examples, please refer to the recipes.
 
