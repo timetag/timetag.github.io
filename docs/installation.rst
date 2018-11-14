@@ -41,14 +41,11 @@ Configuration
   
 *       ETA Backend asks for the IP address and port number that you want to use for remote connection to this computer.
   
-    .. note::
-  
-    The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. 
-    This is just a recommendation, though. 
+.. note::
+    The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
  
   
-*       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, 
-          which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
+*       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
   
 
 Verify the Installation
