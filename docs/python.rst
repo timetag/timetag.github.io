@@ -29,6 +29,7 @@ eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
 - ``format``
     Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto dection of PicoQuant devices. You can also use the integer constant ``FORMAT_SI`` for Swebian Instrument timetags, ``quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format, or  ``quTAG_FORMAT_COMPRESSED`` for quTAG COMPRESSED Binary format. 
     
+    .. note::
         The format of time-tag you use might influece the time tag analysis results.
         
         If the original file is recorded with absolute timing (like in HHT2 mode), then every cut should keep the same absolute timing. 
@@ -82,6 +83,7 @@ eta.run(cuts, ctxs=None, sum_results=True, iterate_ctxs=False, group="main", ver
 - ``cuts``
     The cut descriptors that is fed into the instruments.
     
+    .. note::
         There was a parameter for multi-thread and single-thread mode in previus verisons of ETA, and it is recenlty removed.
         
         Multi-thread and single-thread mode are only describing how to run virtual instruments on the cuts. They should not affect analysis result. However, the way how the files is cutted might affect the result.
