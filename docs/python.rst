@@ -9,8 +9,11 @@ EAT provides embedded Python and corresponding API to allow customization of the
 
 .. note::
     When running the Display Panel, the entire recipe will be sent to ETA Backend. ETA will first check the Virtual Instruments and then start exectuing the code for the current Display Panel. 
+    
     The code is executed in an isolated enviroment with an ``eta`` object and other user-defiened parameters (only those in the same group of Display Panel will be visible) as global variables.
+    
     You can also import third-party Python libraries like ``numpy`` or ``matplotlib``, etc. 
+    
     Please note that ETA Backend can only run one Display Panel at the same time. If you have multiple ETA GUI conneted to ETA Backend, the running requests will be put in a queue. 
 
 
@@ -55,8 +58,14 @@ eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True
     The cut descriptor of the previous cut. If there is no cut provided, a new cut will be generated.
 
 - ``rec_per_cut``
-    The number of records in the returned cut. Please note that if the number exceeds the size of the timetag file, a cut will still be returned, and it will point to a non-existing area of a timetag file. 
-    You can also set a negative value, then the number of records in this cut will be calculated as the number of records beteewn the ending of the last cut to the current end of file minus the absolute value of this nagatvie number. The timetag file that serves as the FIFO when you perform a realtime analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
+    The number of records in the returned cut. 
+    
+    .. note::
+        Please note that if the number exceeds the size of the timetag file, a cut will still be returned, and it will point to a non-existing area of a timetag file. 
+
+        You can also set a negative value, then the number of records in this cut will be calculated as the number of records beteewn the ending of the last cut to the current end of file minus the absolute value of this nagatvie number. 
+
+        The timetag file that serves as the FIFO when you perform a realtime analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
     
 - ``format``
     The same as ``simple_cut``.
@@ -119,7 +128,9 @@ Once you have cuts, you can run Virtual Instruments and fed the cuts into the in
 
 eta.display(app)
 ......
+
 You can send results to ETA GUI using this function. The value of app can be either a Dash or Bokeh graph currently.
+
 .. note::
     Use ``app = dash.Dash()`` to create a Dash graph.
 
@@ -150,6 +161,7 @@ Get a parameter in a recipe using the name of the parameter. If there are multip
 eta.recipe_set_parameter(name, value)
 ......
 Set value of a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
+
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
