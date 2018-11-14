@@ -16,32 +16,33 @@ Sending a JSON string in a format of ``{"method": "<name of method>", "args": [<
 
 The method might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking one method.
 
-List of the methods provided in ETA Backend 
+Remote methods provided in ETA Backend 
 -------------------------------------
+
+It is not recommened to remotelly call the functions provided by the ``eta`` object in the Embedded Python environment directly, althogh it is possible to do so. 
+
+There are three special functions that is provided for remote controlling ETA Backend. All these methods bundles a set of internal functions that first updates the recipe on ETA Backend to the uploaded one,  perform the requested actions, and then send the updated main table as responses. Usually there is no extra response unless there is error in the recipe or there are user-defined ``eta.send()`` in the embedded Python code.
 
 1. VI Checking
 
     JSON: ``{ 'method': "compile_eta", 'args': [eta_file_content] }``
     
     Arg: `eta_file_content` is a string of the content of the `.eta` recipe.
-    
-    Responses: The updated table. No visual response unless there is error in the recipe.
+ 
+2. Browse file and set it as the parameter.
 
-2. Run Analysis or Display Panel
+    JSON: ``{ 'method': "recipe_set_filename", 'args': [eta_file_content, id, name] }``
+    
+    Arg: `eta_file_content` is a string of the content of the `.eta` recipe. For specifying the parameter that you want to modify, the `id` and `name` should also be provided.
+  
+3. Run a Display Panel
 
     JSON: ``{ 'method': "process_eta", 'args': [eta_file_content, id, group] }``
     
     Arg: `eta_file_content` is a string of the content of the `.eta` recipe. For specifying the Display Panel that you want to run, the `id` and `group` should also be provided.
     
-    Responses: The updated table. Other responses are sent in code of Display Panel in the recipe, using `eta.send()`.  
+    Extra Responses: Other responses are sent in code of Display Panel in the recipe, using `eta.send()`.  
 
-3. Browse file as the parameter.
-
-    JSON: ``{ 'method': "recipe_set_filename", 'args': [eta_file_content, id, name] }``
-    
-    Arg: `eta_file_content` is a string of the content of the `.eta` recipe. For specifying the parameter that you want to modify, the `id` and `name` should also be provided.
-    
-    Responses: Responses are sent in code of Display Panel in the recipe, using `eta.send()`.  
 
 Type of responses from ETA Backend 
 -------------------------------------
