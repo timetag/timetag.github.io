@@ -33,18 +33,21 @@ For updating the existing installation, you need to
   
   *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the site-packages should be updated or not.
   
-Configure Backend
+Configuration
 ......
 
-  ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
-
-  The computer which runs the ETA Backend will do the number crunching and it might be advantageous 
-  to run it on the computer which has the timetag files so the (potentially large) files do
-  not have to be copied around. This is just a recommendation, though. 
-  ETA Backend asks for the IP address and port number that you want to use for remote connection to this computer.
+  *       ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
   
-  In the ETA GUI you can then specify the IP address and port number of the computer running the backend, 
-  which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
+  *       ETA Backend asks for the IP address and port number that you want to use for remote connection to this computer.
+  
+    .. note::
+  
+    The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. 
+    This is just a recommendation, though. 
+ 
+  
+  *       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, 
+          which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
   
 
 Verify the Installation
