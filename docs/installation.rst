@@ -2,10 +2,12 @@
 Installation
 ============
 
-Windows (as a standalone program)
+Install as a standalone program
 --------
+You can install ETA GUI and ETA Backend as a standalone program. Currently Windows x68_64 builds is provided on Github.
 
-* Download
+Download
+......
 
   You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
   
@@ -14,7 +16,8 @@ Windows (as a standalone program)
   *       the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend.
   *       the ``ETA_LIB-win64.zip`` for the site-packages for embedded Python.
 
-* Install
+Install
+......
 
   *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
 
@@ -22,9 +25,9 @@ Windows (as a standalone program)
           (or any folder at least 6 levels deep in the file system to
           ensure you do not encounter a bug with Python module loader).
 
+Configure Backend
+......
 
-* Configure Backend
-    
   ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
 
   The computer which runs the ETA Backend will do the number crunching and it might be advantageous 
@@ -36,17 +39,19 @@ Windows (as a standalone program)
   which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
   
 
-* Verify the Installation
+Verify the Installation
+......
 
   After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main
   screen to load it. In order to analyze your time tag file, you have to specify path 
   and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
-Other enviroments
--------
+Install as a Python pacakge
+--------
 
-* Install
-  
+Install
+......
+
   * Install Python 3
   
   * Install ETA Dependencies
@@ -63,10 +68,12 @@ Other enviroments
     
     (TODO: pip install) 
   
-* Configure Backend
+Configure Backend
+......
 
     The backend asks for the path to the site-packages of your Python installation.
    
-* Running the Web GUI
+Running the Web GUI
+......
 
     You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
