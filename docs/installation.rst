@@ -7,10 +7,12 @@ Windows (as a standalone program)
 
 * Download
 
-  You can download ETA from here: https://github.com/timetag/ETA/releases . What you should download:
-
-  *       the ``ETA_Install-win64.zip``
-  *       the ``ETA_LIB-win64.zip`` 
+  You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
+  
+  You need to download two files for the first installation,
+  
+  *       the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend.
+  *       the ``ETA_LIB-win64.zip`` for the site-packages for embedded Python.
 
 * Install
 
@@ -20,23 +22,25 @@ Windows (as a standalone program)
           (or any folder at least 6 levels deep in the file system to
           ensure you do not encounter a bug with Python module loader).
 
+
 * Configure Backend
     
-  The backend asks for the path to the extracted ``site-packages`` and your IP address when you run it for the first time.
+  ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
 
-  The computer which runs the backend will do the number crunching and it might be advantageous 
+  The computer which runs the ETA Backend will do the number crunching and it might be advantageous 
   to run it on the computer which has the timetag files so the (potentially large) files do
-  not have to be copied around. This is just a recommendation, though.
+  not have to be copied around. This is just a recommendation, though. 
+  ETA Backend asks for the IP address and port number that you want to use for remote connection to this computer.
   
-  In the frontend (installed by the ETA-Setup-x.x.x.exe) you can then specify the IP address of the computer 
-  running the backend, which can just be localhost if you run backand and frontend on the same PC. 
-    
+  In the ETA GUI you can then specify the IP address and port number of the computer running the backend, 
+  which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
+  
 
 * Verify the Installation
 
-  After running the frontend you can drag a recipe (``recipe_name.eta``) onto the main
-  screen to load it. In order to analyze your time tag file you have to specify path 
-  and filename in the variables and click “Run” on the code panel you want to execute.
+  After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main
+  screen to load it. In order to analyze your time tag file, you have to specify path 
+  and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
 Other enviroments
 -------
