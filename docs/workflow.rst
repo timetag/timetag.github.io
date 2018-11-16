@@ -166,4 +166,4 @@ Please refer to our pre-made recipes for inspiration.
 
 Run your analysis
 ----------------------
-Once you have added ``Hardware``, ``Instrument Designer`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
+Once you have added ``Acquisition Device``, ``Instrument Designer`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
