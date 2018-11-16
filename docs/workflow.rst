@@ -5,14 +5,14 @@ Workflow
 if not using ready-made recipe
 
 
-Add time-tagger hardware
+Add time-tagger as Acquisition Device
 --------------------------
 
 Click the ``Acquisition Device`` button on the main screen to open a dialogue.
 Specify a relatable name, the number of physically available channels and 
 the number of marker channels (specific to PicoQuant HydraHarp400). 
 
-Add analysis instrument via “Instrument Designer”
+Add analysis instrument via Instrument Designer
 --------------------------------------------------
 
 Click the ``Instrument Designer`` button on the main screen to create a new analysis routine and open it in the Instrument Designer. 
@@ -113,9 +113,9 @@ TODO: Insert graph
 
 
 
-Add a "Display Panel"
+Add Script Panel
 -----------------------
-In the ``Display Panel`` you tell ETA to run your analysis and define what happens with the result.
+In the ``Script Panel`` you tell ETA to run your analysis and define what happens with the result.
 
 A minimum example that saves the data as an Origin-compatitable ``*.txt`` file looks as follows:
 
@@ -166,4 +166,4 @@ Please refer to our pre-made recipes for inspiration.
 
 Run your analysis
 ----------------------
-Once you have added ``Hardware``, ``Instrument Designer`` and ``Display Panel``, return to the home screen and press ``Run`` on the ``Display Panel`` of your choice.
+Once you have added ``Hardware``, ``Instrument Designer`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
