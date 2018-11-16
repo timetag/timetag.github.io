@@ -1,12 +1,12 @@
 ============
-Advanced Useage
+Advanced Usage
 ============
 
 
-Talking to ETA backend via Websocket
+Talking to ETA backend via WebSocket
 -------------------------------------
 
-ETA backend implements a Remote Procedure Call mechanism using JSON format, with which you can upload an existing recipe, modifying parameters like ``filename``, run the analysis, and even get the realtime streamming of the result.
+ETA backend implements a Remote Procedure Call mechanism using JSON format, with which you can upload an existing recipe, modifying parameters like ``filename``, run the analysis, and even get the real-time streaming of the result.
 
 Before invoking a remote method, connect your program (client) to ETA backend (server) using the Websocket protocal. 
 
@@ -19,9 +19,10 @@ The method might send JSON strings as responses in a format of ``["<type>","<con
 Remote methods provided in ETA Backend 
 -------------------------------------
 
-It is not recommened to remotelly call the functions provided by the ``eta`` object in the Embedded Python environment directly, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
+It is not recommended to remotely call the functions provided by the ``eta`` object in the Embedded Python environment directly, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
 
-There are three special functions that is provided for remote controlling ETA Backend. All these methods bundles a set of internal functions that first updates the recipe on ETA Backend to the uploaded one,  perform the requested actions, and then send the updated main table as responses. Usually there is no extra response unless there is error in the recipe or there are user-defined ``eta.send()`` in the embedded Python code.
+There are three special functions that is provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first updates the recipe on ETA Backend to the uploaded one, perform the requested actions, and then send the updated main table as responses. Usually there is no extra response unless there is error in the recipe or there are user-defined ``eta.send()`` in the embedded Python code.
+
 
 1. VI Checking
 
