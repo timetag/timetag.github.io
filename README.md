@@ -9,7 +9,7 @@ Extensible Timetag Analyzer
 [![ETA](https://eta.readthedocs.io/en/latest/_static/logo.png)
 ](https://eta.readthedocs.io/en/latest/?badge=latest)
 
-## What is time resolved measurements and how ETA can help you with that
+## What is time resolved measurements
 
 Time resolved measurements are widely used for many research field, including
 
@@ -25,6 +25,7 @@ Time resolved measurements are widely used for many research field, including
 
 Depending on the duration of the experiments and frequency of events, time resolved measurements can easily generate huge amounts of data, which is overwhelming for common data analysis software.
 
+##  How ETA is going to help you
 We attempt to extract the useful information form data generated from time-resolved measurements by introducing a new kind of time-tag analysis software.
 
 ETA, the extensible time tag analyzer, is an event driven programming language with graphical user interface for analyzing, plotting, and fitting of time tagged data.
