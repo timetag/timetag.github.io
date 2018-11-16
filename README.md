@@ -9,7 +9,9 @@ Extensible Timetag Analyzer
 [![ETA](https://eta.readthedocs.io/en/latest/_static/logo.png)
 ](https://eta.readthedocs.io/en/latest/?badge=latest)
 
-## What is time resolved measurements
+## Introduction
+
+### What is time resolved measurements
 
 Time resolved measurements are widely used for many research field, including
 
@@ -25,12 +27,15 @@ Time resolved measurements are widely used for many research field, including
 
 Depending on the duration of the experiments and frequency of events, time resolved measurements can easily generate huge amounts of data, which is overwhelming for common data analysis software.
 
-##  How ETA is going to help you
+###  How ETA is going to help you
+
 We attempt to extract the useful information form data generated from time-resolved measurements by introducing a new kind of time-tag analysis software.
 
 ETA, the extensible time tag analyzer, is an event driven programming language with graphical user interface for analyzing, plotting, and fitting of time tagged data.
 
 ### ETA for realtime analysis (NEW!)
+
+ETA provides support to the format of quTAG, HydraHarp, and Swebian Instrument time-tagger devices, with tested real-time g(2) analysis recipes that could help you with the diagnosis of experiment setups (e.g. the alignment of the optical path).
 
 [![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
 
@@ -43,4 +48,5 @@ For a full installation, [Download](https://github.com/timetag/ETA/releases) and
 You can also try [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
 
 ### Recipies
+
 Check out the pre-made [recipies](https://eta.readthedocs.io/en/latest/recipes.html) 🎉 that could be used immediately in your experiments.
