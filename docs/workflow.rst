@@ -12,10 +12,10 @@ Click the ``Acquisition Device`` button on the main screen to open a dialogue.
 Specify a relatable name, the number of physically available channels and 
 the number of marker channels (specific to PicoQuant HydraHarp400). 
 
-Add analysis instrument via Instrument Designer
+Add Virtual Instruments to perform analysis
 --------------------------------------------------
 
-Click the ``Instrument Designer`` button on the main screen to create a new analysis routine and open it in the Instrument Designer. 
+Click the ``Virtual Instruments`` button on the main screen to create a new analysis routine and open it in the Instrument Designer. 
 
 This is the place where you define how exactly the ETAbackend analyses your data.
 
@@ -166,4 +166,4 @@ Please refer to our pre-made recipes for inspiration.
 
 Run your analysis
 ----------------------
-Once you have added ``Acquisition Device``, ``Instrument Designer`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
+Once you have added ``Acquisition Device``, ``Virtual Instruments`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
