@@ -1,5 +1,5 @@
 ============
-Recipes
+Using the pre-made recipes
 ============
 Here we want to provide some information about the pre-made recipes.
 
