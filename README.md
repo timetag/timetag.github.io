@@ -9,8 +9,27 @@ Extensible Timetag Analyzer
 [![ETA](https://eta.readthedocs.io/en/latest/_static/logo.png)
 ](https://eta.readthedocs.io/en/latest/?badge=latest)
 
+Time resolved measurements are widely used for many research field, including
 
-## Usage of Time-tagging
+Time correlated photon counting
+Fluorescence lifetime imaging
+Anti-bunching
+Linear optics quantum computing
+Quantum process tomography
+Scanning fluorescence microscopy
+Photo-activated localization microscopy (PALM)
+Stochastic optical reconstruction microscopy (STORM)
+Stimulated emission depletion (STED) microscopy
+Depending on the duration of the experiments and frequency of events, time resolved measurements can easily generate huge amounts of data, which is overwhelming for common data analysis software.
+
+We attempt to extract the useful information form data generated from time-resolved measurements by introducing a new kind of time-tag analysis software.
+
+ETA, the extensible time tag analyzer, is an event driven programming language with graphical user interface for analyzing, plotting, and fitting of time tagged data.
+
+## What is time resolved measurements and how ETA can help you with that?
+
+Time resolved measurements are widely used for many research field, including
+
 * Time correlated photon counting
 * Fluorescence lifetime imaging
 * Anti-bunching
@@ -20,6 +39,12 @@ Extensible Timetag Analyzer
 * Photo-activated localization microscopy (PALM)
 * Stochastic optical reconstruction microscopy (STORM)
 * Stimulated emission depletion (STED) microscopy
+
+Depending on the duration of the experiments and frequency of events, time resolved measurements can easily generate huge amounts of data, which is overwhelming for common data analysis software.
+
+We attempt to extract the useful information form data generated from time-resolved measurements by introducing a new kind of time-tag analysis software.
+
+ETA, the extensible time tag analyzer, is an event driven programming language with graphical user interface for analyzing, plotting, and fitting of time tagged data.
 
 ### ETA for realtime analysis (NEW!)
 
