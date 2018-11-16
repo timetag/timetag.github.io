@@ -2,8 +2,9 @@
 Workflow
 ============
 
-if not using ready-made recipe
+Each ETA recipes consitis of ``Acquisition Device``, ``Virtual Instruments`` , ``Script Panel`` and  ``Parameter``.
 
+Here is the workflow of building an ETA recipe, if you are not using ready-made ones. 
 
 Add time-tagger as Acquisition Device
 --------------------------
