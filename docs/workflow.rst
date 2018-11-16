@@ -1,5 +1,5 @@
 ============
-Workflow
+Building your own recipes
 ============
 
 Each ETA recipes consitis of ``Acquisition Device``, ``Virtual Instruments`` , ``Script Panel`` and  ``Parameter``.
