@@ -26,7 +26,7 @@ We attempt to extract the useful information form data generated from time-resol
 
 ETA, the extensible time tag analyzer, is an event driven programming language with graphical user interface for analyzing, plotting, and fitting of time tagged data.
 
-## What is time resolved measurements and how ETA can help you with that?
+## What is time resolved measurements and how ETA can help you with that
 
 Time resolved measurements are widely used for many research field, including
 
