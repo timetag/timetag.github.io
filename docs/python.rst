@@ -1,20 +1,20 @@
-Customizing Display Panel
+Customizing Script Panel
 ===============================
 
-In each ETA recipe, Display Panel provides the user interface for each experiment. 
+In each ETA recipe, Script Panel provides the user interface for each experiment. 
 
-The common usage of Display Panel is to start an analysis on an existing time-tag file and display results, or provide interactive controls of the acquisition device (time-tagger) or the analysis.
+The common usage of Script Panel is to start an analysis on an existing time-tag file and display results, or provide interactive controls of the acquisition device (time-tagger) or the analysis.
 
-ETA provides embedded Python and corresponding API to allow customization of the Display Panel. Here we list all the API in the latest version of ETA. For examples, please refer to the pre-made recipes.
+ETA provides embedded Python and corresponding API to allow customization of the Script Panel. Here we list all the API in the latest version of ETA. For examples, please refer to the pre-made recipes.
 
 .. note::
-    When running the Display Panel, the entire recipe will be sent to ETA Backend. ETA will first check the Virtual Instruments and then start executing the code for the current Display Panel. 
+    When running the Script Panel, the entire recipe will be sent to ETA Backend. ETA will first check the Virtual Instruments and then start executing the code for the current Script Panel. 
     
-    The code is executed in an isolated environment with an ``eta`` object and other user-defined parameters (only those in the same group of Display Panel will be visible) as global variables.
+    The code is executed in an isolated environment with an ``eta`` object and other user-defined parameters (only those in the same group of Script Panel will be visible) as global variables.
     
     You can also import third-party Python libraries like ``numpy`` or ``matplotlib``, etc. 
     
-    Please note that ETA Backend can only run one Display Panel at the same time. If you have multiple ETA GUI connected to ETA Backend, the running requests will be put in a queue.
+    Please note that ETA Backend can only run one Script Panel at the same time. If you have multiple ETA GUI connected to ETA Backend, the running requests will be put in a queue.
 
 
 Cutting time-tag files
@@ -184,5 +184,3 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 - dash-core-components
 - plotly
 - bokeh
-
-
