@@ -1,5 +1,5 @@
 ============
-Making your own recipes
+Making recipes
 ============
 
 Each ETA recipes consitis of ``Acquisition Device``, ``Virtual Instruments`` , ``Script Panel`` and  ``Parameter``.
