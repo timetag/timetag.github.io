@@ -34,6 +34,4 @@ For a full installation, [Download](https://github.com/timetag/ETA/releases) and
 You can also try [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
 
 ### Recipies
-Here are some [recipies](https://eta.readthedocs.io/en/latest/recipes.html) that could be used for your experiments.
-
-We are also planning for a 📊🎉[ETA Hub] which allows you to [download and share the recipie].
+Check out the pre-made [recipies](https://eta.readthedocs.io/en/latest/recipes.html) 🎉 that could be used immediately in your experiments.
