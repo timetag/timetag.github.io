@@ -37,7 +37,7 @@ eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
     The number of cuts that is returned in the cut descriptor. By setting it to ``-1`` will give you the number of cuts specified in the ``cuts`` parameter. By setting it to any number smaller than ``cuts`` you can truncate a large time tag file.
     
 - ``format``
-    Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto detection of PicoQuant devices. You can also use the integer constant ``FORMAT_SI`` for Swabian Instrument binary format, ``quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format, or  ``quTAG_FORMAT_COMPRESSED`` for compressed quTAG binary format.
+    Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto detection of PicoQuant devices. You can also use the integer constant ``FORMAT_SI`` for Swabian Instrument binary format, ``quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format,  ``quTAG_FORMAT_COMPRESSED`` for compressed quTAG binary format, or ``bh_spc_4bytes`` for Becker & Hickl  SPC-134/144/154/830 format.
     
     .. note::
         The format of time-tag you use might influence the time tag analysis results.
