@@ -48,20 +48,17 @@ eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
 
 Examples:
 
-.. highlight:: python
-.. code-block::
-   :linenothreshold: 5    
+.. code-block:: python    
    
-   '''stop evaluation of timetag stream after 1%'''
+   #stop evaluation of timetag stream after 1%
    cutfile = eta.simple_cut(file,100,1)
-   result=eta.run(cutfile)
+   result = eta.run(cutfile)
    
-.. code-block::
-   :linenothreshold: 5    
+.. code-block:: python   
    
-   '''evaluate timetag stream from 30% to 90%'''
+   #evaluate timetag stream from 30% to 90%
    cutfile = eta.simple_cut(file,10)[3:-1]
-   result=eta.run(cutfile)
+   result = eta.run(cutfile)
 
 eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True)
 ......
