@@ -46,10 +46,26 @@ eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
 
         If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
+Examples:
+
+.. highlight:: python
+.. code-block::
+   :linenothreshold: 5    
+   
+   '''stop evaluation of timetag stream after 1%'''
+   cutfile = eta.simple_cut(file,100,1)
+   result=eta.run(cutfile)
+   
+.. code-block::
+   :linenothreshold: 5    
+   
+   '''evaluate timetag stream from 30% to 90%'''
+   cutfile = eta.simple_cut(file,10)[3:-1]
+   result=eta.run(cutfile)
 
 eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True)
 ......
-``simple_cut`` takes the previous cut descriptor and number of records, and generate a new cut descriptor by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by interactively fed the returned cut descriptor into itself.
+``incremental_cut`` takes the previous cut descriptor and number of records, and generate a new cut descriptor by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by interactively fed the returned cut descriptor into itself.
 
 - ``filename``
     The same as ``simple_cut``. 
