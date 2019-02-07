@@ -22,7 +22,7 @@ Install
 
 For a new installation, you need to
 
-*       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
+*       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software.)
 
 *       Extract ``ETA_LIB.zip`` to ``C:\Users\***\AppData\Local\Programs\ETA\site-packages``
         (or any folder at least 6 levels deep in the file system to ensure you do not encounter a bug with Python module loader).
@@ -38,13 +38,13 @@ Configuration
 
 *       ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
   
-*       ETA Backend asks for the IP address and port number that you want to use for remote connection to this computer.
+*       ETA Backend first asks for the IP address and then for the port number that you want to use for remote connection to this computer.
   
 .. note::
     The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
  
   
-*       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backand and frontend on the same PC. 
+*       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backend and frontend on the same PC. 
   
 
 Verify the Installation
@@ -68,9 +68,9 @@ Install
     - numba 
     - astunparse (only works in Python <3.7.0)
 
-* Install ETA backend
+* Install ETA Backend
   
-    ETA backend can be installed from git repository or your package manager. 
+    ETA Backend can be installed from git repository or your package manager. 
     
     (TODO: pip install) 
   
