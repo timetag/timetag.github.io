@@ -33,7 +33,7 @@ For updating the existing installation, you need to
   
 *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the site-packages should be updated or not.
 
-*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed on the next launch.
+*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed.
   
 Configuration
 ......
