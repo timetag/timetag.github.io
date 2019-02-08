@@ -32,13 +32,15 @@ For updating the existing installation, you need to
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
   
 *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the site-packages should be updated or not.
+
+*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed on the next launch.
   
 Configuration
 ......
 
 *       ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
   
-*       ETA Backend first asks for the IP address and then for the port number that you want to use for remote connection to this computer.
+*       ETA Backend asks for the IP address that you want to use for remote connection to this computer. It will try to detect the port automatically.
   
 .. note::
     The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
