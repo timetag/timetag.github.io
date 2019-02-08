@@ -111,8 +111,33 @@ TODO: Insert graph
       action2
     b: #involves all transitions arriving to b
       action3
-
-
+      
+TODO: explain all the analysis actions
+.. code::
+          start(clock)
+          start(c1)
+          Start a clock labeled c1.
+          
+          stop(clock)
+          stop(c1)
+          Stop a clock labeled c1.
+          
+          emit(channel_number,waittime_ps,period_ps,repeat)
+          emit(2,10)
+          Emit signal to a channel 2 after 10 picoseconds.
+          
+          record(histogram,clock)
+          record(h1,c1)
+          Record the time interval on clock c1 to histogram h1.
+          
+          fill(coincidence,slot_number)
+          fill(coinci1,1)
+          Record coincidence event on slot 1 of coincidence tool coinci1.
+          
+          clear(coincidence,slot_number)
+          clear(coinci1,1)
+          Clear coincidence event of coincidence tool coinci1.
+          
 
 Add Script Panel
 -----------------------
