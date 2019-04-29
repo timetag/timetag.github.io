@@ -74,3 +74,28 @@ An important adjustment is the speed at which the file is processed. This is don
 (note: this will happen automatically soon)
 
 You might want to switch between accumulating the histogram to showing only the most recent chunk. We call these modes accumulation and alignment mode, respectively. By default the graph will start accumulating the histogram but a button can switch to alignment mode if desired. There is also a button to switch between logarithmic and linear plotting of the y-axis.
+
+Frequently asked questions
+------------
+
+How are the channel number assigned in ETA?
+......
+In order to easily migrate recipes between different time tagger hardware, ETA unifies the physical channels and virtual channels in the same "address space".
+
+* The physical channels start from 0.
+
+* The virtual channel can start anything between physical channels and 255 (255 is the +infinity in ETA). 
+
+* Markers are also physical channels, and they starts on 16 (on Hydraharp and quTAG) if they are enabled.
+
+How is HHT3 mode different from other modes?
+......
+
+Assuming the sync channel (CHN0) is always connected to the laser and CHN1 and CHN2 are connected to SPDs, there should be no difference on the recipe side. There will be some measurement error only if the sync is not perfectly stable.
+
+However, if you plug SPDs signals on CHN0 and CHN1, then you will need different recipes for T2 and T3, since CHN0 is not recorded in T3 mode, and we need special actions for guessing the last sync signal. 
+Transitions on ETA graph cannot be triggered on the non-existing CHN0 signals in the T3 mode.
+
+Graph looks strange sometimes
+......
+See https://github.com/timetag/ETA/issues/59
