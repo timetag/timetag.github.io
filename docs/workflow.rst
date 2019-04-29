@@ -114,6 +114,7 @@ TODO: Insert graph
       
 TODO: explain all the analysis actions
 .. code::
+
           start(clock)
           start(c1)
           Start a clock labeled c1.
@@ -137,7 +138,31 @@ TODO: explain all the analysis actions
           clear(coincidence,slot_number)
           clear(coinci1,1)
           Clear coincidence event of coincidence tool coinci1.
-          
+
+
+Extending actions using embedded code
+-----------------------
+Apart from the built-in actions, you can also use a embedded code to extend the functionality of ETA.
+
+Embedded code can be wrapped in a  ``{`` and ``}`` . If the code contains curly brackets, a pair of ``{{{`` and ``}}}`` can be used.
+
+The embedded code uses a restricted sub-set of Python language. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. Please not that features that requires ``import`` , ``exec`` or file I/O are availble. Calling built-in actions in embedded code is not currently supported.
+
+However, a limited subset of numpy function is imported with `np`. 
+Here is an example for generating random numbers on transtion from a to b.
+
+.. code::
+
+      a--1-->b:
+          start(c1) # execute bulit-in action
+          #execute the embedded Python code
+          {   
+              mu, sigma = 0, 0.1 # mean and standard deviation
+              s = np.random.normal(mu, sigma) #generate random numbers
+              print(s) # print the genreated floating number
+          }
+          # you can also emit signal using the result from the embedded Python code, which might be useful for monte calor simulations
+
 
 Add Script Panel
 -----------------------
