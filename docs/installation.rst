@@ -57,25 +57,17 @@ After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto th
 Install as a Python package
 --------
 
-Install
+Install ETA Backend
 ......
 
-* Install Python 3.7
-  
-* Install ETA Dependencies
-  
-    ``pip install -r requirements.txt``
-
-* Install ETA Backend
-  
-    ETA Backend can be installed from git repository or your package manager. 
+* Install ETA Backend 
+    ``pip install etabackend``
     
-    (TODO: pip install) 
+* Run backend 
+    ``python -m etabackend``
   
-Configure Backend
-......
-
-The backend asks for the path to the site-packages of your Python installation.
+* Configure Backend
+    The backend asks for the path to the site-packages of your Python installation.
    
 Running the Web GUI
 ......
