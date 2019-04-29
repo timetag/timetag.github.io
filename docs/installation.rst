@@ -54,21 +54,17 @@ Verify the Installation
 
 After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it. In order to analyze your time tag file, you have to specify path and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
-Install as a Python pacakge
+Install as a Python package
 --------
 
 Install
 ......
 
-* Install Python 3
+* Install Python 3.7
   
 * Install ETA Dependencies
   
-    - cffi 
-    - numpy
-    - llvmlite
-    - numba 
-    - astunparse (only works in Python <3.7.0)
+    ``pip install -r requirements.txt``
 
 * Install ETA Backend
   
