@@ -146,7 +146,9 @@ Apart from the built-in actions, you can also use a embedded code to extend the 
 
 Embedded code can be wrapped in a  ``{`` and ``}`` . If the code contains curly brackets, a pair of ``{{{`` and ``}}}`` can be used.
 
-The embedded code uses a restricted sub-set of Python language. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. Please not that features that requires ``import`` , ``exec`` or file I/O are availble. Calling built-in actions in embedded code is not currently supported.
+The embedded code uses a restricted sub-set of Python language. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
+
+Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
 
 However, a limited subset of numpy function is imported with `np`. 
 Here is an example for generating random numbers on transtion from a to b.
