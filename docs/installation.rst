@@ -2,20 +2,22 @@
 Installation
 ============
 
-Install as a standalone program
+Install
 --------
+Install as a standalone program
+......
 
 You can install ETA GUI and ETA Backend as a standalone program. Currently Windows x68_64 builds are provided on Github.
-
-Install
-......
 
 For a new installation, you need to
 
 You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
   
-*      You need to download the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend. Please note that ``ETA_LIB-win64.zip`` is no longer required for ETA (>=0.6.0).
+*      You need to download the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend. 
 
+.. note::
+    Please note that ``ETA_LIB-win64.zip`` is no longer required for ETA (>=0.6.0).
+ 
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software.)
 
 For updating the existing installation, you need to
@@ -27,40 +29,32 @@ For updating the existing installation, you need to
 *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the recipes should be updated.
 
 
-  
-Configuration
+Install as a Python package
 ......
 
-*       ETA Backend asks for the IP address that you want to use for remote connection to this computer. It will try to detect the port automatically.
+* Install ETA Backend 
+    ``pip install etabackend``
+    
+* Run ETA Backend
+    ``python -m etabackend``
   
-.. note::
-    The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
- 
-  
-*       In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backend and frontend on the same PC. 
-  
+* Run the Web GUI
+     You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
 
 Verify the Installation
 ......
 
 After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it. In order to analyze your time tag file, you have to specify path and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
-Install as a Python package
+
+Configurating for remote access
 --------
 
-Install ETA Backend
-......
+The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
 
-* Install ETA Backend 
-    ``pip install etabackend``
-    
-* Run backend 
-    ``python -m etabackend``
+*   In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backend and frontend on the same PC. 
+
+*    ETA Backend uses enviroment variable ETA_HOST for IP address and port that you want to use for remote connection to this computer. It will try to detect the port automatically.
   
-* Configure Backend
-    The backend asks for the path to the site-packages of your Python installation.
-   
-Running the Web GUI
-......
-
-You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
+.. note::
+Remote access might be dangerous if your IP and port are directly accessible via Internet. Considering setting up a firewall.
