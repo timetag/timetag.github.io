@@ -5,41 +5,32 @@ Installation
 Install as a standalone program
 --------
 
-You can install ETA GUI and ETA Backend as a standalone program. Currently Windows x68_64 builds is provided on Github.
-
-Download
-......
-
-You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
-  
-You need to download two files for the first installation,
-  
-*       the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend.
-*       the ``ETA_LIB-win64.zip`` for the site-packages for embedded Python.
+You can install ETA GUI and ETA Backend as a standalone program. Currently Windows x68_64 builds are provided on Github.
 
 Install
 ......
 
 For a new installation, you need to
 
+You can download ETA from Github Releases (https://github.com/timetag/ETA/releases). 
+  
+*      You need to download the ``ETA_Install-win64.zip`` for the installer of ETA GUI and ETA Backend. Please note that ``ETA_LIB-win64.zip`` is no longer required for ETA (>=0.6.0).
+
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software.)
 
-*       Extract ``ETA_LIB.zip`` to ``C:\Users\***\AppData\Local\Programs\ETA\site-packages``
-        (or any folder at least 6 levels deep in the file system to ensure you do not encounter a bug with Python module loader).
-          
 For updating the existing installation, you need to
+
+*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed.
 
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
   
-*       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the site-packages should be updated or not.
+*       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the recipes should be updated.
 
-*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed.
+
   
 Configuration
 ......
 
-*       ETA Backend asks for the full path to the extracted ``site-packages`` when you run it for the first time.
-  
 *       ETA Backend asks for the IP address that you want to use for remote connection to this computer. It will try to detect the port automatically.
   
 .. note::
