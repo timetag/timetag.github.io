@@ -2,8 +2,9 @@
 Installation
 ============
 
-Install
+Installing ETA
 --------
+
 Install as a standalone program
 ......
 
@@ -47,14 +48,14 @@ Verify the Installation
 After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it. In order to analyze your time tag file, you have to specify path and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
 
-Configurating for remote access
+Configurating ETA for remote access
 --------
 
 The computer which runs the ETA Backend will do the number crunching and it might be advantageous to run it on the computer which has the timetag files so the (potentially large) files do not have to be copied around. This is just a recommendation, though. 
 
 *   In the ETA GUI you can then specify the IP address and port number of the computer running the backend, which can just be ``localhost:5678`` if you run backend and frontend on the same PC. 
 
-*    ETA Backend uses enviroment variable ETA_HOST for IP address and port that you want to use for remote connection to this computer. It will try to detect the port automatically.
+*    ETA Backend uses enviroment variable ETA_IP and ETA_PORT for IP address and port that you want to use for remote connection to this computer. 
   
 .. note::
-Remote access might be dangerous if your IP and port are directly accessible via Internet. Considering setting up a firewall.
+     Remote access might be dangerous if your IP and port are directly accessible via Internet. Considering setting up a firewall.
