@@ -32,13 +32,41 @@ For updating the existing installation, you need to
 
 Install as a Python package
 ......
+For regular python:
+,,,,
 
 * Install ETA Backend 
     ``pip install etabackend``
     
 * Run ETA Backend
     ``python -m etabackend``
-  
+For Anaconda/Miniconda in separate environment
+,,,,
+
+* Install ETA Backend 
+    open Anaconda promt and enter
+    
+    ``conda create -n ETA python=3``
+    
+    ``conda install -n ETA pip``
+    
+    ``activate ETA``
+    
+    ``pip install etabackend``
+    
+* Run ETA Backend
+    create a text file and add the following, adjusting the path to your Anaconda installation:
+    
+    ``@echo off``
+
+    ``set PATH=%PATH%;C:\Path\Anaconda3\Scripts``
+
+    ``@call C:\Path\Anaconda3\Scripts\activate.bat ETA``
+
+    ``@call python -m etabackend``
+
+    save as a .bat file.
+    
 * Run the Web GUI
      You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
 
