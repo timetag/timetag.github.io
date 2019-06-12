@@ -40,7 +40,7 @@ For regular python:
     
 * Run ETA Backend
     ``python -m etabackend``
-For Anaconda/Miniconda in separate environment
+For Anaconda/Miniconda in separate environment:
 ,,,,
 
 * Install ETA Backend 
@@ -52,8 +52,7 @@ For Anaconda/Miniconda in separate environment
     
     ``activate ETA``
     
-    ``pip install etabackend``
-    
+    ``pip install etabackend``   
 * Run ETA Backend
     create a text file and add the following, adjusting the path to your Anaconda installation:
     
@@ -65,9 +64,10 @@ For Anaconda/Miniconda in separate environment
 
     ``@call python -m etabackend``
 
-    save as a .bat file.
-    
-* Run the Web GUI
+    save as a .bat file.   
+Run the Web GUI
+,,,,
+
      You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
 
 Verify the Installation
