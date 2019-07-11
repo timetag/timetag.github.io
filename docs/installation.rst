@@ -55,14 +55,12 @@ For Anaconda/Miniconda in separate environment:
     ``pip install etabackend``   
 * Run ETA Backend
     create a text file and add the following, adjusting the path to your Anaconda installation:
+    .. code::
     
-    ``@echo off``
-
-    ``set PATH=%PATH%;C:\Path\Anaconda3\Scripts``
-
-    ``@call C:\Path\Anaconda3\Scripts\activate.bat ETA``
-
-    ``@call python -m etabackend``
+            @echo off
+            set PATH=%PATH%;C:\Users\username\Anaconda3\Scripts
+            @call C:\Users\username\Anaconda3\Scripts\activate.bat ETA
+            @call python -m etabackend
 
     save as a .bat file.   
 Run the Web GUI
