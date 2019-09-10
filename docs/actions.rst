@@ -14,6 +14,7 @@ In the following documentation, we list the built-in Tools and their Actions in 
 
 CLOCK
 ------------------------------
+``CLOCK(name, max start times, max stop times)``
 
 CLOCK is a time interval recorder with a start button and a stop button. The CLOCK remembers the time when it is started or stopped, and it calculates the time interval as the output.
 
@@ -45,16 +46,17 @@ Actions
     Stop the clock at the current time.
 
 - ``clock.infer_start_from_stop(SYNC)``
-    Using the stopping time to find the last specified type of signal before it, and then overwirte the starting time to the time of this signal.
+    Using the stopping time to find the last specified type of signal before it, and then overwrite the starting time to the time of this signal.
     If the clock is a single-start-multi-stop clock, then the earliest stopping time value it stores will be used for inferring the start.
 
     .. note::
-        Currently it can only use the SYNC period to find the SYNC signal. This action might be removed if there is better idea for supporting Life-time measurements using HydraHarp T3 files.
+        Currently it can only use the SYNC period to find the SYNC signal. This action might be removed if there is better idea for supporting Life-time measurements using HydraHarp400 T3 files.
 
 - ``[clock1,clock2,...].sort(start)``
     Sort the starting time of a group of clocks, preserving their stopping time.
     This is useful if you want to record multi-dimensional histograms with the axis indicating the arrival order (first photon, second photon) instead of channels (detector1, detector2).
-
+    
+   .. note::
     Please note that multi-CLOCK is not yet supported.
 
     The first parameters can be also changed to ``stop``, to sort the stopping time of a group of clocks, preserving their starting time.
@@ -67,29 +69,31 @@ Performing a start-stop measurement:
 .. code-block:: python    
    
     CLOCK(c1,1,1)
-    started:
+    state2:
         c1.start()
-    stopped:
+    state1:
         c1.stop()  
         t1.record(c1)
 
 HISTOGRAM
 ------------------------------
+``HISTOGRAM(name,[(number of bins, width of bins in picoseconds)),...]``
+
 Histogram generates statistics of time intervals or an arbitrary INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
-The histogram can be retrived using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
+The histogram can be retrieved using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
 
 Parameters
 ......
 
-- ``[(Number of bins, Width of bins in picosecond),...]`` (required)
+- ``[(Number of bins, Width of bins in picoseconds),...]`` (required)
     This parameter has to be specified in a pair, like ``(100,16)``. The first value of the pair indicates the number of bins in the histogram. The second value of the pair indicates the size of each bin in the histogram. 
     
     If the histogram is multi-dimensional, specify value for each dimension, like ``[(100,16),(200,16)]``.
 
  .. note::
-    The product of the histogram parameters bin size and bin number gives you the maximum correaltion length, if you are performing a correlational analysis. 
+    The product of the histogram parameters bin size and bin number gives you the maximum correlation length, if you are performing a correlational analysis. 
     
-    The values that falls out of the histogram will not be ignored.
+    The values that fall out of the histogram will be ignored.
 
 - ``Extra Dimensions``
     The extra dimension before the histogram dimensions, usually used for making images.
@@ -103,17 +107,17 @@ Actions
 - ``histogram.record(clock1,clock2,...)``
     Record the time interval of ``clock1`` and ``clock2`` into a multi-dimensional histogram. The order of clock should be the same as the order of dimension. 
 
-    This is usally used to explore the joint probability distribution of two types of events.
+    This is usually used to explore the joint probability distribution of two types of events.
 
 - ``histogram.record_all(clock)``
     ``histogram.record_all`` is the Cartesian product version of ``histogram.record``. It records all the time intervals of the multi-CLOCK ``clock`` into the histogram. 
     
-    This is usually used together with a multi-sart-single-stop CLOCK to correlate singals from one channel to the other channel.
+    This is usually used together with a multi-start-single-stop CLOCK to correlate signals from one channel to the another channel.
 
-    Using record_all with multi-dimensional histogram is not yet supported.
+    Using record_all with a multi-dimensional histogram is not yet supported.
 
 - ``histogram[x][y][...].record(clock,...)``
-    Record the time interval of ``clock`` into an image of 1-dimensional or multi-dimensional histograms. This is usally used in biology imaging, where x and y can be obtained from state trasitions of markers, which indicates the postition of the scanning instrument.
+    Record the time interval of ``clock`` into an image of 1-dimensional or multi-dimensional histograms. This is usually used in biology imaging, where x and y can be obtained from state transitions of markers, which indicates the position of the scanning instrument.
 
 - ``histogram[x][y][...].record_all(clock,...)``
     Combination of ``histogram[x][y].record(clock,...)`` and ``histogram.record_all(clock)``
@@ -121,7 +125,7 @@ Actions
 Examples
 ......
 
-Performing a correaltion:
+Performing a correlation:
 
 .. code-block:: python    
     HISTOGRAM(t1,(100,16))
@@ -134,7 +138,9 @@ Performing a correaltion:
 
 COINCIDENCE
 ------------------------------
-Coincidence is a tool that emits a signal when all of its slots are fulfilled.
+``COINCIDENCE(name, length_of_array, emission_channel)``
+
+Coincidence is a Tool that emits a signal when all of its slots are fulfilled.
 
 Parameters
 ......
@@ -159,6 +165,8 @@ Actions
 
 SELF
 ------------------------------
+``emit(channel, delay_in_ps=0, period=0, repeat_#_of_times=1)``
+
 The instrument itself is also a Tool. When using its actions, the instrument doesn't need to be referred by its name.
 
 Actions
@@ -171,7 +179,7 @@ Actions
     The maximum limit of channel number ``chn`` is 255.
  
     .. note::
-        It is not allowed to emit to any channel that is read from a timetag file (timetagger channels or markers). The emited signal will never be written to the timetag file to prevent corrputing the original data.
+        It is not allowed to emit to any channel that is read from a timetag file (timetagger channels or markers). The emitted signal will never be written to the timetag file to prevent corrputing the original data.
 
         If you need to merge signals from two channels into one channel, simply emit them into a new unused channel.
 
@@ -180,12 +188,12 @@ Actions
 - ``cancel_emit(chn)``
     Flush all the previously emitted events in the channel ``chn``.
 
-    Canceling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
+    Cancelling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
 
 Examples
 ......
 
-Making a dealy line:
+Making a delay line:
 
 .. code-block:: python    
    
@@ -200,10 +208,10 @@ Apart from the built-in actions, you can also use a embedded code to extend the 
 
 Embedded code can be wrapped in a  ``{`` and ``}`` . If the code contains curly brackets, a pair of ``{{{`` and ``}}}`` can be used.
 
-The embedded code uses a restricted sub-set of Python language, and a limited subset of numpy function is imported with `np`. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
+The embedded code uses a restricted sub-set of Python language, and a limited subset of Numpy function is imported with `np`. Internally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
 
 .. note::
-    Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
+    Please note that features that requires ``import``, ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
     
     We noticed that the built-in tools and actions already serve as a good basis for many different experiments. But we still want to add more actions for different analysis purposes. If you created some custom Action for extending the functionality of ETA, please share it :)
 
@@ -211,16 +219,17 @@ The embedded code uses a restricted sub-set of Python language, and a limited su
 Examples
 ....
 
-Here is an example for generating random numbers on transtion from a to b. You can then emit signal using the result from the embedded Python code, which might be useful for monte calor simulations.
+Here is an example for generating random numbers on a transition from state a to state b. You can then emit a signal using the result from the embedded Python code, which might, for example, be useful for Monte-Carlo simulations.
 
 .. code::
 
       a--1-->b:
-          start(c1) # execute bulit-in action
+          start(c1) # execute built-in action
           #execute the embedded Python code
           {   
               mu, sigma = 0, 0.1 # mean and standard deviation
               s = np.random.normal(mu, sigma) #generate random numbers
-              print(s) # print the genreated floating number
+              print(s) # print the generated floating number
           }
+          emit(2, s) # emit on channel 2 after a random delay in ps
           
