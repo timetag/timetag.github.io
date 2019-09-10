@@ -182,10 +182,10 @@ Set value of a parameter in a recipe using the name of the parameter. If there a
 - ``value``
     Value of the parameter, as shown in the ETA GUI.
     
-List of packages in ETA_LIB
+Using Third-party Libraries
 -----
 
-ETA_LIB is the standard distribution for ETA packages, which includes some commonly used libraries.
+The following libraries are required to be installed with ETA. Feel free to use them in your recipes. 
 
 - numpy
 - scipy
@@ -197,3 +197,6 @@ ETA_LIB is the standard distribution for ETA packages, which includes some commo
 - dash-core-components
 - plotly
 - bokeh
+
+Using other third-party libraries (including Python libraries or dynamic linked libraries) might lead to not fully portable recipes. Please distribute the libraries with the recipe, so that the users can download and install them. 
+ETA also recommends distributing the libraries on ETA-DLC (ETA downloadable contents). 
