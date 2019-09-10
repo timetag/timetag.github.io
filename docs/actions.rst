@@ -124,7 +124,7 @@ Examples
 Performing a correaltion:
 
 .. code-block:: python    
-   
+    HISTOGRAM(t1,(100,16))
     CLOCK(c1,100,1)
     started:
         c1.start()
