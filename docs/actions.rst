@@ -1,13 +1,11 @@
 Tools and Actions
 ===============================
 
-Virtual Instruments are used to perform analysis in an ETA recipe. As mentioned before, each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side.
+Virtual Instruments are used to perform timetag analysis in an ETA recipe. As mentioned before, each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side. Actions can be put in the code panel to specify what should be done when there is a state change on the graph. 
 
-In the code panel, users can put what should be done when there is a state change on the graph, which are called Actions.
+Each Action belongs to a certain Tool. Tools can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted. 
 
-Each Action belongs to a certian Tool. For example, if you want to record a time interval of two events, you will need to create a Tool called CLOCK.
-
-Each Tool can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted.
+For example, if you want to record a time interval of two events, you will need to create a Tool called CLOCK first, and then do Action clock.start() to start this clock.
 
 In the following documentation, we list the built-in Tools and their Actions in the current version of ETA. 
 
@@ -17,25 +15,25 @@ In the following documentation, we list the built-in Tools and their Actions in 
 CLOCK
 ------------------------------
 
-CLOCK is a time interval recorder with a start button and a stop button. The CLOCKS remembers the time when it is started or stopped, and it calculates the time interval as the output.
+CLOCK is a time interval recorder with a start button and a stop button. The CLOCK remembers the time when it is started or stopped, and it calculates the time interval as the output.
 
-.. note::
-        The buttons can be pressed for multiple times. The recoder has a maximum number of recorded events, and it will drop the oldest event when it reach this limit. 
-        
-        Please also note that ETA will never automatically clear the recordings in the CLOCK. It can only overwritten.
+The buttons can be pressed for multiple times in case of a "multi-CLOCK". The recorder has a maximum number of recorded events, and it will drop the oldest event when it reaches this limit. 
+
+.. note::        
+        Please also note that ETA will not automatically clear the recordings in the CLOCK, they can only overwritten.
 
 Parameters
 ......
 
 - ``Max Start Times`` (default:1)
-    The Max Start Times parameters specifies the number of start events are preserved in the recorder. 
+    This parameter specifies the maximum number of start events that can be stored in the recorder. 
     
 - ``Max Stop Times`` (default:1)
-    The Max Start Times parameters specifies the number of stop events are preserved in the recorder.
+    This parameter specifies the maximum number of stop events that can be stored in the recorder.
 
 .. note::
 
-    Max Stop Times should be set to 1, and Max Start Times should be set to a very large number when doing correlational measurements, so that you correlate each signal on one channel to every singal on the other channel.
+    Max Stop Times should be set to 1, and Max Start Times should be set to a very large number when doing correlational measurements, so that you correlate each signal on one channel to every signal on the other channel.
 
 Actions
 ......
@@ -49,23 +47,24 @@ Actions
     Stop the clock at the current time.
 
 - ``clock.infer_start_from_stop(SYNC)``
-    Using the value of stop to find the last specified signal before the stop, and then overwirte the start to the time of this signal.
-    
-    Currently it can only use the SYNC period to find the SYNC signal. This Action might be removed if there is better idea for supporting Life-time measurements using HydraHarp T3 files.
+    Using the stopping time to find the last specified type of signal before it, and then overwirte the starting time to the time of this signal.
+    If the clock is a single-start-multi-stop clock, then the earliest stopping time value it stores will be used for inferring the start.
 
-    If the clock is a single-start-multi-stop clock, then the earliest stop value it remembers will be used.
+    .. note::
+        Currently it can only use the SYNC period to find the SYNC signal. This action might be removed if there is better idea for supporting Life-time measurements using HydraHarp T3 files.
 
 - ``[clock1,clock2,...].sort(start)``
-    Sort the starting time time of a group of clocks, preserving their stopping time.
-    This is useful if you want to do some measurements that records multi-dimensional histograms with the axis indicating the arrival order (first photon, second photon) instaed of channels (detector1, detector2).
+    Sort the starting time of a group of clocks, preserving their stopping time.
+    This is useful if you want to record multi-dimensional histograms with the axis indicating the arrival order (first photon, second photon) instead of channels (detector1, detector2).
 
     Please note that multi-CLOCK is not yet supported.
-    The first parameters can be also changed to ``stop``.
+
+    The first parameters can be also changed to ``stop``, to sort the stopping time of a group of clocks, preserving their starting time.
 
 Examples
 ......
 
-Performing a start-stop measurement.
+Performing a start-stop measurement:
 
 .. code-block:: python    
    
@@ -78,35 +77,36 @@ Performing a start-stop measurement.
 
 HISTOGRAM
 ------------------------------
-Histogram stores statistics with time intervals or an arbitray INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
-The histogram name can be read out from the Script Panel for further processing.
+Histogram generates statistics of time intervals or an arbitrary INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
+The histogram can be retrived using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
 
 Parameters
 ......
 
 - ``Number of bins`` (required)
-    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like ``[100,200]``.
+    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like, ``[100,200]``.
 
 - ``Width (in ps) of bins`` (required)
-    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension like ``[16,16]``.
+    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension, like ``[16,16]``.
 
+ .. note::
+    The product of the histogram parameters bin size and bin number gives you the maximum correaltion length , if you are performing a correlational analysis. 
+    
+    The values that falls out of the histogram will not be ignored.
 
 Actions
 ......
 
 - ``histogram.record(clock)``
-    Record a time interval of the CLOCK ``clock`` into a 1-dimensional histogram. The values that falls out of the histogram will not be ignored.
+    Record the time interval of ``clock`` into a 1-dimensional histogram. The values that falls out of the histogram will be ignored.
 
 - ``histogram.record(clock1,clock2,...)``
-    Record a time interval of the CLOCK ``clock1`` and ``clock2`` into a multi-dimensional histogram. The values that falls out of the histogram will not be ignored.
+    Record the time interval of ``clock1`` and ``clock2`` into a multi-dimensional histogram. The order of clock should be the same as the order of dimension. The values that falls out of the histogram will be ignored.
 
 - ``histogram.record_all(clock)``
-    Record all the time intervals of the CLOCK into the histogram. The values that falls out of the histogram will not be ignored.
+    Record all the time intervals of the multi-CLOCK ``clock`` into the histogram. The time intervals are calculated like doing a Cartesian product between starts and stops. 
 
-    .. note::
-        The product of the histogram parameters (bin size and bin number) gives you the maximum correaltion length if you are performing a correlational analysis.
-        
-        Using record_all with multi-dimensional histogram is not yet fully tested.
+    Using record_all with multi-dimensional histogram is not yet supported.
 
 Examples
 ......
@@ -133,7 +133,7 @@ Parameters
     The number of coincidence slots on this Coincidence counter.
 
 - ``Emit to this channel# when fulfilled`` (required)
-    Emit to this channel# when fulfilled
+    Emit to this channel# when all of the coincidence slots are fulfilled.
 
 
 Actions
@@ -141,7 +141,7 @@ Actions
 
 
 - ``coincidence.fill(slotid)``
-    Mark the coincidence slot `slotid` with the current time. A signal will then be emitted if all of the slots are fulfilled.
+    Mark the coincidence slot `slotid` with the current time. Then, a signal will then be emitted at the current time, if all of the slots are fulfilled. 
 
 - ``coincidence.clear()``
     Clear all coincidence slots.
@@ -149,14 +149,14 @@ Actions
 
 SELF
 ------------------------------
-The instrument itself is also a Tool. When using actions, it doesn't need to be referred by name.
+The instrument itself is also a Tool. When using its actions, the instrument doesn't need to be referred by its name.
 
 Actions
 ......
 
 
 - ``emit(chn, waittime=0, period=0, repeat=1)``
-    Emit signal to chn after ``waittime``. It can also emit some repeated signal if  ``repeat`` is set to larger than one, with a `period` in ps.
+    Emit a signal to ``chn`` after ``waittime``. It can also emit some repeated signals with a `period` in ps if  ``repeat`` is set to larger than one.
     
     The maximum limit of channel number ``chn`` is 255.
  
