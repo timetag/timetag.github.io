@@ -183,7 +183,7 @@ Making a dealy line:
         emit(2, 130)# here, ch0 is duplicated to ch2 with a delay of 130ps, making a delay line
 
 
-Extending actions using embedded code
+Extending Actions using Embedded Code
 -----------------------
 
 Apart from the built-in actions, you can also use a embedded code to extend the functionality of ETA.
@@ -195,8 +195,8 @@ The embedded code uses a restricted sub-set of Python language, and a limited su
 .. note::
     Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
     
-    We noticed that the built-in tools and actions already serve as a good basis for many different experiments. But we still want to add more actions for different analysis purposes. 
-    
+    We noticed that the built-in tools and actions already serve as a good basis for many different experiments. But we still want to add more actions for different analysis purposes. If you created some custom Action for extending the functionality of ETA, please share it :)
+
 
 Examples
 ....
