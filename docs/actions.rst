@@ -63,24 +63,27 @@ Performing a start-stop measurement.
 
 HISTOGRAM
 ------------------------------
-Histogram stores statistics with time intervals or an arbitray INTEGER. The histogram name can be read out from the Script Panel for further processing.
+Histogram stores statistics with time intervals or an arbitray INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
+The histogram name can be read out from the Script Panel for further processing.
 
 Parameters
 ......
 
 - ``Number of bins`` (required)
-    Number of bins in the histogram. 
+    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like `[100,200]`.
 
 - ``Width (in ps) of bins`` (required)
-    The size of each bin in the histogram.
+    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension like `[16,16]`.
 
 
 Actions
 ......
 
+- ``histogram.record(clock1,)``
+    Record a time interval of the CLOCK `clock1` into a 1-dimensional histogram. The values that falls out of the histogram will not be ignored.
 
-- ``histogram.record(clock)``
-    Record a time interval of the CLOCK into the histogram. The values that falls out of the histogram will not be ignored.
+- ``histogram.record(clock1,clock2,...)``
+    Record a time interval of the CLOCK `clock1` and `clock2` into a multi-dimensional histogram. The values that falls out of the histogram will not be ignored.
 
 - ``histogram.record_all(clock)``
     Record all the time intervals of the CLOCK into the histogram. The values that falls out of the histogram will not be ignored.
@@ -88,6 +91,7 @@ Actions
     .. note::
         The product of the histogram parameters (bin size and bin number) gives you the maximum correaltion length if you are performing a correlational analysis.
         
+        Using record_all with multi-dimensional histogram is not yet fully tested.
 
 Examples
 ......
