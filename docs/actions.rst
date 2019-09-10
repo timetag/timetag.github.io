@@ -81,14 +81,13 @@ The histogram can be retrived using its name from the returned dictionary from e
 Parameters
 ......
 
-- ``Number of bins`` (required)
-    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like, ``[100,200]``.
-
-- ``Width (in ps) of bins`` (required)
-    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension, like ``[16,16]``.
+- ``[(Number of bins, Width of bins in picosecond),...]`` (required)
+    This parameter has to be specified in a pair, like ``(100,16)``. The first value of the pair indicates the number of bins in the histogram. The second value of the pair indicates the size of each bin in the histogram. 
+    
+    If the histogram is multi-dimensional, specify value for each dimension, like ``[(100,16),(200,16)]``.
 
  .. note::
-    The product of the histogram parameters bin size and bin number gives you the maximum correaltion length , if you are performing a correlational analysis. 
+    The product of the histogram parameters bin size and bin number gives you the maximum correaltion length, if you are performing a correlational analysis. 
     
     The values that falls out of the histogram will not be ignored.
 
@@ -115,7 +114,6 @@ Actions
 
 - ``histogram[x][y][...].record(clock,...)``
     Record the time interval of ``clock`` into an image of 1-dimensional or multi-dimensional histograms. This is usally used in biology imaging, where x and y can be obtained from state trasitions of markers, which indicates the postition of the scanning instrument.
-
 
 - ``histogram[x][y][...].record_all(clock,...)``
     Combination of ``histogram[x][y].record(clock,...)`` and ``histogram.record_all(clock)``
