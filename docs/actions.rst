@@ -128,6 +128,7 @@ Examples
 ......
 
 Making a dealy line:
+
 .. code-block:: python    
    
     ch0_event:
@@ -143,10 +144,14 @@ Embedded code can be wrapped in a  ``{`` and ``}`` . If the code contains curly 
 
 The embedded code uses a restricted sub-set of Python language. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
 
-Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
+.. note::
+    Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
 
-However, a limited subset of numpy function is imported with `np`. 
-Here is an example for generating random numbers on transtion from a to b.
+    However, a limited subset of numpy function is imported with `np`. 
+    Here is an example for generating random numbers on transtion from a to b.
+
+Examples
+....
 
 .. code::
 
