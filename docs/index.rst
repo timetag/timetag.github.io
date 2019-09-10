@@ -15,5 +15,6 @@ Index
    installation
    workflow
    recipes
+   actions
    python
    advanced
