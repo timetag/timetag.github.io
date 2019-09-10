@@ -32,8 +32,9 @@ Parameters
 - ``Max Stop Times`` (default:1)
     The Max Start Times parameters specifies the number of stop events are preserved in the recorder.
 
-    .. note::
-        Currently, Max Stop Times can only be set to 1.
+.. note::
+
+    Max Stop Times should be set to 1, and Max Start Times should be set to a very large number when doing correlational measurements, so that you correlate each signal on one channel to every singal on the other channel.
 
 Actions
 ......
@@ -44,8 +45,21 @@ Actions
     
  
 - ``clock.stop()``
-    Start the clock at the current time.
+    Stop the clock at the current time.
 
+- ``clock.infer_start_from_stop(SYNC)``
+    Using the value of stop to find the last specified signal before the stop, and then overwirte the start to the time of this signal.
+    
+    Currently it can only use the SYNC period to find the SYNC signal. This Action might be removed if there is better idea for supporting Life-time measurements using HydraHarp T3 files.
+
+    If the clock is a single-start-multi-stop clock, then the earliest stop value it remembers will be used.
+
+- ``[clock1,clock2,...].sort(start)``
+    Sort the starting time time of a group of clocks, preserving their stopping time.
+    This is useful if you want to do some measurements that records histograms depending on arrival order.
+
+    Please note that multi-CLOCK is not yet supported.
+    The first parameters can be also changed to ``stop``.
 
 Examples
 ......
@@ -141,9 +155,9 @@ Actions
 
 
 - ``emit(chn, waittime=0, period=0, repeat=1)``
-    Emit signal to chn after `waittime`. It can also emit some repeated signal if  `repeat` is set to larger than one, with a `period` in ps.
+    Emit signal to chn after ``waittime``. It can also emit some repeated signal if  ``repeat`` is set to larger than one, with a `period` in ps.
     
-    The maximum limit of channel number `chn` is 255.
+    The maximum limit of channel number ``chn`` is 255.
  
     .. note::
         It is not allowed to emit to any channel that is read from a timetag file (timetagger channels or markers). The emited signal will never be written to the timetag file to prevent corrputing the original data.
@@ -152,6 +166,10 @@ Actions
 
         Channels can also be used as routers. For examples, you can route events to different Virtual Instruments based on some status that is controlled by the markers.
         
+- ``cancel_emit(chn)``
+    Flush all the previously emitted events in the channel ``chn``.
+
+    Canceling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
 
 Examples
 ......
