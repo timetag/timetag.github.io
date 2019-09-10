@@ -4,21 +4,24 @@ Tools and Actions
 Virtual Instruments are used to perform analysis in an ETA recipe. As mentioned before, each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side.
 
 In the code panel, users can put what should be done when there is a state change on the graph, which are called Actions.
-
 Each Action belongs to a certian Tool. For example, if you want to record a time interval of two events, you will need to create a Tool called CLOCK.
-
 Each Tool can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted.
 
 In the following documentation, we list the built-in Tools and their Actions in the current version of ETA. 
 
 .. note::
-    Please note that ETA is still under development, and Tools and their Actions might be changed in the future.
+    Please note that ETA is still under development. Tools and their Actions might be changed in the future.
 
 
 CLOCK
 ------------------------------
 
 CLOCK is a time interval recorder with a start button and a stop button. The CLOCKS remembers the time when it is started or stopped, and it calculates the time interval as the output.
+
+.. note::
+        The buttons can be pressed for multiple times. The recoder has a maximum number of recorded events, and it will drop the oldest event when it reach this limit. 
+        
+        Please also note that ETA will never automatically clear the recordings in the CLOCK. It can only overwritten.
 
 Parameters
 ......
@@ -39,9 +42,7 @@ Actions
 - ``clock.start()``
     Start the clock at the current time.
     
-    .. note::
-        The buttons can be pressed for multiple times. The recoder has a maximum number of recorded events, and it will drop the oldest event when it reach this limit.
-
+ 
 - ``clock.stop()``
     Start the clock at the current time.
 
@@ -104,8 +105,17 @@ Actions
 ......
 
 
-- ``emit(????)``
-    TODO: emit
+- ``emit(chn, waittime=0, period=0, repeat=1)``
+    Emit signal to chn after `waittime`. It can also emit some repeated signal if  `repeat` is set to larger than one, with a `period` in ps.
+    
+    The maximum limit of channel number `chn` is 255.
+ 
+    .. note::
+        It is not allowed to emit to any channel that is read from a timetag file (timetagger channels or markers). The emited signal will never be written to the timetag file to prevent corrputing the original data.
+
+        If you need to merge signals from two channels into one channel, simply emit them into a new unused channel.
+
+        Channels can also be used as routers. For examples, you can route events based on markers to different Virtual Instruments based on some status that is controlled by the markers.
         
 
 Examples:
