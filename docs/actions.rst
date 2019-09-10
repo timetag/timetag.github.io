@@ -56,7 +56,7 @@ Actions
 
 - ``[clock1,clock2,...].sort(start)``
     Sort the starting time time of a group of clocks, preserving their stopping time.
-    This is useful if you want to do some measurements that records histograms depending on arrival order.
+    This is useful if you want to do some measurements that records multi-dimensional histograms with the axis indicating the arrival order (first photon, second photon) instaed of channels (detector1, detector2).
 
     Please note that multi-CLOCK is not yet supported.
     The first parameters can be also changed to ``stop``.
@@ -84,20 +84,20 @@ Parameters
 ......
 
 - ``Number of bins`` (required)
-    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like `[100,200]`.
+    Number of bins in the histogram. If the histogram is multi-dimensional, specify value for each dimension like ``[100,200]``.
 
 - ``Width (in ps) of bins`` (required)
-    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension like `[16,16]`.
+    The size of each bin in the histogram. If the histogram is multi-dimensional, specify value for each dimension like ``[16,16]``.
 
 
 Actions
 ......
 
-- ``histogram.record(clock1,)``
-    Record a time interval of the CLOCK `clock1` into a 1-dimensional histogram. The values that falls out of the histogram will not be ignored.
+- ``histogram.record(clock)``
+    Record a time interval of the CLOCK ``clock`` into a 1-dimensional histogram. The values that falls out of the histogram will not be ignored.
 
 - ``histogram.record(clock1,clock2,...)``
-    Record a time interval of the CLOCK `clock1` and `clock2` into a multi-dimensional histogram. The values that falls out of the histogram will not be ignored.
+    Record a time interval of the CLOCK ``clock1`` and ``clock2`` into a multi-dimensional histogram. The values that falls out of the histogram will not be ignored.
 
 - ``histogram.record_all(clock)``
     Record all the time intervals of the CLOCK into the histogram. The values that falls out of the histogram will not be ignored.
