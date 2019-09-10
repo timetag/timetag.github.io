@@ -113,11 +113,11 @@ Actions
 
     Using record_all with multi-dimensional histogram is not yet supported.
 
-- ``histogram[x][y].record(clock,...)``
+- ``histogram[x][y][...].record(clock,...)``
     Record the time interval of ``clock`` into an image of 1-dimensional or multi-dimensional histograms. This is usally used in biology imaging, where x and y can be obtained from state trasitions of markers, which indicates the postition of the scanning instrument.
 
 
-- ``histogram[x][y].record_all(clock,...)``
+- ``histogram[x][y][...].record_all(clock,...)``
     Combination of ``histogram[x][y].record(clock,...)``and ``histogram.record_all(clock)``
 
 Examples
