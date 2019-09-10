@@ -47,7 +47,10 @@ Actions
     Start the clock at the current time.
 
 
-Examples:
+Examples
+......
+
+Performing a start-stop measurement.
 
 .. code-block:: python    
    
@@ -86,7 +89,10 @@ Actions
         The product of the histogram parameters (bin size and bin number) gives you the maximum correaltion length if you are performing a correlational analysis.
         
 
-Examples:
+Examples
+......
+
+Performing a correaltion:
 
 .. code-block:: python    
    
@@ -115,11 +121,13 @@ Actions
 
         If you need to merge signals from two channels into one channel, simply emit them into a new unused channel.
 
-        Channels can also be used as routers. For examples, you can route events based on markers to different Virtual Instruments based on some status that is controlled by the markers.
+        Channels can also be used as routers. For examples, you can route events to different Virtual Instruments based on some status that is controlled by the markers.
         
 
-Examples:
+Examples
+......
 
+Making a dealy line:
 .. code-block:: python    
    
     ch0_event:
