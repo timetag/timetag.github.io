@@ -4,14 +4,15 @@ Tools and Actions
 Virtual Instruments are used to perform analysis in an ETA recipe. As mentioned before, each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side.
 
 In the code panel, users can put what should be done when there is a state change on the graph, which are called Actions.
+
 Each Action belongs to a certian Tool. For example, if you want to record a time interval of two events, you will need to create a Tool called CLOCK.
+
 Each Tool can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted.
 
 In the following documentation, we list the built-in Tools and their Actions in the current version of ETA. 
 
 .. note::
     Please note that ETA is still under development. Tools and their Actions might be changed in the future.
-
 
 CLOCK
 ------------------------------
@@ -189,12 +190,13 @@ Apart from the built-in actions, you can also use a embedded code to extend the 
 
 Embedded code can be wrapped in a  ``{`` and ``}`` . If the code contains curly brackets, a pair of ``{{{`` and ``}}}`` can be used.
 
-The embedded code uses a restricted sub-set of Python language. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
+The embedded code uses a restricted sub-set of Python language, and a limited subset of numpy function is imported with `np`. Intenally, ETA uses Numba to compile the Python code into LLVM and link it with the built-in actions and other parts of the program. 
 
 .. note::
     Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
     
-    However, a limited subset of numpy function is imported with `np`. 
+    We noticed that the built-in tools and actions already serve as a good basis for many different experiments. But we still want to add more actions for different analysis purposes. 
+    
 
 Examples
 ....
