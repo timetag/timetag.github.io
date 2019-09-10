@@ -118,7 +118,7 @@ Actions
 
 
 - ``histogram[x][y][...].record_all(clock,...)``
-    Combination of ``histogram[x][y].record(clock,...)``and ``histogram.record_all(clock)``
+    Combination of ``histogram[x][y].record(clock,...)`` and ``histogram.record_all(clock)``
 
 Examples
 ......
