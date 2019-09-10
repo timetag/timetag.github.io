@@ -17,19 +17,19 @@ CLOCK
 
 CLOCK is a time interval recorder with a start button and a stop button. The CLOCK remembers the time when it is started or stopped, and it calculates the time interval as the output.
 
-The buttons can be pressed for multiple times in case of a "multi-CLOCK". The recorder has a maximum number of recorded events, and it will drop the oldest event when it reaches this limit. 
+There is a special case of CLOCK called "multi-CLOCK", where the buttons can be pressed for multiple times. The "multi-CLOCK" has a maximum limit of recorded events, and it will drop the oldest event when it reaches this limit. 
 
 .. note::        
-        Please also note that ETA will not automatically clear the recordings in the CLOCK, they can only overwritten.
+        Please also note that ETA will not automatically clear the recordings in the CLOCK, they can only be overwritten.
 
 Parameters
 ......
 
 - ``Max Start Times`` (default:1)
-    This parameter specifies the maximum number of start events that can be stored in the recorder. 
+    This parameter specifies the maximum limit of start events that can be stored in the recorder. 
     
 - ``Max Stop Times`` (default:1)
-    This parameter specifies the maximum number of stop events that can be stored in the recorder.
+    This parameter specifies the maximum limit of stop events that can be stored in the recorder.
 
 .. note::
 
@@ -38,11 +38,9 @@ Parameters
 Actions
 ......
 
-
 - ``clock.start()``
     Start the clock at the current time.
     
- 
 - ``clock.stop()``
     Stop the clock at the current time.
 
@@ -94,19 +92,33 @@ Parameters
     
     The values that falls out of the histogram will not be ignored.
 
+- ``Extra Dimensions``
+    The extra dimension before the histogram dimensions, usually used for making images.
+
 Actions
 ......
 
 - ``histogram.record(clock)``
-    Record the time interval of ``clock`` into a 1-dimensional histogram. The values that falls out of the histogram will be ignored.
+    Record the time interval of ``clock`` into a 1-dimensional histogram. 
 
 - ``histogram.record(clock1,clock2,...)``
-    Record the time interval of ``clock1`` and ``clock2`` into a multi-dimensional histogram. The order of clock should be the same as the order of dimension. The values that falls out of the histogram will be ignored.
+    Record the time interval of ``clock1`` and ``clock2`` into a multi-dimensional histogram. The order of clock should be the same as the order of dimension. 
+
+    This is usally used to explore the joint probability distribution of two types of events.
 
 - ``histogram.record_all(clock)``
-    Record all the time intervals of the multi-CLOCK ``clock`` into the histogram. The time intervals are calculated like doing a Cartesian product between starts and stops. 
+    ``histogram.record_all`` is the Cartesian product version of ``histogram.record``. It records all the time intervals of the multi-CLOCK ``clock`` into the histogram. 
+    
+    This is usually used together with a multi-sart-single-stop CLOCK to correlate singals from one channel to the other channel.
 
     Using record_all with multi-dimensional histogram is not yet supported.
+
+- ``histogram[x][y].record(clock,...)``
+    Record the time interval of ``clock`` into an image of 1-dimensional or multi-dimensional histograms. This is usally used in biology imaging, where x and y can be obtained from state trasitions of markers, which indicates the postition of the scanning instrument.
+
+
+- ``histogram[x][y].record_all(clock,...)``
+    Combination of ``histogram[x][y].record(clock,...)``and ``histogram.record_all(clock)``
 
 Examples
 ......
