@@ -171,12 +171,13 @@ The embedded code uses a restricted sub-set of Python language. Intenally, ETA u
 
 .. note::
     Please note that features that requires ``import`` , ``exec`` or file I/O are not available. Calling built-in actions in embedded code is not currently supported.
-
+    
     However, a limited subset of numpy function is imported with `np`. 
-    Here is an example for generating random numbers on transtion from a to b.
 
 Examples
 ....
+
+Here is an example for generating random numbers on transtion from a to b. You can then emit signal using the result from the embedded Python code, which might be useful for monte calor simulations.
 
 .. code::
 
@@ -188,5 +189,4 @@ Examples
               s = np.random.normal(mu, sigma) #generate random numbers
               print(s) # print the genreated floating number
           }
-          # you can also emit signal using the result from the embedded Python code, which might be useful for monte calor simulations
-
+          
