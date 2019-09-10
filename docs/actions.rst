@@ -103,6 +103,31 @@ Performing a correaltion:
         c1.stop()  
         t1.record_all(c1)
 
+COINCIDENCE
+------------------------------
+Coincidence is a tool that emits a signal when all of its slots are fulfilled.
+
+Parameters
+......
+
+- ``Coincidence Slots`` (required)
+    The number of coincidence slots on this Coincidence counter.
+
+- ``Emit to this channel# when fulfilled`` (required)
+    Emit to this channel# when fulfilled
+
+
+Actions
+......
+
+
+- ``coincidence.fill(slotid)``
+    Mark the coincidence slot `slotid` with the current time. A signal will then be emitted if all of the slots are fulfilled.
+
+- ``coincidence.clear()``
+    Clear all coincidence slots.
+
+
 SELF
 ------------------------------
 The instrument itself is also a Tool. When using actions, it doesn't need to be referred by name.
