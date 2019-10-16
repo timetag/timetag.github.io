@@ -90,18 +90,21 @@ eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True
 - ``verbose``
     Specify if the cut information will be displayed on the analysis log.
     
-eta.wait_till_presnese(cut, timeout=1, raiseerr=False):
+eta.wait_for_data(cut, timeout=1, raiseerr=False, verbose=False):
 ......
-``wait_till_presnese`` will validate if the cut is presence using the current size of the file in this cut descriptor. A boolean will be returned as result. If you run a real-time analysis you can then loop on ``eta.wait_till_presnese``  to wait until the cut is filled with records.
+``wait_for_data`` will validate if the cut is presence using the current size of the file in this cut descriptor. A boolean will be returned as result. If you run a real-time analysis you can then loop on ``eta.wait_for_data``  to wait until the cut is filled with records.
 
 - ``cut``
     The cut descriptor to be validated.
 
 - ``timeout``
-    Value in seconds, specify the maximum waiting time for ``wait_till_presnese`` .
+    Value in seconds, specify the maximum waiting time for ``wait_for_data`` .
     
 - ``raiseerr``
     Specify if an ValueError will be raised when timeout happens.
+    
+- ``verbose``
+    Specify if information about the file growth will be displayed on the analysis log.
 
 Executing Analysis
 -----
