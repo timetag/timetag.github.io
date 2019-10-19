@@ -42,9 +42,12 @@ Actions
 - ``clock.start()``
     Start the clock at the current time.
     
+- ``clock.start(LAST_SYNC)``
+    Start the clock at the last sync. The time for the last sync is calculated from SYNCRate.
+    
 - ``clock.stop()``
     Stop the clock at the current time.
-
+    
 - ``clock.infer_start_from_stop(SYNC)``
     Using the stopping time to find the last specified type of signal before it, and then overwrite the starting time to the time of this signal.
     If the clock is a single-start-multi-stop clock, then the earliest stopping time value it stores will be used for inferring the start.
