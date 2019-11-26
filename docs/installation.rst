@@ -4,6 +4,7 @@ Installation
 
 Installing ETA
 --------
+ETA is comprised of two parts communicating via websocket: the GUI and the backend. We chose to separate the program in this way to allow remote analysis of time tags. Since correlators are typically close to the setup and require a fast interface for data transfer, it is advisable to run the backend on the computer controlling the correlator. The GUI, however, can be used from anywhere with network access to the data aquisition computer. If you transfered the time tag files to another computer for evaluation, make shure you are running both the GUI and the backend locally.
 
 Install as a standalone program
 ......
@@ -21,7 +22,7 @@ You can download ETA from Github Releases (https://github.com/timetag/ETA/releas
  
 *       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software.)
 
-For updating the existing installation, you need to
+Updating the existing installation:
 
 *       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed.
 
@@ -63,7 +64,13 @@ For Anaconda/Miniconda in separate environment:
             @call C:\Users\username\Anaconda3\Scripts\activate.bat ETA
             @call python -m etabackend
 
-    save as a .bat file.   
+    save as a .bat file. 
+    
+    When running sucessfully it should look like this:
+    
+    .. figure:: _static/ETA_backend.jpg
+        :align: center
+        :width: 50 %
 Run the Web GUI
 ,,,,
 
