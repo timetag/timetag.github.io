@@ -22,20 +22,20 @@ You can download ETA from Github Releases (https://github.com/timetag/ETA/releas
 .. note::
     Please note that ``ETA_LIB-win64.zip`` is no longer required for ETA (>=0.6.0).
  
-*       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software.)
+*       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. (It is recommended to temporarlily disable realtime thread scanning on your anti-virus software to accelerate the file unzipping.)
+
+*       After installation, two icons will be created on the desktop. Click the `ETA Backend` (icon with black background) to start the backend first, and then click `ETA` (icon with white background) to launch the GUI.
 
 Updating the existing installation:
 
-*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed.
-
-*       Run the extracted ``ETA-Setup-x.x.x.exe`` to install ETA GUI and ETA Backend. 
+*       ETA will attempt to download a new release if one exists at program start. It will then be automatically installed when the program is closed. If you prefrer to do it manually you can run the extracted ``ETA-Setup-x.x.x.exe`` like in a fresh installation. 
   
 *       Check the Github Releases (https://github.com/timetag/ETA/releases) for further information about whether the recipes should be updated.
 
 
 Install as a Python package
 ......
-For regular python:
+For offical Python distribution:
 ,,,,
 
 * Install ETA Backend 
@@ -50,31 +50,30 @@ For Anaconda/Miniconda in separate environment:
     open Anaconda promt and enter
     
     ``conda create -n ETA python=3``
-    
+     
     ``conda install -n ETA pip``
     
     ``activate ETA``
     
-    ``pip install etabackend``   
+    ``pip install etabackend``
+    
 * Run ETA Backend
-    create a text file and add the following, adjusting the path to your Anaconda installation:
+    Create a text file and add the following, adjusting the path to your Anaconda installation, then save save as a .bat file. 
     
     .. code::
     
             @echo off
-            set PATH=%PATH%;C:\Users\username\Anaconda3\Scripts
-            @call C:\Users\username\Anaconda3\Scripts\activate.bat ETA
+            set PATH=%PATH%;C:\Users\<username>\Anaconda3\Scripts
+            @call C:\Users\<username>\Anaconda3\Scripts\activate.bat ETA
             @call python -m etabackend
-
-    save as a .bat file. 
     
-    When running sucessfully it should look like this:
+    When running sucessfully, this .bat file should look like
     
     .. figure:: _static/ETA_backend.jpg
         :align: center
         :width: 50 %
-Run the Web GUI
-,,,,
+        
+* Run the Web GUI
 
      Please not that the GUI will not be installed when ETA is installed as a Python package. Instead, you can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser.
 
