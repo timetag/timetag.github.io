@@ -9,7 +9,7 @@ ETA is comprised of two parts communicating via websocket: the GUI and the backe
 Install as a standalone program
 ......
 
-You can install ETA GUI and ETA Backend as a standalone program. Currently Windows x68_64 builds are provided on Github.
+You can install ETA GUI and ETA Backend as a standalone program. Currently ETA has been tested on 64-bit versions of Microsoft Windows 7/10 and Ubuntu 18.04 with offical distributions of Python 3.6/3.7, but it may also work nicely on other platforms. Windows x68_64 binary builds are provided on Github.
 
 For a new installation, you need to
 
