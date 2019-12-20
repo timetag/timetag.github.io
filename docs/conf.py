@@ -20,7 +20,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'ETA'
-copyright = '2018, ETA Team'
+copyright = '2017-2019, ETA Team'
 author = 'ETA Team'
 
 # The short X.Y version
