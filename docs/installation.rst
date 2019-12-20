@@ -6,10 +6,12 @@ Installing ETA
 --------
 ETA is comprised of two parts communicating via websocket: the GUI and the backend. We chose to separate the program in this way to allow remote analysis of time tags. Since correlators are typically close to the setup and require a fast interface for data transfer, it is advisable to run the backend on the computer controlling the correlator. The GUI, however, can be used from anywhere with network access to the data aquisition computer. If you transfered the time tag files to another computer for evaluation, make shure you are running both the GUI and the backend locally.
 
+Currently, ETA has been tested on 64-bit versions of Microsoft Windows 7/10 and Ubuntu 18.04/19.04 with Python 3.6/3.7, but it may also work nicely on other platforms. We recommend users to install ETA as a standalone program on Windows, and as a Python package on other platforms. 
+
 Install as a standalone program
 ......
 
-You can install ETA GUI and ETA Backend as a standalone program. Currently ETA has been tested on 64-bit versions of Microsoft Windows 7/10 and Ubuntu 18.04 with offical distributions of Python 3.6/3.7, but it may also work nicely on other platforms. Windows x68_64 binary builds are provided on Github.
+You can install ETA GUI and ETA Backend as a standalone program. Currently, Windows x68_64 binary builds are provided on Github.
 
 For a new installation, you need to
 
@@ -74,7 +76,7 @@ For Anaconda/Miniconda in separate environment:
 Run the Web GUI
 ,,,,
 
-     You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ from any platform with a Web browser.
+     Please not that the GUI will not be installed when ETA is installed as a Python package. Instead, you can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser.
 
 Verify the Installation
 ......
