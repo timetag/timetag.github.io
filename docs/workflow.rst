@@ -101,18 +101,20 @@ TODO:explain the following and add more functions
   TABLE()
 
 Allowed action definitions
+
 TODO: Insert graph
 
 .. code::
 
     a--1-->b:
       action1
-    a--2,4-->b
+    a--2,4-->b:
       action2
     b: #involves all transitions arriving to b
       action3
       
 TODO: explain all the analysis actions
+
 .. code::
 
           start(clock)
