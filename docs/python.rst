@@ -92,7 +92,7 @@ eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True
     
 eta.wait_for_data(cut, timeout=1, raiseerr=False, verbose=False):
 ......
-``wait_for_data`` will validate if the cut is presence using the current size of the file in this cut descriptor. A boolean will be returned as result. If you run a real-time analysis you can then loop on ``eta.wait_for_data``  to wait until the cut is filled with records.
+``wait_for_data`` will validate if the cut is present using the current size of the file in this cut descriptor. A boolean will be returned as result. If you run a real-time analysis you can then loop on ``eta.wait_for_data``  to wait until the cut is filled with records.
 
 - ``cut``
     The cut descriptor to be validated.
