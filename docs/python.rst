@@ -84,9 +84,6 @@ eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True
 - ``format``
     The same as ``simple_cut``.
     
-- ``format``
-    The same as ``simple_cut``.
-    
 - ``verbose``
     Specify if the cut information will be displayed on the analysis log.
     
