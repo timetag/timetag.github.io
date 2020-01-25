@@ -106,7 +106,7 @@ eta.wait_for_data(cut, timeout=1, raiseerr=False, verbose=False):
 Executing Analysis
 -----
 
-eta.run(cuts, ctxs=None, sum_results=True, return_ctxs=False, group="main", verbose=True)
+eta.run(cuts, ctxs=None, sum_results=True, iterate_ctxs=False, group="main", verbose=True)
 ......
 
 Once you have cuts, you can run Virtual Instruments and fed the cuts into the instruments and obtain results. The analysis results will be returned in a Python dictionary, with the histogram names as the keys.
@@ -132,7 +132,7 @@ Once you have cuts, you can run Virtual Instruments and fed the cuts into the in
 - ``sum_results``
     Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
 
-- ``return_ctxs``
+- ``iterate_ctxs``
     Specifies if the extra context information should be returned, so that you can iteratively call this function using the returned context. If this value is set to False then only the results will be returned. 
     
 - ``group``
