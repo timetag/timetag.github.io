@@ -37,7 +37,7 @@ eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_ti
 .. note::
         The low-level API, `eta.clip_from_file()` is the only way to actually load the timetag file content into memory and return only one Clip object for later use. You can think of `eta.clip_from_file()` as the timetag-specific way of doing ``read()`` in Python. 
 
-        However, it is not recommended to use this low-level API directly, as it is complecated to manage the Clips in the multi-threading mode. In order to make ETA resumeing an exisitng analysis using a new Clip without starting a new one you will also need to put  `eta.clip_from_file()` and `eta.run` together inside a `for` loop, with a context variable managed by yourself. 
+        However, it is not recommended to use this low-level API directly, as it is complecated to manage the Clips in the multi-threading mode. In order to make ETA resume an exisitng analysis using a new Clip without starting a new one you will also need to put  `eta.clip_from_file()` and `eta.run` together inside a `for` loop, with a context variable managed by yourself. 
 
 - ``filename``
     File name of the time tag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path to file on that computer.
@@ -45,7 +45,7 @@ eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_ti
 - ``modify_clip``
     If provided, this previous Clip will be modifed. ETA will slide the cut window in the time-tag file, starting from the ending position of the prevoius Clip.  
 
-    . note::
+    .. note::
         Please note that the prevoius will be modified to a new Clip with timetag events from different window in the timetag file. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
 
 - ``read_events``
