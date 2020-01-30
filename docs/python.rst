@@ -123,6 +123,10 @@ You can use Python generators functions that yields Clips as a source. The gener
 
 - ``source``
     You can use Python generators functions that yields Clips as a source. The generator functions will be called many times, each time with a new Clip returned. 
+    
+- ``max_autofeed``
+    It allows ETA to fetch at most ``max_autofeed`` Clips from the generator.
+    This will be useful if you want to get each result per Clip, rather than get final result after the full generator is consumed.
 
 - ``return_results``
     Specifies if the dictionary of result should be returned. 
