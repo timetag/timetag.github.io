@@ -114,7 +114,7 @@ eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, v
 Executing Analysis
 -----
 
-eta.run(source, resume_task=None, group="main", verbose=True, return_task=False, return_results=True, max_autofeed=0, verbose=True)
+eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0, verbose=True)
 ......
 
 `eta.run()` starts an analysis, where you can feed the Clips as sourece into Virtual Instruments and obtain results. The analysis results will be returned in a Python dictionary, with the histogram names as the keys.
@@ -135,7 +135,9 @@ You can use Python generators functions that yields Clips as a source. The gener
         There was a parameter for multi-thread and single-thread mode in previous versions of ETA, and it is recently removed.
         
         Multi-thread and single-thread mode are only describing how to run virtual instruments on the Clips. They should not affect analysis result. However, the way how the files is cut might affect the result.
+
 - ``group``
+    The group of instruments that you want to run analysis on.
 
 - ``return_task``
     Specifies if you want the task descriptor returned . 
@@ -157,7 +159,7 @@ eta.aggregrate(list_of_tasks, sum_results=True, verbose=True):
 
 - ``sum_results``
     Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
-    
+
 - ``verbose``
     Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
 
