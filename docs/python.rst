@@ -84,7 +84,7 @@ eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format
 - ``reuse_clips``
     If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. This is useful when you want to load all the Clips at one time, like in a multi-reading analysis.
 
-    . note::
+    .. note::
         Please be careful when setting this to False, as it may cause memory leaking if the reference are not handeled properly.
 
 - ``keep_indexes``
@@ -123,7 +123,7 @@ You can use Python generators functions that yields Clips as a source. ETA will 
 
 
 - ``source``
-    You can use Python generators functions that yields Clips as a source. The generator functions will be called many times, each time with a new Clip returned. 
+    You can use a single Clip or a Python generators functions that yields Clips as a source. The generator functions will be called many times, each time with a new Clip returned. 
     
 - ``max_autofeed``
     It allows ETA to fetch at most ``max_autofeed`` Clips from the generator.
