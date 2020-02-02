@@ -47,7 +47,7 @@ ETA provides support to the format of quTAG, HydraHarp, and Swebian Instrument t
 ## Get Started!
 ### Install ETA
 
-For a full installation, [Download](https://github.com/timetag/ETA/releases) and install GUI, backend and the ``ETA_LIB`` according to the [Documentation](https://eta.readthedocs.io/en/latest/installation.html).
+For a full installation, [download](https://github.com/timetag/ETA/releases) and [install](https://eta.readthedocs.io/en/latest/installation.html) GUI and backend.
 
 You can also try [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) without installation.
 
