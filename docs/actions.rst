@@ -177,7 +177,7 @@ Actions
 
 
 - ``emit(chn, waittime=0, period=0, repeat=1)``
-    Emit a signal to ``chn`` after ``waittime``. It can also emit some repeated signals with a `period` in ps if  ``repeat`` is set to larger than one.
+    Emit a signal to ``chn`` after ``waittime``, both are either integer values or the name of an INTEGER Tool. It can also emit some repeated signals with a `period` in ps if  ``repeat`` is set to larger than one. If reapeat is set to 0, no event will be emitted, which might be used as a conditional emittion.
     
     The maximum limit of channel number ``chn`` is 255.
  
@@ -222,17 +222,29 @@ The embedded code uses a restricted sub-set of Python language, and a limited su
 Examples
 ....
 
-Here is an example for generating random numbers on a transition from state a to state b. You can then emit a signal using the result from the embedded Python code, which might, for example, be useful for Monte-Carlo simulations.
+Here is an example for sampling random delayed events from a exponential decay, and then emit a signal using the result from the embedded Python code,  on a transition from state a to state b.  This type of  might, for example, be useful for a Monte-Carlo simulation.
 
 .. code::
-
+      INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
       a--1-->b:
           start(c1) # execute built-in action
           #execute the embedded Python code
-          {   
-              mu, sigma = 0, 0.1 # mean and standard deviation
-              s = np.random.normal(mu, sigma) #generate random numbers
-              print(s) # print the generated floating number
+          {
+                delay_from_sync = 200
+                binsize = 16
+                random_delay_arr = ((np.random.exponential(125, 1)+delay_from_sync)/binsize) 
+                random_delay = round(random_delay_arr[0])*binsize
           }
-          emit(2, s) # emit on channel 2 after a random delay in ps
-          
+          emit(3,random_delay) # emit on the channel 3 with a dealy of random_delay
+
+Here is an advanced example for simulating the 50%-50% beam splitter that split singal on channel 3 into channel 4 and channel 5.
+.. code::
+        VFILE(4)
+        VFILE(5)
+        INTEGER(retchn)
+        a--3-->b:
+        {
+                options = np.asarray([4,5])
+                retchn = np.random.choice(options)
+        }
+        emit(retchn,0)
