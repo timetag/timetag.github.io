@@ -3,9 +3,9 @@ Customizing Script Panel
 
 In each ETA recipe, Script Panel provides the user interface for each experiment. 
 
-The common usage of Script Panel is to start an analysis on an existing time-tag file and display results, or provide interactive controls of the acquisition device (time-tagger) or the analysis.
+The common usage of Script Panel is to start an analysis on an existing time-tag file or a realtime time-tag sources, display results, and provide interactive controls of the acquisition device (time-tagger) or the analysis.
 
-ETA provides embedded Python and corresponding API to allow customization of the Script Panel. Here we list all the API in the latest version of ETA. For examples, please refer to the pre-made recipes.
+ETA provides Python API to allow customization of the Script Panel. Here we list all the API in the latest version of ETA. Please refer to the pre-made recipes for examples.
 
 .. note::
     When running the Script Panel, the entire recipe will be sent to ETA Backend. ETA will first check the Virtual Instruments and then start executing the code for the current Script Panel. 
@@ -17,24 +17,49 @@ ETA provides embedded Python and corresponding API to allow customization of the
     Please note that ETA Backend can only run one Script Panel at the same time. If you have multiple ETA GUI connected to ETA Backend, the running requests will be put in a queue.
 
 
-Cutting time-tag files
+Prepare Timetag Clips
 ------------------------------
 
-You need to cut the time-tag file into sections before running the analysis on these sections. When cutting the time-tag file, ETA will read the header of the time-tag and then generate cut descriptors that can be later used in the analysis. You can think of ``_cut()`` as the timetag-specific way of ``open()`` in Python.  
+You need to prepare Clips of time-tags before running the analysis. Clips contian the metadata of the timetag, like measurement resolutions, which are important for analysis. Clips can loaded from a section of timetag file, or a exsiting buffer from a timetagger library. 
 
-eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
+ETA provides a set of APIs to help you buiding generators that automatically cut the file into a series of Clips. These APIs will read the header of the time-tag and then set up Clip objects that can be later used in the analysis. 
+
+We recommend using the Python generator function that yields Clips each time when it is called. ETA will automatically feed the new Clips from the generator when a current Clip reaches its end.
+
+For users who are not familiar with generators, we use Python generator to implement the new `eta.incremental_cut()` generator function, as a warpper of `eta.clip_from_file()`. And the `eta.simple_cut()` generator function will further warp the incremental_cut.
+        
+You can also implement your own generator using Clip class or a lower-level API `eta.clip_from_file`. One example is that you can poll a timetagger library to see if there is new records in memory ready for analysis when doing ETA streaming.
+
+eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0, verbose=print)
 ......
+``clip_from_file`` takes the previous Clip and number of events to read as input, and generates a new Clip by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by iteratively fed the returned Clip into itself.
 
-``simple_cut`` takes the file name and number of cuts, and cuts the file into equal size sections. In a correlational analysis, we can cut the file into some sections and run parallel analysis to get speed boosts.
+.. note::
+        The low-level API, `eta.clip_from_file()` is the only way to actually load the timetag file content into memory and return only one Clip object for later use. You can think of `eta.clip_from_file()` as the timetag-specific way of doing ``read()`` in Python. 
+
+        However, it is not recommended to use this low-level API directly, as it is complecated to manage the Clips in the multi-threading mode. In order to make ETA resume an exisitng analysis using a new Clip without starting a new one you will also need to put  `eta.clip_from_file()` and `eta.run` together inside a `for` loop, with a context variable managed by yourself. 
 
 - ``filename``
     File name of the time tag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path to file on that computer.
     
-- ``cuts``
-    The number of cuts that you want to generate. A list of cut descriptors will be returned if you specify a value larger than one. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor.
+- ``modify_clip``
+    If provided, this previous Clip will be modifed. ETA will slide the cut window in the time-tag file, starting from the ending position of the prevoius Clip.  
+
+    .. note::
+        Please note that the prevoius will be modified to a new Clip with timetag events from different window in the timetag file. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
+
+- ``read_events``
+    The number of events in the returned Clip. Setting it to 0 will make ETA read the entire file.
     
-- ``trunc``
-    The number of cuts that is returned in the cut descriptor. By setting it to ``-1`` will give you the number of cuts specified in the ``cuts`` parameter. By setting it to any number smaller than ``cuts`` you can truncate a large time tag file.
+    If the number exceeds the size of the time-tag file, ETA will wait until the file grows to that size. This is particularly useful in a real-time analysis where the time-tag file is continouslys growing.
+    
+    .. note::
+        You can also set a negative value, then the number of records in this Clip will be calculated as the number of records between the ending of the last Clip to the current end of file minus the absolute value of this negative number. 
+
+        The time tag file that serves as the FIFO when you perform a real-time analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
+    
+- ``timeout``
+    Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If the time is out before that, a False will be returned indicating a failure, and the ``modify_clip`` will not be modified.
     
 - ``format``
     Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto detection of PicoQuant devices. You can also use the integer constant ``FORMAT_SI`` for Swabian Instrument binary format, ``quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format,  ``quTAG_FORMAT_COMPRESSED`` for compressed quTAG binary format, or ``bh_spc_4bytes`` for Becker & Hickl  SPC-134/144/154/830 format.
@@ -46,100 +71,104 @@ eta.simple_cut(filename, cuts=1, trunc=-1, format=-1)
 
         If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
-Examples:
+- ``verbose``
+    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
 
-.. code-block:: python    
-   
-   #stop evaluation of timetag stream after 1%
-   cutfile = eta.simple_cut(file,100,1)
-   result = eta.run(cutfile)
-   
-.. code-block:: python   
-   
-   #evaluate timetag stream from 30% to 90%
-   cutfile = eta.simple_cut(file,10)[3:-1]
-   result = eta.run(cutfile)
-
-eta.incremental_cut(filename, cut=None, rec_per_cut=-10, format=-1, verbose=True)
+eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0, verbose=print, reuse_clips=True, keep_indexes=None)
 ......
-``incremental_cut`` takes the previous cut descriptor and number of records, and generate a new cut descriptor by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by interactively fed the returned cut descriptor into itself.
-
-- ``filename``
-    The same as ``simple_cut``. 
-    
-- ``cut``
-    The cut descriptor of the previous cut. If there is no cut descriptor provided, a new cut descriptor will be generated.
+``incremental_cut``  is a generator that takes the file name and the incremental per cut, and yields Clips. It is wrapper on top of `eta.clip_from_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_from_file()`, and also added some new parameters.
 
 - ``rec_per_cut``
-    The number of records in the returned cut. 
-    
+    This amount of events will be read each time. This replaces the ``read_events`` in ``clip_from_file``. 
+
+- ``reuse_clips``
+    If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. This is useful when you want to load all the Clips at one time, like in a multi-reading analysis.
+
     .. note::
-        Please note that if the number exceeds the size of the time tag file, a cut will still be returned, and it will point to a non-existing area of a time tag file. 
+        Please be careful when setting this to False, as it may cause memory leaking if the reference are not handeled properly.
 
-        You can also set a negative value, then the number of records in this cut will be calculated as the number of records between the ending of the last cut to the current end of file minus the absolute value of this negative number. 
+- ``keep_indexes``
+    A list of indexes of Clips that will be actually yields. Other Clips will be discarded. Indexes start from 0 when first called.
+    
+    Examples:
 
-        The time tag file that serves as the FIFO when you perform a real-time analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
+    .. code-block:: python    
 
-    
-- ``format``
-    The same as ``simple_cut``.
-    
-- ``verbose``
-    Specify if the cut information will be displayed on the analysis log.
-    
-eta.wait_for_data(cut, timeout=1, raiseerr=False, verbose=False):
+        #stop evaluation of timetag stream after 2%
+        cutfile = eta.simple_cut(file,100,keep_indexes=[1,2])
+        result = eta.run(cutfile)
+  
+
+eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, verbose=print, reuse_clips=True, keep_indexes=None)
 ......
-``wait_for_data`` will validate if the cut is present using the current size of the file in this cut descriptor. A boolean will be returned as result. If you run a real-time analysis you can then loop on ``eta.wait_for_data``  to wait until the cut is filled with records.
 
-- ``cut``
-    The cut descriptor to be validated.
+``simple_cut`` is a generator that takes the file name and number of cuts, and yields Clips. It will cut the file into equal size Clips. In a correlational analysis, we can cut the file into some Clips and run parallel analysis to get speed boosts. It is wrapper on top of `eta.incremental_cut()`. It inherts most of the parameters from `eta.incremental_cut()`, and also added some new parameters.
 
-- ``timeout``
-    Value in seconds, specify the maximum waiting time for ``wait_for_data`` .
+- ``cuts``
+    The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. This replaces the ``rec_per_cut`` in ``incremental_cut``.
     
-- ``raiseerr``
-    Specify if an ValueError will be raised when timeout happens.
-    
-- ``verbose``
-    Specify if information about the file growth will be displayed on the analysis log.
+- ``trunc``
+    The number of cuts that is returned in the cut descriptor. By setting it to ``-1`` will give you the number of cuts specified in the ``cuts`` parameter. By setting it to any number smaller than ``cuts`` you can truncate a large time tag file.
+
 
 Executing Analysis
 -----
 
-eta.run(cuts, ctxs=None, sum_results=True, iterate_ctxs=False, group="main", verbose=True)
+eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0, verbose=True)
 ......
 
-Once you have cuts, you can run Virtual Instruments and fed the cuts into the instruments and obtain results. The analysis results will be returned in a Python dictionary, with the histogram names as the keys.
+``eta.run()`` starts an analysis, where you can feed the Clips as sourece into Virtual Instruments and obtain results. The analysis results will be returned in a Python dictionary, with the histogram names as the keys. ETA will create a new task for the analysis after each call to this function, unless ``resume_task`` is specified.
 
-- ``cuts``
-    The cut descriptors that is fed into the instruments.
+You can use Python generators functions that yields Clips as a source. ETA will do auto-feeding, and the generator functions will be called many times, each time with a new Clip returned. In each ``eta.run()`` call, the same task for all the future Clip generated by the generator, until the generator reaches its end or ``max_autofeed`` is reached.
+
+
+- ``source``
+    You can use a single Clip or a Python generators functions that yields Clips as a source. The generator functions will be called many times, each time with a new Clip returned. 
     
-    .. note::
-        There was a parameter for multi-thread and single-thread mode in previous versions of ETA, and it is recently removed.
-        
-        Multi-thread and single-thread mode are only describing how to run virtual instruments on the cuts. They should not affect analysis result. However, the way how the files is cut might affect the result.
-
-        Multithread mode is by default enabled and the thread number is set to the number of CPU cores.
-
-        If the number of cuts fed into eta.run() is less than the number of threads, the extra threads will not be created.
-
-        If the number of cuts is larger than the number of threads, they will queue up. The thread who finishes processing his cut, will go fetch the next cut in the queue.
-
-        
-- ``ctxs``
-    The context information of the analysis. 
-
-- ``sum_results``
-    Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
-
-- ``iterate_ctxs``
-    Specifies if the extra context information should be returned, so that you can iteratively call this function using the returned context. If this value is set to False then only the results will be returned. 
+- ``max_autofeed``
+    It allows ETA to fetch at most ``max_autofeed`` Clips from the generator.
+    This will be useful if you want to get each result per Clip, rather than get final result after the full generator is consumed.
     
 - ``group``
     The group of instruments that you want to run analysis on.
 
+- ``return_results``
+    Specifies if the dictionary of result should be returned. 
+    
+    This is the switch for multi-threading analysis. Set it to True will disable multi-threading.
+    
+    Set it to False will start a new therad in the thread pool. If this value is set to False, you must turn on ``return_task``. Then, the task descriptor will be returned immediately, and the analysis will run in the background. You can start many threads in the background and then gather the results later with a list of task descriptor. 
+    
+- ``return_task``
+    Specifies if you want the task descriptor returned . 
+    
+    You must set it to True if ``return_results`` is set to False. If both of them are set to Ture, you can get both of them with ``result, context = eta.run(..., return_task=True, return_results=True)``, and later you can resume an analysis with the context.
+    
+    .. note::
+        There was a parameter for multi-thread mode in previous versions of ETA, and it is recently removed. The new way of doing multi-threading will be easier and more flexibile. And the context parameter is renamed to task descriptor to reduce confusion.
+        
+        Multi-thread and single-thread mode are only describing how to run virtual instruments on the Clips. They should not affect analysis result. However, the way how the files is cut might affect the result.
+
+        You can call ``eta.run(...,return_results=False)`` many times, even with different groups for completely different analysis. As long as you have the task descriptor, you will be able to retrieve the result in the end.
+
+- ``resume_task``
+    Pass a old task descriptor as a context to resume this analysis , by feeding the new Clip in. This is particularly useful when you want to perform real-time analysis. You can iteratively call this function using the returned task.
+
 - ``verbose``
-    Specifies if the inforamtion of analysis will be displayed on the GUI.
+    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
+
+eta.aggregrate(list_of_tasks, sum_results=True, verbose=True):
+......
+``eta.aggregrate`` will gather data form previously started tasks in the list and sum them up as the final results. This is useful in the multi-threading mode. 
+
+- ``list_of_tasks``
+    A list of previously created tasks. You put the tasks that you want to retrieve results from into this list, and ETA will block the foreground and wait until all of them are finished.
+
+- ``sum_results``
+    Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
+
+- ``verbose``
+    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
 
 eta.display(app)
 ......
