@@ -224,7 +224,8 @@ Examples
 
 Here is an example for sampling randomly delays from a exponential decay and then emitting a signal with this delay whenever a transition from state a to state b happens via channel 1. This type of embedded code might, for example, be useful for a Monte-Carlo simulation.
 
-.. code::
+.. code-block:: python
+
         INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
         a--1-->b:
             start(c1) # execute built-in action
@@ -240,7 +241,8 @@ Here is an example for sampling randomly delays from a exponential decay and the
 
 Here is an advanced example for simulating a 50%-50% beam splitter for randomly redistributing a singal on channel 3 to channels 4 and 5.
 
-.. code::
+.. code-block:: python
+
         VFILE(4)
         VFILE(5)
         INTEGER(retchn)
