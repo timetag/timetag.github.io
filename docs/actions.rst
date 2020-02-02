@@ -228,7 +228,6 @@ Here is an example for sampling randomly delays from a exponential decay and the
 
         INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
         a--1-->b:
-            start(c1) # execute built-in action
             #execute the embedded Python code
             {
                 delay_from_sync = 200
