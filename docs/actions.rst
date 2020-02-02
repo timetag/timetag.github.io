@@ -223,19 +223,19 @@ Examples
 ....
 
 Here is an example for sampling random delayed events from a exponential decay, and then emit a signal using the result from the embedded Python code,  on a transition from state a to state b.  This type of  might, for example, be useful for a Monte-Carlo simulation.
-
 .. code::
-      INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
-      a--1-->b:
-          start(c1) # execute built-in action
-          #execute the embedded Python code
-          {
-                delay_from_sync = 200
-                binsize = 16
-                random_delay_arr = ((np.random.exponential(125, 1)+delay_from_sync)/binsize) 
-                random_delay = round(random_delay_arr[0])*binsize
-          }
-          emit(3,random_delay) # emit on the channel 3 with a dealy of random_delay
+        INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
+        a--1-->b:
+            start(c1) # execute built-in action
+            #execute the embedded Python code
+            {
+                    delay_from_sync = 200
+                    binsize = 16
+                    random_delay_arr = ((np.random.exponential(125, 1)+delay_from_sync)/binsize) 
+                    random_delay = round(random_delay_arr[0])*binsize
+            }
+            emit(3,random_delay) # emit on the channel 3 with a dealy of random_delay
+
 
 Here is an advanced example for simulating the 50%-50% beam splitter that split singal on channel 3 into channel 4 and channel 5.
 .. code::
