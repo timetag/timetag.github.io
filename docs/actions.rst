@@ -222,7 +222,8 @@ The embedded code uses a restricted sub-set of Python language, and a limited su
 Examples
 ....
 
-Here is an example for sampling random delayed events from a exponential decay, and then emit a signal using the result from the embedded Python code,  on a transition from state a to state b.  This type of  might, for example, be useful for a Monte-Carlo simulation.
+Here is an example for sampling randomly delays from a exponential decay and then emitting a signal with this delay whenever a transition from state a to state b happens via channel 1. This type of embedded code might, for example, be useful for a Monte-Carlo simulation.
+
 .. code::
         INTEGER(random_delay) # define an INTEGER for use by both actions and embedded Python
         a--1-->b:
@@ -237,7 +238,8 @@ Here is an example for sampling random delayed events from a exponential decay, 
             emit(3,random_delay) # emit on the channel 3 with a dealy of random_delay
 
 
-Here is an advanced example for simulating the 50%-50% beam splitter that split singal on channel 3 into channel 4 and channel 5.
+Here is an advanced example for simulating a 50%-50% beam splitter for randomly redistributing a singal on channel 3 to channels 4 and 5.
+
 .. code::
         VFILE(4)
         VFILE(5)
