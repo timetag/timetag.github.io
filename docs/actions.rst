@@ -229,10 +229,10 @@ Here is an example for sampling random delayed events from a exponential decay, 
             start(c1) # execute built-in action
             #execute the embedded Python code
             {
-                    delay_from_sync = 200
-                    binsize = 16
-                    random_delay_arr = ((np.random.exponential(125, 1)+delay_from_sync)/binsize) 
-                    random_delay = round(random_delay_arr[0])*binsize
+                delay_from_sync = 200
+                binsize = 16
+                random_delay_arr = ((np.random.exponential(125, 1)+delay_from_sync)/binsize) 
+                random_delay = round(random_delay_arr[0])*binsize
             }
             emit(3,random_delay) # emit on the channel 3 with a dealy of random_delay
 
@@ -243,8 +243,8 @@ Here is an advanced example for simulating the 50%-50% beam splitter that split 
         VFILE(5)
         INTEGER(retchn)
         a--3-->b:
-        {
+            {
                 options = np.asarray([4,5])
                 retchn = np.random.choice(options)
-        }
-        emit(retchn,0)
+            }
+            emit(retchn,0)
