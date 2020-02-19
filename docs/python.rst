@@ -30,7 +30,7 @@ For users who are not familiar with generators, we use Python generator to imple
         
 You can also implement your own generator using Clip class or a lower-level API `eta.clip_from_file`. One example is that you can poll a timetagger library to see if there is new records in memory ready for analysis when doing ETA streaming.
 
-eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0, verbose=print)
+eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0)
 ......
 ``clip_from_file`` takes the previous Clip and number of events to read as input, and generates a new Clip by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by iteratively fed the returned Clip into itself.
 
@@ -71,10 +71,9 @@ eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_ti
 
         If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
-- ``verbose``
-    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
 
-eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0, verbose=print, reuse_clips=True, keep_indexes=None)
+
+eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0,  reuse_clips=True, keep_indexes=None)
 ......
 ``incremental_cut``  is a generator that takes the file name and the incremental per cut, and yields Clips. It is wrapper on top of `eta.clip_from_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_from_file()`, and also added some new parameters.
 
@@ -99,7 +98,7 @@ eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format
         result = eta.run(cutfile)
   
 
-eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, verbose=print, reuse_clips=True, keep_indexes=None)
+eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
 
 ``simple_cut`` is a generator that takes the file name and number of cuts, and yields Clips. It will cut the file into equal size Clips. In a correlational analysis, we can cut the file into some Clips and run parallel analysis to get speed boosts. It is wrapper on top of `eta.incremental_cut()`. It inherts most of the parameters from `eta.incremental_cut()`, and also added some new parameters.
@@ -114,7 +113,7 @@ eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, v
 Executing Analysis
 -----
 
-eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0, verbose=True)
+eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0)
 ......
 
 ``eta.run()`` starts an analysis, where you can feed the Clips as sourece into Virtual Instruments and obtain results. The analysis results will be returned in a Python dictionary, with the histogram names as the keys. ETA will create a new task for the analysis after each call to this function, unless ``resume_task`` is specified.
@@ -154,10 +153,8 @@ You can use Python generators functions that yields Clips as a source. ETA will 
 - ``resume_task``
     Pass a old task descriptor as a context to resume this analysis , by feeding the new Clip in. This is particularly useful when you want to perform real-time analysis. You can iteratively call this function using the returned task.
 
-- ``verbose``
-    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
 
-eta.aggregrate(list_of_tasks, sum_results=True, verbose=True):
+eta.aggregrate(list_of_tasks, sum_results=True):
 ......
 ``eta.aggregrate`` will gather data form previously started tasks in the list and sum them up as the final results. This is useful in the multi-threading mode. 
 
@@ -166,9 +163,7 @@ eta.aggregrate(list_of_tasks, sum_results=True, verbose=True):
 
 - ``sum_results``
     Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
-
-- ``verbose``
-    Specify a reference to a function that will be called with the information to be displayed. Values can be `print` as standard output, or `eta.send` as ETA Frontend.    
+  
 
 eta.display(app)
 ......
