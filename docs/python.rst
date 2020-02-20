@@ -164,6 +164,9 @@ eta.aggregrate(list_of_tasks, sum_results=True):
 - ``sum_results``
     Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
   
+    
+Interacting with ETA GUI
+-----
 
 eta.display(app)
 ......
@@ -173,16 +176,45 @@ You can send results to ETA GUI using this function. The value of app can be eit
 .. note::
     Use ``app = dash.Dash()`` to create a Dash graph.
 
+logging.getLogger('etabackend.frontend')
+......
+Returns the ``logger``, with which you can display inforamtion on the GUI.
+
+logger.info(msgstring)
+......
+This is the ETA alternative for ``print()`` in Python.  This is useful when you use want to display some message on the ETA GUI.
+
+- ``msgstring``
+    Message string to be shown on the ETA GUI. 
+    
+logger.setLevel(loglevel)
+......
+This modifies the logging level of a specific logger.
+
+- ``loglevel``
+    A loglevel from logging. Can be ``logging.WARNING``
+    
+    Examples:
+
+    .. code-block:: python
+    
+        logger = logging.getLogger('etabackend.frontend')
+        logger.info('No further logoutput for the realtime recipe.')
+        logger.setLevel(logging.WARNING)
+        plt.show()
+        logger.setLevel(logging.INFO)
+
 eta.send(text,endpoint="log"):
 ......
-This is the ETA alternative for ``print()`` in Python.  This is useful when you use another program to talk to ETA via WebSocket (see Advanced Usages). You can stream the results back using this function.
+This is useful when you want to talk to another program other than ETA GUI via WebSocket (see Advanced Usages). You can stream the results back using this function. 
 
 - ``text``
-    String of information to be sent to ETA GUI. 
+    String of information to be sent to the client. 
     
 - ``endpoint``
     Can either be ``log`` or ``err``, for indicating the type of message.
-    
+
+
 Modify recipies programatically
 ------
 You can also modify recipes programmatically. 
