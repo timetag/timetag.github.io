@@ -143,8 +143,6 @@ The analysis will block the execution of Python script until the results are ret
     Set it to False will start a new therad in the thread pool. In this case, you must turn on ``return_task`` so that the task descriptor will be returned immediately, and the analysis will continue running in the background. You can start many threads in the background and gather a list of task descriptors, with which you can aggregate the results from these threads later. 
     
     .. note::
-        Multi-thread and single-thread mode are only describing how to run virtual instruments on the Clips. They should not affect analysis result. However, the way how the files is cut might affect the result.
-        
         The parameter for enabling multi-thread mode is removed since version 0.6.6, when we switch to the Map-Reduce style of multi-threading. The new way of doing multi-threading is easier and more flexibile. ``eta.run`` works like Map, and ``eta.aggregrate`` works like Reduce. 
         
         You can schedule your analysis from Script Panel in any way you want. As long as you keep the task descriptor, you will be able to retrieve the result in the end. 
@@ -154,17 +152,23 @@ The analysis will block the execution of Python script until the results are ret
     
     If both of them are set to Ture, you can get both of them with ``result, task = eta.run(..., return_task=True, return_results=True)``, and later you can resume an analysis with the task descriptor using ``resume_task``.
     
+    .. note::
+        The context parameter is renamed to task descriptor to reduce confusion since version 0.6.6.
+        
+        Task descriptor works like a memory snapshot of a current running or finished analysis, everything is preserved so that you can resume any kind of analysis without worrying about different behaviors of different Tools.
+        
 - ``resume_task``
     Pass a old task descriptor to resume the analysis. 
     
     The analysis will be resumed from the point where it ended, with all contexts set correctly, and then feeded with the new Clip. 
     
     .. note::
-        The context parameter is renamed to task descriptor to reduce confusion since version 0.6.6.
-        
-        Task descriptor works like a memory snapshot of a current running or finished analysis, everything is preserved so that you can resume any kind of analysis without worrying about different behaviors of different Tools.
-        
         You can iteratively call ``eta.run`` using the returned task from a previous ``eta.run`` call. This is particularly useful when you want to perform real-time analysis. 
+    
+        The way how the files is cut into Clips, or the order in which ``eta.run`` is invoked, will never affect analysis result, as long as you always resume with the last task descriptor (or None for the first iteration) during the entire analysis. 
+        
+        In multi-threading analysis, however, there will usually be the same amount of "last" task descriptors missing during the fisrt iteration, as the number of threads you use. You will also end up with that amount of task descriptor in the end. For some analysis, like correlation which yields histograms, you can use ``eta.aggregrate`` later to merge the analysis results from those tasks into one. But it won't change the fact that they are essentialy many different independent analysis.
+        
 
 eta.aggregrate(list_of_tasks, sum_results=True):
 ......
