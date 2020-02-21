@@ -158,12 +158,14 @@ The analysis will block the execution of Python script until the results are ret
         Task descriptor works like a memory snapshot of a current running or finished analysis, everything is preserved so that you can resume any kind of analysis without worrying about different behaviors of different Tools.
         
 - ``resume_task``
-    Pass a old task descriptor to resume the analysis. 
+    Specifies an old task descriptor to resume the analysis. 
     
     The analysis will be resumed from the point where it ended, with all contexts set correctly, and then feeded with the new Clip. 
     
+    You can iteratively call ``eta.run`` using the returned task from a previous ``eta.run`` call. This is particularly useful when you want to perform real-time or streamming analysis. 
+
     .. note::
-        You can iteratively call ``eta.run`` using the returned task from a previous ``eta.run`` call. This is particularly useful when you want to perform real-time analysis. 
+        After the analysis is resumed, the old task descriptor becomes invalid, however, a new task descriptor can be returned by setting ``return_task=True``.
     
         The way how the files is cut into Clips, or the order in which ``eta.run`` is invoked, will never affect analysis result, as long as you always resume with the last task descriptor (or None for the first iteration) during the entire analysis. 
         
