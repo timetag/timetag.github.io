@@ -1,7 +1,7 @@
 Customizing Script Panel
 ===============================
 
-In each ETA recipe, Script Panel provides the user interface for each experiment. 
+In the ETA recipe, Script Panel provides the user interface for each experiment. 
 
 The common usage of Script Panel is to start an analysis on an existing time-tag file or a realtime time-tag sources, display results, and provide interactive controls of the acquisition device (time-tagger) or the analysis.
 
@@ -20,33 +20,32 @@ ETA provides Python API to allow customization of the Script Panel. Here we list
 Prepare Timetag Clips
 ------------------------------
 
-You need to prepare Clips of time-tags before running the analysis. Clips contian the metadata of the timetag, like measurement resolutions, which are important for analysis. Clips can loaded from a section of timetag file, or a exsiting buffer from a timetagger library. 
+You need to prepare Clips of time-tags before running the analysis. Clips contian the actual timetag data, together with the metadata of the timetag data, like measurement resolutions, which are crucial to the correctness of an analysis. Clips can be loaded from a section of timetag file, or constructed from an exsiting buffer given by the timetagger library. 
 
-ETA provides a set of APIs to help you buiding generators that automatically cut the file into a series of Clips. These APIs will read the header of the time-tag and then set up Clip objects that can be later used in the analysis. 
+Due to the nature of the timetag data, we recommend using the Python generator function that yields Clips each time when it is called. ETA will automatically feed the new Clips from the generator when a current Clip reaches its end. ETA provides a set of APIs to help you build generators that automatically cut the file into a series of Clips. These APIs will read the header of the time-tag file and then set the Clip objects up, which can be later used in the analysis. 
 
-We recommend using the Python generator function that yields Clips each time when it is called. ETA will automatically feed the new Clips from the generator when a current Clip reaches its end.
+For users who are not familiar with generators, we use Python generator to implement the ``eta.clips()`` generator function, as a warpper of ``eta.clip_file()``. And the ``eta.split_file()`` generator function will further warp the ``eta.clips``.
 
-For users who are not familiar with generators, we use Python generator to implement the new `eta.incremental_cut()` generator function, as a warpper of `eta.clip_from_file()`. And the `eta.simple_cut()` generator function will further warp the incremental_cut.
-        
-You can also implement your own generator using Clip class or a lower-level API `eta.clip_from_file`. One example is that you can poll a timetagger library to see if there is new records in memory ready for analysis when doing ETA streaming.
+You can also implement your own generator using Clip class or a lower-level API `eta.clip_file`. One example is that you can poll a timetagger library to see if there is new records in memory ready for analysis, when performing ETA streaming analysis.
 
-eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0)
+eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0)
 ......
-``clip_from_file`` takes the previous Clip and number of events to read as input, and generates a new Clip by sliding the cut window in the time tag file. It is useful for implementing real-time analysis by iteratively fed the returned Clip into itself.
+``eta.clip_file`` takes the previous Clip and number of events to be read as input, and generates a new Clip by sliding the cut window in the time tag file.
 
 .. note::
-        The low-level API, `eta.clip_from_file()` is the only way to actually load the timetag file content into memory and return only one Clip object for later use. You can think of `eta.clip_from_file()` as the timetag-specific way of doing ``read()`` in Python. 
+        The low-level API, `eta.clip_file()`, is the only way to actually load the timetag from file into memory and return only one Clip object for later use. You can think of `eta.clip_file()` as the timetag-specific way of doing ``read()`` in Python. 
 
-        However, it is not recommended to use this low-level API directly, as it is complecated to manage the Clips in the multi-threading mode. In order to make ETA resume an exisitng analysis using a new Clip without starting a new one you will also need to put  `eta.clip_from_file()` and `eta.run` together inside a `for` loop, with a context variable managed by yourself. 
+        However, it is not recommended to use this low-level API directly, as it is complecated to manage multiple Clips during analysis. In order to keep the analysis running on a series of Clips, you will also need to put  `eta.clip_file()` and `eta.run` together inside a `for` loop, with a task variable managed by yourself.
+        
 
 - ``filename``
-    File name of the time tag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path to file on that computer.
+    The path to the time tag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path to file on that computer.
     
 - ``modify_clip``
-    If provided, this previous Clip will be modifed. ETA will slide the cut window in the time-tag file, starting from the ending position of the prevoius Clip.  
+    If provided, this previous Clip will be modifed. ETA will slide the cut window in the time-tag file, starting from the ending position of the prevoius Clip.  It is useful for implementing real-time analysis by iteratively feeding the returned Clip to fetch newly generated events.
 
     .. note::
-        Please note that the prevoius will be modified to a new Clip with timetag events from different window in the timetag file. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
+        Please note that for performance consideration, the provided Clip ``modify_clip`` will be modified. The ``modify_clip`` will contain timetag events from a new window in the timetag file after calling this function. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
 
 - ``read_events``
     The number of events in the returned Clip. Setting it to 0 will make ETA read the entire file.
@@ -72,20 +71,21 @@ eta.clip_from_file(filename, modify_clip=None, read_events=0, format=-1, wait_ti
         If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
 
-
-eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0,  reuse_clips=True, keep_indexes=None)
+eta.clips(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0,  reuse_clips=True, keep_indexes=None)
 ......
-``incremental_cut``  is a generator that takes the file name and the incremental per cut, and yields Clips. It is wrapper on top of `eta.clip_from_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_from_file()`, and also added some new parameters.
+``eta.clips`` makes a generator that yields Clips with a specified amount of new record read from the file. It is wrapper on top of `eta.clip_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_file()`, and also adds some new parameters.
 
 - ``rec_per_cut``
-    This amount of events will be read each time. This replaces the ``read_events`` in ``clip_from_file``. 
+    This amount of events will be read each time. This replaces the ``read_events`` in ``eta.clip_file``. 
 
 - ``reuse_clips``
-    If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. This is useful when you want to load all the Clips at one time, like in a multi-reading analysis.
+    If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. 
 
     .. note::
-        Please be careful when setting this to False, as it may cause memory leaking if the reference are not handeled properly.
+        This is useful when you want to load all the Clips at once. For example, in a correlational analysis, we can set this parameter to False, and then use ``list(ret)`` to load the file into some equal-size Clips in a list, with which you could run parallel analysis to get speed boosts. 
 
+        Please be careful when setting this to False, as it may cause memory leaking if the references are not handeled properly.
+        
 - ``keep_indexes``
     A list of indexes of Clips that will be actually yields. Other Clips will be discarded. Indexes start from 0 when first called.
     
@@ -94,20 +94,17 @@ eta.incremental_cut(filename, modify_clip=None, rec_per_cut=1024*1024*10, format
     .. code-block:: python    
 
         #stop evaluation of timetag stream after 2%
-        cutfile = eta.simple_cut(file,100,keep_indexes=[1,2])
+        cutfile = eta.split_file(file,100,keep_indexes=[1,2])
         result = eta.run(cutfile)
   
 
-eta.simple_cut(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
+eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
 
-``simple_cut`` is a generator that takes the file name and number of cuts, and yields Clips. It will cut the file into equal size Clips. In a correlational analysis, we can cut the file into some Clips and run parallel analysis to get speed boosts. It is wrapper on top of `eta.incremental_cut()`. It inherts most of the parameters from `eta.incremental_cut()`, and also added some new parameters.
+``eta.split_file`` makes a generator yields Clips, that will split the file into a desired amount of equal size sections. It is wrapper on top of `eta.clips()`. It inherts most of the parameters from `eta.clips()`, and use ``cuts`` parameter that replaces the ``rec_per_cut`` in ``eta.clips``.
 
 - ``cuts``
-    The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. This replaces the ``rec_per_cut`` in ``incremental_cut``.
-    
-- ``trunc``
-    The number of cuts that is returned in the cut descriptor. By setting it to ``-1`` will give you the number of cuts specified in the ``cuts`` parameter. By setting it to any number smaller than ``cuts`` you can truncate a large time tag file.
+    The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. 
 
 
 Executing Analysis
@@ -116,9 +113,9 @@ Executing Analysis
 eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0)
 ......
 
-``eta.run()`` starts an analysis, where you can feed the Clips as sourece into Virtual Instruments and obtain results. 
+``eta.run()`` starts an analysis, where you can feed the Clips as the sourece into Virtual Instruments and obtain results. 
 
-You can use Python generators functions that yields Clips as a source. ETA will do auto-feeding, fetching one new Clip from the generator each time, so and the generator functions will be called many times. 
+You can use Python generators functions, that yields Clip objects, as a source. ETA will do auto-feeding, fetching one new Clip from the generator each time, so and the generator functions will be called many times. 
 
 In a single invoke of ``eta.run()``, only a single task will be used for all Clips generated by the generator, until the generator reaches its end or ``max_autofeed`` is reached.  By default ``eta.run`` will use a new task for the analysis, unless ``resume_task`` is specified.
 
