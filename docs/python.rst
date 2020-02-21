@@ -167,26 +167,30 @@ The analysis will block the execution of Python script until the results are ret
     .. note::
         After the analysis is resumed, the old task descriptor becomes invalid, however, a new task descriptor can be returned by setting ``return_task=True``.
     
-        The way how the files is cut into Clips, or the order in which ``eta.run`` is invoked, will never affect analysis result, as long as you always resume with the last task descriptor (or None for the first iteration) during the entire analysis. 
+        The way how the files is cut into Clips, or the order in which ``eta.run`` is invoked, will never affect analysis result, as long as you always resume with the last task descriptor (or ``None`` for the first iteration) during the entire analysis. 
         
         In multi-threading analysis, however, there will usually be the same amount of "last" task descriptors missing during the fisrt iteration, as the number of threads you use. You will also end up with that amount of task descriptor in the end. For some analysis, like correlation which yields histograms, you can use ``eta.aggregrate`` later to merge the analysis results from those tasks into one. But it won't change the fact that they are essentialy many different independent analysis.
         
 
 eta.aggregrate(list_of_tasks, sum_results=True):
 ......
-``eta.aggregrate`` will gather data form previously anlaysis tasks started with ``return_results=False`` and put them together as the final results. If all previously anlaysis tasks haven't finished, ETA will block until all of them are finished. This should only be used in the multi-threading mode. 
+``eta.aggregrate`` will gather data form previous multi-threading anlaysis tasks started with ``return_results=False`` and put them together as the final results. If all previously anlaysis tasks haven't finished, ETA will block until all of them are finished. 
 
 - ``list_of_tasks``
-    A list of previously created task descriptors. You can put the tasks descriptors, from which you want to retrieve results, into this list. 
+    A list of previously created task descriptors, from which you want to retrieve results.
     
     .. note::
-        You can run analysis with different groups for completely different analysis at the same time. However, you can only aggregrate the results form the same group. 
+        You can run multi-threading analysis on different groups for completely different analysis at the same time. However, you can only aggregrate the results using form task descriptors created by ``eta.run`` on the same group.  
         
 - ``sum_results``
-    Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
+    Specifies if the results will be summed up. 
+    
     
     .. note::
-        You can run analysis with different groups for completely different analysis at the same time. However, you can only aggregrate the results form the same group. 
+        This is useful for correlational analysis if you want to merges histograms from many individual analysis tasks. Keep in mind that you will need to make sure that it is physically meaningful to perform adding. (Is the histogram in the same base unit? Can you add histograms from experiments done today and yesterday? Will the result be different from running with with only one task, but many Clips instead.)
+        
+        Users can also set this value to False and get a list of dict returned instead. Then they can use their own data aggregation methods, like concatenating to generate large images.
+        
 
 Interacting with ETA GUI
 -----
