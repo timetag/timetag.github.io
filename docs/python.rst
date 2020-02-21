@@ -132,39 +132,52 @@ You can use Python generators functions that yields Clips as a source. ETA will 
     The group of instruments that you want to run analysis on.
 
 - ``return_results``
-    Specifies if the dictionary of result should be returned. 
+    Specifies if a dictionary of results should be returned. 
     
-    This is the switch for multi-threading analysis. Set it to True will disable multi-threading.
+    This is the switch for multi-threading analysis. No new thread will be created and the analysis will be performed in MainThread if this option is set to True.
     
-    Set it to False will start a new therad in the thread pool. If this value is set to False, you must turn on ``return_task``. Then, the task descriptor will be returned immediately, and the analysis will run in the background. You can start many threads in the background and then gather the results later with a list of task descriptor. 
-    
-- ``return_task``
-    Specifies if you want the task descriptor returned . 
-    
-    You must set it to True if ``return_results`` is set to False. If both of them are set to Ture, you can get both of them with ``result, context = eta.run(..., return_task=True, return_results=True)``, and later you can resume an analysis with the context.
+    Set it to False will start a new therad in the thread pool. In this case, you must turn on ``return_task`` so that the task descriptor will be returned immediately, and the analysis will continue running in the background. You can start many threads in the background and gather a list of task descriptors, with which you can aggregate the results from these threads later. 
     
     .. note::
-        There was a parameter for multi-thread mode in previous versions of ETA, and it is recently removed. The new way of doing multi-threading will be easier and more flexibile. And the context parameter is renamed to task descriptor to reduce confusion.
-        
         Multi-thread and single-thread mode are only describing how to run virtual instruments on the Clips. They should not affect analysis result. However, the way how the files is cut might affect the result.
-
-        You can call ``eta.run(...,return_results=False)`` many times, even with different groups for completely different analysis. As long as you have the task descriptor, you will be able to retrieve the result in the end.
-
+        
+        The parameter for enabling multi-thread mode is removed since version 0.6.6, when we switch to the Map-Reduce style of multi-threading. The new way of doing multi-threading is easier and more flexibile. ``eta.run`` works like Map, and ``eta.aggregrate`` works like Reduce. 
+        
+        You can schedule your analysis from Script Panel in any way you want. As long as you keep the task descriptor, you will be able to retrieve the result in the end. 
+        
+- ``return_task``
+    Specifies if the task descriptor should returned. You must set it to True if ``return_results`` is set to False. 
+    
+    If both of them are set to Ture, you can get both of them with ``result, task = eta.run(..., return_task=True, return_results=True)``, and later you can resume an analysis with the task descriptor using ``resume_task``.
+    
 - ``resume_task``
-    Pass a old task descriptor as a context to resume this analysis , by feeding the new Clip in. This is particularly useful when you want to perform real-time analysis. You can iteratively call this function using the returned task.
-
+    Pass a old task descriptor to resume the analysis. 
+    
+    The analysis will be resumed from the point where it ended, with all contexts set correctly, and then feeded with the new Clip. 
+    
+    .. note::
+        The context parameter is renamed to task descriptor to reduce confusion since version 0.6.6.
+        
+        Task descriptor works like a memory snapshot of a current running or finished analysis, everything is preserved so that you can resume any kind of analysis without worrying about different behaviors of different Tools.
+        
+        You can iteratively call ``eta.run`` using the returned task from a previous ``eta.run`` call. This is particularly useful when you want to perform real-time analysis. 
 
 eta.aggregrate(list_of_tasks, sum_results=True):
 ......
-``eta.aggregrate`` will gather data form previously started tasks in the list and sum them up as the final results. This is useful in the multi-threading mode. 
+``eta.aggregrate`` will gather data form previously anlaysis tasks started with ``return_results=False`` and put them together as the final results. If all previously anlaysis tasks haven't finished, ETA will block until all of them are finished. This should only be used in the multi-threading mode. 
 
 - ``list_of_tasks``
-    A list of previously created tasks. You put the tasks that you want to retrieve results from into this list, and ETA will block the foreground and wait until all of them are finished.
-
+    A list of previously created task descriptors. You can put the tasks descriptors, from which you want to retrieve results, into this list. 
+    
+    .. note::
+        You can run analysis with different groups for completely different analysis at the same time. However, you can only aggregrate the results form the same group. 
+        
 - ``sum_results``
     Specifies if the results will be summed up. This is useful for correlational analysis if you cut the file into pieces and then merges the histograms together. Users can also set this value to False and implement their own data aggregation methods, like concatenating the histograms to generate large images.
-  
     
+    .. note::
+        You can run analysis with different groups for completely different analysis at the same time. However, you can only aggregrate the results form the same group. 
+
 Interacting with ETA GUI
 -----
 
