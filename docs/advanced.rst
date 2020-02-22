@@ -108,4 +108,40 @@ Type of responses from ETA Backend
     
     Args: ``<message>`` is a string of a user-defined message.
 
+Using ETA as a Python Library
+-------------------------------------
+There are two ways to run ETA as a Python Library, one with the BACKEND Class and one with ETA Class.
 
+etabackend.process_eta(recipe, id, group="main")
+......
+Run a Display Panel, as if it is being run from the GUI. 
+
+- ``recipe``
+    The recipe object parsed from the ``.eta`` JSON file.
+    
+- ``id``
+    The identifier of the Display Panel to be started.
+    
+-  ``group``
+    The gruop name of this Display Panel
+
+    .. code-block:: python
+        import json
+        from etabackend.backend import BACKEND
+        etabackend = BACKEND(run_forever=False)
+        def send(self, text, endpoint="log"):
+            print(text)
+        etabackend.send = send
+        with open("./Realtime.eta", 'r') as filehandle:
+            etarecipe = json.load(filehandle)
+            etabackend.process_eta(etarecipe, id="dpp_template_code", group="main")
+            
+kernel.compile_eta(recipe)
+......
+Compile the recipe and cache it in the ETA kernel.
+
+
+- ``recipe``
+    The recipe object parsed from the ``.eta`` JSON file.
+    
+    Please refer to the `tests <https://github.com/timetag/ETA/tree/master/tests>`_ for examples.
