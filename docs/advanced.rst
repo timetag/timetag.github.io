@@ -7,9 +7,9 @@ Run ETA as a Python Library
 -------------------------------------
 There are two ways to run ETA as a Python Library, one with the ``BACKEND`` Class and the other with ETA Class. 
 
-Use the ``BACKEND`` Class if you want full ETA Backend features. 
+Use the ``BACKEND`` Class if you want full ETA Backend features, without Websocket and GUI. This is ideal for using ETA in monitor-less (headless) enviroments like supercomputers, or embedded devices.
 
-Use the ``ETA`` Class, if you would like to ignore all Script Panels in the exsiting recipe and simply obtian a ``eta`` object for later use, as described in `Customizing Script Panel`.
+Use the ``ETA`` Class, if you would like to ignore all Script Panels in the exsiting recipe and simply obtian a ``eta`` object for later use, as described in `Customizing Script Panel`. This is ideal for performing automated testing, using ETA with a notebook environment like Jupyter, or integrating ETA into your own Remote Procedure Calling system.
 
 backend.process_eta(recipe, id, group="main")
 ......
