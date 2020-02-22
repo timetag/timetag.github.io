@@ -57,14 +57,14 @@ Before invoking a remote procedure, connect your program (client) to ETA backend
 
 Sending a JSON string in a format of ``{"method": "<name of method>", "args": [<arg1>,<arg2>,...] }`` to the Websocket will invoke the corresponding procedure immediately. When invoked procedure is running, new requests will be queued until the current one finishes.
 
-The procedure might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking one procedure.
+The procedure might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking a single procedure.
 
 Remote procedures provided by ETA Backend 
 ......
 
-There are three special functions provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first update the recipe on ETA Backend to the uploaded one, and then perform the requested actions. Optionaly they will also send the updated table for GUI as responses. 
+There are three special functions provided for remote controlling ETA Backend. 
 
-Please not that usually there might be some extra response, for errors in the recipe or user-defined frontend logger in the Script Panel code.
+All these methods bundle a set of internal functions that first update the recipe on ETA Backend to the uploaded one, and then perform the requested actions. Optionaly they will also send the updated table for GUI as responses. There might be some extra response, for errors in the recipe or user-defined frontend logger in the Script Panel code.
 
 It is not recommended to remotely call the undocumented procedures provided by the backend object, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
 
@@ -91,6 +91,7 @@ It is not recommended to remotely call the undocumented procedures provided by t
 
 Type of responses from ETA Backend 
 ......
+In order to interact with the Backend properly, your client needs to handel these types of responses, and display them to the user.
 
 1. Errors 
 
@@ -121,7 +122,6 @@ Type of responses from ETA Backend
     Type: ``running``
     
     JSON: ``["running"]``
-    
    
 5. Switch state to stopped  
 
@@ -134,7 +134,6 @@ Type of responses from ETA Backend
     Type: ``discard``
     
     JSON: ``["discard"]``
-
 
 7. URL of dashboard 
 
