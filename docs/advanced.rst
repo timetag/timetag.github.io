@@ -3,26 +3,66 @@ Advanced Usage
 ============
 
 
+Run ETA Backend or ETA as a Python Library
+-------------------------------------
+There are two ways to run ETA as a Python Library, one with the BACKEND Class and one with ETA Class.
+
+etabackend.process_eta(recipe, id, group="main")
+......
+
+Run a Display Panel, as if it is being run from the GUI. 
+
+- ``recipe``
+    The recipe object parsed from the ``.eta`` JSON file.
+    
+- ``id``
+    The identifier of the Script Panel to be started.
+    
+-  ``group``
+    The gruop name of this Script Panel
+
+.. code-block:: python
+
+        import json
+        from etabackend.backend import BACKEND
+        etabackend = BACKEND(run_forever=False)
+        def send(self, text, endpoint="log"):
+            print(text)
+        etabackend.send = send
+        with open("./Realtime.eta", 'r') as filehandle:
+            etarecipe = json.load(filehandle)
+            etabackend.process_eta(etarecipe, id="dpp_template_code", group="main")
+            
+kernel.compile_eta(recipe)
+......
+Compile the recipe and cache it in the ETA kernel.
+
+
+- ``recipe``
+    The recipe object parsed from the ``.eta`` JSON file.
+    
+    Please refer to the `tests <https://github.com/timetag/ETA/tree/master/tests>`_ for examples.
+
+
 Talking to ETA backend via WebSocket
 -------------------------------------
 
 ETA backend implements a Remote Procedure Call mechanism using JSON format, with which you can upload an existing recipe, modifying parameters like ``filename``, run the analysis, and even get the real-time streaming of the result.
 
-Before invoking a remote method, connect your program (client) to ETA backend (server) using the Websocket protocal. 
+Before invoking a remote procedure, connect your program (client) to ETA backend (server) using the Websocket protocal. 
 
 (Examples in LabVIEW and Javascript are provided. [TODO:link to .vi] )
 
-Sending a JSON string in a format of ``{"method": "<name of method>", "args": [<arg1>,<arg2>,...] }`` to the Websocket will invoke the corresponding method immediately. When invoked method is running, new requests will be queued until the current method finishes.
+Sending a JSON string in a format of ``{"method": "<name of method>", "args": [<arg1>,<arg2>,...] }`` to the Websocket will invoke the corresponding procedure immediately. When invoked procedure is running, new requests will be queued until the current one finishes.
 
-The method might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking one method.
+The procedure might send JSON strings as responses in a format of ``["<type>","<content>"]``. Please note that the client might get multiple responses (even in different types) after invoking one procedure.
 
-Remote methods provided in ETA Backend 
--------------------------------------
+Remote procedures provided by ETA Backend 
+......
 
-It is not recommended to remotely call the functions provided by the ``eta`` object in the Embedded Python environment directly, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
+There are three special functions provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first update the recipe on ETA Backend to the uploaded one, and then perform the requested actions. Optionaly they will also send the updated table for GUI as responses. Usually there will be some extra response, for errors in the recipe or user-defined frontend logger in the Script Panel code.
 
-There are three special functions that is provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first updates the recipe on ETA Backend to the uploaded one, perform the requested actions, and then send the updated main table as responses. Usually there is no extra response unless there is error in the recipe or there are user-defined ``eta.send()`` in the embedded Python code.
-
+It is not recommended to remotely call the undocumented procedures provided by the backend object, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
 
 1. VI Checking
 
@@ -46,7 +86,7 @@ There are three special functions that is provided for remote controlling ETA Ba
 
 
 Type of responses from ETA Backend 
--------------------------------------
+......
 
 1. Errors 
 
@@ -107,42 +147,3 @@ Type of responses from ETA Backend
     JSON: ``["<type>","<message>"]``
     
     Args: ``<message>`` is a string of a user-defined message.
-
-Using ETA as a Python Library
--------------------------------------
-There are two ways to run ETA as a Python Library, one with the BACKEND Class and one with ETA Class.
-
-etabackend.process_eta(recipe, id, group="main")
-......
-Run a Display Panel, as if it is being run from the GUI. 
-
-- ``recipe``
-    The recipe object parsed from the ``.eta`` JSON file.
-    
-- ``id``
-    The identifier of the Display Panel to be started.
-    
--  ``group``
-    The gruop name of this Display Panel
-
-.. code-block:: python
-
-        import json
-        from etabackend.backend import BACKEND
-        etabackend = BACKEND(run_forever=False)
-        def send(self, text, endpoint="log"):
-            print(text)
-        etabackend.send = send
-        with open("./Realtime.eta", 'r') as filehandle:
-            etarecipe = json.load(filehandle)
-            etabackend.process_eta(etarecipe, id="dpp_template_code", group="main")
-            
-kernel.compile_eta(recipe)
-......
-Compile the recipe and cache it in the ETA kernel.
-
-
-- ``recipe``
-    The recipe object parsed from the ``.eta`` JSON file.
-    
-    Please refer to the `tests <https://github.com/timetag/ETA/tree/master/tests>`_ for examples.
