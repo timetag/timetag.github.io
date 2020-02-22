@@ -5,7 +5,11 @@ Advanced Usage
 
 Run ETA as a Python Library
 -------------------------------------
-There are two ways to run ETA as a Python Library, one with the BACKEND Class and the other with ETA Class. Use the BACKEND Class if you want full ETA Backend features. Use the ETA Class, if you would like to ignore all Script Panels in the exsiting recipe and simply obtian a ``eta`` object for later use, as described in `Customizing Script Panel`.
+There are two ways to run ETA as a Python Library, one with the ``BACKEND`` Class and the other with ETA Class. 
+
+Use the ``BACKEND`` Class if you want full ETA Backend features. 
+
+Use the ``ETA`` Class, if you would like to ignore all Script Panels in the exsiting recipe and simply obtian a ``eta`` object for later use, as described in `Customizing Script Panel`.
 
 backend.process_eta(recipe, id, group="main")
 ......
@@ -58,7 +62,9 @@ The procedure might send JSON strings as responses in a format of ``["<type>","<
 Remote procedures provided by ETA Backend 
 ......
 
-There are three special functions provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first update the recipe on ETA Backend to the uploaded one, and then perform the requested actions. Optionaly they will also send the updated table for GUI as responses. Usually there will be some extra response, for errors in the recipe or user-defined frontend logger in the Script Panel code.
+There are three special functions provided for remote controlling ETA Backend. All these methods bundle a set of internal functions that first update the recipe on ETA Backend to the uploaded one, and then perform the requested actions. Optionaly they will also send the updated table for GUI as responses. 
+
+Please not that usually there might be some extra response, for errors in the recipe or user-defined frontend logger in the Script Panel code.
 
 It is not recommended to remotely call the undocumented procedures provided by the backend object, because they are not designed for remote calling and the returned value will not be streamed back to caller's side.
 
