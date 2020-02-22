@@ -126,6 +126,7 @@ Run a Display Panel, as if it is being run from the GUI.
     The gruop name of this Display Panel
 
 .. code-block:: python
+
         import json
         from etabackend.backend import BACKEND
         etabackend = BACKEND(run_forever=False)
