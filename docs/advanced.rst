@@ -3,14 +3,14 @@ Advanced Usage
 ============
 
 
-Run ETA Backend or ETA as a Python Library
+Run ETA as a Python Library
 -------------------------------------
-There are two ways to run ETA as a Python Library, one with the BACKEND Class and one with ETA Class.
+There are two ways to run ETA as a Python Library, one with the BACKEND Class and the other with ETA Class. Use the BACKEND Class if you want full ETA Backend features. Use the ETA Class, if you would like to ignore all Script Panels in the exsiting recipe and simply obtian a ``eta`` object for later use, as described in `Customizing Script Panel`.
 
-etabackend.process_eta(recipe, id, group="main")
+backend.process_eta(recipe, id, group="main")
 ......
 
-Run a Display Panel, as if it is being run from the GUI. 
+Run a Script Panel, as if it is being run from the GUI. You will usually need to hook a ``send`` function to obtian results, as the Script Panel code might use logger or other methods to stream the results to the caller.
 
 - ``recipe``
     The recipe object parsed from the ``.eta`` JSON file.
@@ -25,18 +25,16 @@ Run a Display Panel, as if it is being run from the GUI.
 
         import json
         from etabackend.backend import BACKEND
-        etabackend = BACKEND(run_forever=False)
+        backend = BACKEND(run_forever=False)
         def send(self, text, endpoint="log"):
             print(text)
-        etabackend.send = send
+        backend.send = send
         with open("./Realtime.eta", 'r') as filehandle:
-            etarecipe = json.load(filehandle)
-            etabackend.process_eta(etarecipe, id="dpp_template_code", group="main")
+            backend.process_eta(json.load(filehandle), id="dpp_template_code", group="main")
             
-kernel.compile_eta(recipe)
+eta.compile_eta(recipe)
 ......
-Compile the recipe and cache it in the ETA kernel.
-
+Compile the recipe and cache it in the ETA kernel. You can later call ``eta.run`` as if in the Script Panel.
 
 - ``recipe``
     The recipe object parsed from the ``.eta`` JSON file.
