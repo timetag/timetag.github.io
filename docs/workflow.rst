@@ -6,12 +6,7 @@ Each ETA recipes consitis of ``Acquisition Device``, ``Virtual Instruments`` , `
 
 Here is the workflow of building an ETA recipe, if you are not using ready-made ones. 
 
-Add time-tagger as Acquisition Device
---------------------------
 
-Click the ``Acquisition Device`` button on the main screen to open a dialogue.
-Specify a relatable name, the number of physically available channels and 
-the number of marker channels (specific to PicoQuant HydraHarp400). 
 
 Add Virtual Instruments to perform analysis
 --------------------------------------------------
@@ -141,6 +136,14 @@ TODO: explain all the analysis actions
           clear(coinci1,1)
           Clear coincidence event of coincidence tool coinci1.
 
+Add your time-tagger in Virtual Instruments
+--------------------------
+
+Make an RFILE in the action panel.
+
+Specify the name for RFILE, assign the physically available channels and the number of marker channels.
+
+TODO: explain how to do it with  PicoQuant HydraHarp400
 
 Add Script Panel
 -----------------------
@@ -151,7 +154,7 @@ A minimum example that saves the data as an Origin-compatitable ``*.txt`` file l
 .. code:: python
 
     import numpy as np
-    result =eta.run(eta.simple_cut(filename,4)) #tell ETA to run the analysis on "filename" in 4 chunks (automatic multi-threading)
+    result =eta.run(eta.clip(filename)) #tell ETA to run the analysis on "filename" 
     histogram = result["h1"] #get the table from result
     np.savetxt("h1.txt",histogram) #save the txt file for the histogram
     eta.send("processing succeed.") #display message on GUI popup
@@ -168,7 +171,7 @@ In the following example dash from plotly is used to create an interactive graph
     import dash_core_components as dcc
     import dash_html_components as html
     import plotly.graph_objs as go
-    result =eta.run(eta.simple_cut(filename,4))
+    result =eta.run(eta.clip(filename))
     histogram = result["h1"] #get the table from result
 
     app = dash.Dash()
