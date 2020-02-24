@@ -110,7 +110,7 @@ eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, r
 Executing Analysis
 -----
 
-eta.run(source, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0)
+eta.run(sources, resume_task=None, group="main", return_task=False, return_results=True, max_autofeed=0, stop_with_source)
 ......
 
 ``eta.run()`` starts an analysis, where you can feed the Clips as the sourece into Virtual Instruments and obtain results. 
@@ -121,8 +121,10 @@ In a single invoke of ``eta.run()``, only a single task will be used for all Cli
 
 The analysis will block the execution of Python script until the results are returned in a Python dictionary, with the histogram names as the keys. If you want to schedule many analysis and run them in parallel, you can set ``return_results=Fasle``.
 
-- ``source``
-    You can use a single Clip or a Python generators functions that yields Clips as a source. 
+- ``sources``
+    A dict of Python generators functions that yields Clips. The keys should match with the name of coresponding RFILEs in the virtual instrument.
+
+    If only one generator is provided instead of a dict, it will be broadcasted to all RFILEs. Please note that broadcast happens in turns
     
 - ``max_autofeed``
     It limits the number of Clips that ``eta.run`` would fetch from the generator.
@@ -168,6 +170,8 @@ The analysis will block the execution of Python script until the results are ret
         
         In multi-threading analysis, however, there will usually be the same amount of "last" task descriptors missing during the fisrt iteration, as the number of threads you use. You will also end up with that amount of task descriptor in the end. For some analysis, like correlation which yields histograms, you can use ``eta.aggregrate`` later to merge the analysis results from those tasks into one. But it won't change the fact that they are essentialy many different independent analysis.
         
+- ``stop_with_source``
+    Stop the analysis when any of the sources reaches its end. Set it to False if you want to run simulation without any source.
 
 eta.aggregrate(list_of_tasks, sum_results=True):
 ......
