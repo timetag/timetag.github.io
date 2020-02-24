@@ -12,6 +12,29 @@ In the following documentation, we list the built-in Tools and their Actions in 
 .. note::
     Please note that ETA is still under development. Tools and their Actions might be changed in the future.
 
+RFILE
+------------------------------
+``RFILE(name, [signal channels], [marker channels])``
+
+RFILE is a read-only source of timetags. It works like a placeholder, for the physical timetagger device in the real-world, in the Virtual Instruments. 
+
+Each RFILE should be later connected with a Clip generator in ``eta.run``, see `Customizing Script Panel` for more details. 
+
+Parameters
+......
+
+- ``signal channels`` (default:[0,1,2,3])
+    This parameter specifies the signal channels used in the timetag source.  
+    
+- ``marker channels`` (default:[])
+    This parameter specifies the marker channels used in the timetag source. This is only for HydraHarp devices.
+
+.. note::
+    The RFILE Tool can be defined on any Virtual Instrument graph. You just need to define it once, and it works as if the the signals are emitted the signal from that Virtual Instrument. 
+    
+    Channel numbers in RFILE should be continously ascending, like ``[1,2,3]`` or ``[2,3,4]``. The should also be smaller than any virtual channel number.  There should be a clear boundary between them.
+
+
 CLOCK
 ------------------------------
 ``CLOCK(name, max start times, max stop times)``
@@ -177,17 +200,20 @@ Actions
 
 
 - ``emit(chn, waittime=0, period=0, repeat=1)``
-    Emit a signal to ``chn`` after ``waittime``, both are either integer values or the name of an INTEGER Tool. It can also emit some repeated signals with a `period` in ps if  ``repeat`` is set to larger than one. If reapeat is set to 0, no event will be emitted, which might be used as a conditional emittion.
+    Emit a signal to ``chn`` after ``waittime``, both are either integer values or the name of an INTEGER Tool. It can also emit some repeated signals with a `period` in ps if  ``repeat`` is set to larger than one. 
     
-    The maximum limit of channel number ``chn`` is 255.
+    If reapeat is set to 0, no event will be emitted, which might be used as a conditional emittion.
+    
+    The maximum limit of channel number ``chn`` is 255, and the minimum limit of ``chn`` is larger than the largest channel number assigned for the ``RFILE``.
  
     .. note::
-        It is not allowed to emit to any channel that is read from a timetag file (timetagger channels or markers). The emitted signal will never be written to the timetag file to prevent corrputing the original data.
+        It is not allowed to emit to any channel that is used in ``RFILE``, since it is usually read from a timetag file (timetagger channels or markers). The emitted signal will never be written to the timetag file to prevent corrputing the original data. 
 
         If you need to merge signals from two channels into one channel, simply emit them into a new unused channel.
 
         Channels can also be used as routers. For examples, you can route events to different Virtual Instruments based on some status that is controlled by the markers.
         
+
 - ``cancel_emit(chn)``
     Flush all the previously emitted events in the channel ``chn``.
 
