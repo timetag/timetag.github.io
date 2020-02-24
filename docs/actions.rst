@@ -16,7 +16,7 @@ RFILE
 ------------------------------
 ``RFILE(name, [signal channels], [marker channels])``
 
-RFILE is a read-only source of timetags. It works like a placeholder, for the physical timetagger device in the real-world, in the Virtual Instruments. 
+RFILE is a read-only source of timetags. It works like a placeholder, for the physical timetagger device in the real-world, in the Virtual Instruments. The availble channels in the physical device will be mapped to the assigned channel number, which can be used by all the Virtual Instruments.
 
 Each RFILE should be later connected with a Clip generator in ``eta.run``, see `Customizing Script Panel` for more details. 
 
@@ -24,14 +24,16 @@ Parameters
 ......
 
 - ``signal channels`` (default:[0,1,2,3])
-    This parameter specifies the signal channels used in the timetag source.  
+    This parameter specifies the signal channels mapped from the timetag source. You should always put all availble channels in the physical device here, even if you are not currenlty using this channel.
     
 - ``marker channels`` (default:[])
-    This parameter specifies the marker channels used in the timetag source. This is only for HydraHarp devices.
+    Simialr to ``signal channels``, but this parameter specifies the marker channels. This is only for HydraHarp devices.
 
 .. note::
     The RFILE Tool can be defined on any Virtual Instrument graph. You just need to define it once, and it works as if the the signals are emitted the signal from that Virtual Instrument. 
     
+    
+     
     Channel numbers in RFILE should be continously ascending, like ``[1,2,3]`` or ``[2,3,4]``. The should also be smaller than any virtual channel number.  There should be a clear boundary between them.
 
 
