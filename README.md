@@ -37,12 +37,15 @@ ETA, the extensible time tag analyzer, is an event driven programming language w
 
 Currently, ETA supports the timetag format of devices from PicoQuant (HydraHarp T2&T3 format, PicoHarp T2&T3 format, TimeHarp T2&T3 format), Swabian Instrument (TIME TAGGER 20 file format), quTools (quTAG file format), and Becker & Hickl (SPC-134/144/154/830 file format).
 
-### ETA for realtime analysis (NEW!)
+### ETA for realtime streamming analysis 
 
 ETA provides support to the format of quTAG, HydraHarp, and Swebian Instrument time-tagger devices, with tested real-time g(2) analysis recipes that could help you with the diagnosis of experiment setups (e.g. the alignment of the optical path).
 
 [![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
 
+### ETA for correlating data from multiple timetagers (NEW!)
+
+The latest version of ETA makes it easier to correlate timetag files from many different time-tagger devices. 
 
 ## Get Started!
 ### Install ETA
