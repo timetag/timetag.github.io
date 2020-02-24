@@ -2,10 +2,9 @@
 Making recipes
 ============
 
-Each ETA recipes consitis of ``Acquisition Device``, ``Virtual Instruments`` , ``Script Panel`` and  ``Parameter``.
+Each ETA recipes consitis of ``Virtual Instruments`` , ``Script Panel`` and optionally ``Parameter``.
 
 Here is the workflow of building an ETA recipe, if you are not using ready-made ones. 
-
 
 
 Add Virtual Instruments to perform analysis
@@ -198,4 +197,4 @@ Please refer to our pre-made recipes for inspiration.
 
 Run your analysis
 ----------------------
-Once you have added ``Acquisition Device``, ``Virtual Instruments`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
+Once you have added  ``Virtual Instruments`` and ``Script Panel``, return to the home screen and press ``Run`` on the ``Script Panel`` of your choice.
