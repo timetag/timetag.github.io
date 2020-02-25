@@ -245,18 +245,18 @@ This is useful when you want to talk to another program other than ETA GUI via W
 
 Modify recipies programatically
 ------
-You can also modify recipes programmatically. 
+You can also modify recipes programmatically. The recipe uploaded will be availble under ``eta.recipe``.
 
 As an example, you can upload the template recipe from your LabVIEW program to ETA Backend via WebSocket (see Advanced Usages), and then change the parameters (like bin size for histograms) to get different results.
 
-eta.recipe_get_parameter(name)
+eta.recipe.get_parameter(name)
 ......
 Get a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be returned.
 
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
-eta.recipe_set_parameter(name, value)
+eta.recipe.set_parameter(name, value)
 ......
 Set value of a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
 
