@@ -66,19 +66,24 @@ Actions
 
 - ``clock.start()``
     Start the clock at the current time.
-    
-- ``clock.start(LAST_SYNC)``
-    Start the clock at the last sync. The time for the last sync is calculated from SYNCRate.
-    
+
 - ``clock.stop()``
     Stop the clock at the current time.
     
+- ``clock.start(LAST_SYNC)``
+    Start the clock at the last sync. The time for the last sync is calculated from SYNCRate.
+
 - ``clock.infer_start_from_stop(SYNC)``
     Using the stopping time to find the last specified type of signal before it, and then overwrite the starting time to the time of this signal.
     If the clock is a single-start-multi-stop clock, then the earliest stopping time value it stores will be used for inferring the start.
 
     .. note::
-        Currently it can only use the SYNC period to find the SYNC signal. This action might be removed if there is better idea for supporting Life-time measurements using HydraHarp400 T3 files.
+        ``clock.infer_start_from_stop(SYNC)`` and ``clock.start(LAST_SYNC)`` use the SYNC period to reconstruct the SYNC signal, which is not recorded in HydraHarp T3 mode files. 
+
+        If multiple T3 mode file are used, they will both starts at time 0. If the SYNC rates are the same, they are automatically synced without extra efforts. If the SYNC are different, the SYNC will be taken from the first defined ``RFILE``, as the master ``RFILE``. You can also mannualy set SYNC rate to a clip using ``your_t3clip.SYNCRate_pspr`` in the Script Panel, stretching all files' internal time to match the master ``RFILE``. 
+        
+        If T3 and T2 are mixed in sources, it should work similarly. Things get a little bit complicated if T2 doesn't start at 0 while T3 does. In order to mix them properly, you will need to manually modify the T2 Clip object with a negative value added to ``your_t2clip.GlobalTimeShift``, which will applied to all channels within the that Clip.
+
 
 - ``[clock1,clock2,...].sort(start)``
     Sort the starting time of a group of clocks, preserving their stopping time.
