@@ -50,7 +50,7 @@ The latest version of ETA makes it easier to correlate timetag files from many d
 ## Get Started!
 ### Install ETA
 
-For a full installation, [download](https://github.com/timetag/ETA/releases) and [install](https://eta.readthedocs.io/en/latest/installation.html) GUI and backend.
+For a full installation, [download and install](https://eta.readthedocs.io/en/latest/installation.html) GUI and backend.
 
 You can also try [ETA Web GUI](https://eta.readthedocs.io/en/latest/installation.html#try-eta-without-installation) without installation.
 
