@@ -36,17 +36,15 @@ Install as a Python package
 For offical Python distribution:
 ,,,,
 
-* Install ETA Backend 
-    If you use offical Python installation, type ``pip install etabackend --upgrade`` to install ETA.
+*      If you use offical Python installation, type ``python3 -m pip install etabackend --upgrade`` to install ETA. Please note that on certian platforms you should put ``python`` instead of ``python3``.
+ 
+*      After installation, type ``python3 -m etabackend`` to start ETA Backend. 
     
-* Run ETA Backend
-    ``python -m etabackend``
     
 For Anaconda/Miniconda in separate environment:
 ,,,,
 
-* Install ETA Backend 
-    Open the Anaconda promt and type the following lines. This will create a conda environment for ETA.
+*     Open the Anaconda promt and type the following lines. This will create a conda environment for ETA.
     
     .. code::
     
@@ -55,12 +53,11 @@ For Anaconda/Miniconda in separate environment:
         activate ETA
         pip install etabackend
     
-* Run ETA Backend
-    Activate Type ``python -m etabackend`` to start the ETA Backend.
+*     Activate the ETA conda envronment, and type ``python -m etabackend`` to start the ETA Backend.
     
-    Optionally, . Create a text file and add the following, adjusting the path to your Anaconda installation, then save save as a .bat file. 
+*     Optionally, you can create a short cut for faster launching. Create a text file and add the following, adjusting the path to your Anaconda installation, then save save as a .bat file. 
     
-    .. code::
+      .. code::
     
             @echo off
             set PATH=%PATH%;C:\Users\<username>\Anaconda3\Scripts
@@ -68,15 +65,15 @@ For Anaconda/Miniconda in separate environment:
             @call python -m etabackend
 
 Launch the GUI
-......
+,,,,
 
-    When the Backend is started, it should look lile
+*     When the Backend is started, it should look lile
     
     .. figure:: _static/ETA_backend.jpg
         :align: center
         :width: 50 %
         
-    Open a Web browser window and type the ETA URL on the address bar to launch the GUI.
+*     Open a Web browser window and type the ETA URL on the address bar to launch the GUI.
     
 
 
