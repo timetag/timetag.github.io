@@ -8,7 +8,7 @@ ETA is comprised of two parts communicating via websocket: the GUI and the backe
 
 Currently, ETA (>=0.7.0) has been tested on 64-bit versions of Microsoft Windows 7/10, Ubuntu 18.04/19.04 and Mac OS 10.15 with Python 3.7/3.8, but it may also work nicely on other platforms. We recommend users to install ETA as a standalone program on Windows, and as a Python package on other platforms. 
 
-Install as a standalone program
+Install as a standalone program (Windows-only)
 ......
 
 You can install ETA GUI and ETA Backend as a standalone program. Currently, Windows x68_64 binary builds are provided on Github.
@@ -37,10 +37,11 @@ For offical Python distribution:
 ,,,,
 
 * Install ETA Backend 
-    ``pip install etabackend --upgrade``
+    If you use offical Python installation, type ``pip install etabackend --upgrade`` to install ETA.
     
 * Run ETA Backend
     ``python -m etabackend``
+    
 For Anaconda/Miniconda in separate environment:
 ,,,,
 
@@ -55,7 +56,9 @@ For Anaconda/Miniconda in separate environment:
         pip install etabackend
     
 * Run ETA Backend
-    Create a text file and add the following, adjusting the path to your Anaconda installation, then save save as a .bat file. 
+    Activate Type ``python -m etabackend`` to start the ETA Backend.
+    
+    Optionally, . Create a text file and add the following, adjusting the path to your Anaconda installation, then save save as a .bat file. 
     
     .. code::
     
@@ -63,22 +66,26 @@ For Anaconda/Miniconda in separate environment:
             set PATH=%PATH%;C:\Users\<username>\Anaconda3\Scripts
             @call C:\Users\<username>\Anaconda3\Scripts\activate.bat ETA
             @call python -m etabackend
-    
-    When running sucessfully, this .bat file should look like
+
+Launch the GUI
+......
+
+    When the Backend is started, it should look lile
     
     .. figure:: _static/ETA_backend.jpg
         :align: center
         :width: 50 %
         
-* Run the Web GUI
+    Open a Web browser window and type the ETA URL on the address bar to launch the GUI.
+    
 
-.. note::
-    Please not that the GUI will not be installed when ETA is installed as a Python package. Instead, you can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser. Please note that the Web GUI will always follow the current master branch, and it may not match your ETA Backend version. 
 
 Verify the Installation
 ......
 
-After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it. In order to analyze your time tag file, you have to specify path and filename in the variables and click "Run" button besides the Display Panel you want to execute.
+After launching the ETA GUI, click New and then click Simulation, it will load a simulation recipe which can run without any actual timetag. Click the "Run" besides the Display Panel you want to execute to see the results.
+
+In order to analyze your own time tag file, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it, specify filename in the variables, and then click "Run" button besides the Display Panel you want to execute.
 
 If problem occurs, try ``pip install --upgrade`` again to upgrade each `ETA dependencies <https://github.com/timetag/ETA/blob/master/requirements.txt>`_ .
 
@@ -93,3 +100,11 @@ The computer which runs the ETA Backend will do the number crunching and it migh
   
 .. note::
      Remote access might be dangerous if your IP and port are directly accessible via Internet. Considering setting up a firewall.
+
+Try ETA without installation
+--------
+
+You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser. 
+
+.. note::
+    Please note that the Web GUI will always follow the current master branch, and it may not match your ETA Backend version. 
