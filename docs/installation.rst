@@ -6,7 +6,7 @@ Installing ETA
 --------
 ETA is comprised of two parts communicating via websocket: the GUI and the backend. We chose to separate the program in this way to allow remote analysis of time tags. Since correlators are typically close to the setup and require a fast interface for data transfer, it is advisable to run the backend on the computer controlling the correlator. The GUI, however, can be used from anywhere with network access to the data aquisition computer. If you transfered the time tag files to another computer for evaluation, make shure you are running both the GUI and the backend locally.
 
-Currently, ETA (>=0.6.5) has been tested on 64-bit versions of Microsoft Windows 7/10 and Ubuntu 18.04/19.04 with Python 3.6/3.7/3.8, but it may also work nicely on other platforms. We recommend users to install ETA as a standalone program on Windows, and as a Python package on other platforms. 
+Currently, ETA (>=0.7.0) has been tested on 64-bit versions of Microsoft Windows 7/10, Ubuntu 18.04/19.04 and Mac OS 10.15 with Python 3.7/3.8, but it may also work nicely on other platforms. We recommend users to install ETA as a standalone program on Windows, and as a Python package on other platforms. 
 
 Install as a standalone program
 ......
@@ -37,7 +37,7 @@ For offical Python distribution:
 ,,,,
 
 * Install ETA Backend 
-    ``pip install etabackend``
+    ``pip install etabackend --upgrade``
     
 * Run ETA Backend
     ``python -m etabackend``
@@ -73,14 +73,14 @@ For Anaconda/Miniconda in separate environment:
 * Run the Web GUI
 
 .. note::
-    Please not that the GUI will not be installed when ETA is installed as a Python package. Instead, you can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser.
+    Please not that the GUI will not be installed when ETA is installed as a Python package. Instead, you can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser. Please note that the Web GUI will always follow the current master branch, and it may not match your ETA Backend version. 
 
 Verify the Installation
 ......
 
 After launching the ETA GUI, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it. In order to analyze your time tag file, you have to specify path and filename in the variables and click "Run" button besides the Display Panel you want to execute.
 
-If problem occurs, try ``pip install --upgrade`` to upgrade each `ETA dependencies <https://github.com/timetag/ETA/blob/master/requirements.txt>`_ .
+If problem occurs, try ``pip install --upgrade`` again to upgrade each `ETA dependencies <https://github.com/timetag/ETA/blob/master/requirements.txt>`_ .
 
 Configurating ETA for remote access
 --------
