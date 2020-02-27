@@ -4,7 +4,7 @@ Installation
 
 Installing ETA
 --------
-ETA is comprised of two parts communicating via websocket: the GUI and the backend. We chose to separate the program in this way to allow remote analysis of time tags. Since correlators are typically close to the setup and require a fast interface for data transfer, it is advisable to run the backend on the computer controlling the correlator. The GUI, however, can be used from anywhere with network access to the data aquisition computer. If you transfered the time tag files to another computer for evaluation, make shure you are running both the GUI and the backend locally.
+ETA is comprised of two parts communicating via websocket: the GUI and the backend. We chose to separate the program in this way to allow remote analysis of time tags. Since correlators are typically close to the setup and require a fast interface for data transfer, it is advisable to run the backend on the computer controlling the correlator. The GUI, however, can be used from anywhere with a morden browser, and network access to the data aquisition computer. If you transfered the time tag files to your own computer for evaluation, make sure you are running both the GUI and the backend locally.
 
 Currently, ETA (>=0.7.0) has been tested on 64-bit versions of Microsoft Windows 7/10, Ubuntu 18.04/19.04 and Mac OS 10.15 with Python 3.7/3.8, but it may also work nicely on other platforms. We recommend users to install ETA as a standalone program on Windows, and as a Python package on other platforms. 
 
@@ -80,9 +80,9 @@ Launch the GUI
 Verify the Installation
 ......
 
-After launching the ETA GUI, click New and then click Simulation, it will load a simulation recipe which can run without any actual timetag. Click the "Run" besides the Display Panel you want to execute to see the results.
+*     After launching the ETA GUI, click New and then click Simulation, it will load a simulation recipe which can run without any actual timetag. Click the "Run" besides the Display Panel you want to execute to see the results.
 
-In order to analyze your own time tag file, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it, specify filename in the variables, and then click "Run" button besides the Display Panel you want to execute.
+*     In order to analyze your own time tag file, you can drag a recipe (``recipe_name.eta``) onto the main screen to load it, specify filename in the variables, and then click "Run" button besides the Display Panel you want to execute.
 
 If problem occurs, try ``pip install --upgrade`` again to upgrade each `ETA dependencies <https://github.com/timetag/ETA/blob/master/requirements.txt>`_ .
 
