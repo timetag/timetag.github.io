@@ -112,7 +112,7 @@ HISTOGRAM
 ------------------------------
 ``HISTOGRAM(name,[(number of bins, width of bins in picoseconds, time interval modifier)),...]``
 
-Histogram generates statistics of time intervals. The time intervals that fall out of the histogram will be ignored.  Histograms can be 1-dimensional or multi-dimensional, and each 1-d or multi-d histogram can be put into an array that is 1-d or multi-d.
+Histogram generates statistics of time intervals. The time intervals that fall out of the histogram will be ignored.  Histograms can be 1-dimensional or multi-dimensional, and it can be put into an array that is 1-d or multi-d.
 
 The histogram can be retrieved using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
 
@@ -136,7 +136,7 @@ Parameters
     If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. This would move the position of "time zero", thus truncate the histogram to a given position from left.  Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
 
 - ``Extra Dimensions``
-    Each 1-d or multi-d histogram can be put into an array that is 1-d or multi-d. The extra dimension adds before the histogram dimensions, usually used for making images.
+    The 1-d or multi-d histogram can be put into an array which is 1-d or multi-d, forming "an array of (consistent) histograms" The extra dimension adds before the histogram dimensions, usually used for making images.
 
 Actions
 ......
