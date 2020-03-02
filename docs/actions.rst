@@ -121,14 +121,16 @@ Parameters
 - ``[(Number of bins, Width of bins in picoseconds, time interval modifier),...]`` (required)
     A list of dimension specification. One tuple is used per dimension. The first value of the tuple indicates the number of bins in the histogram. The second value of the tuple indicates the size of each bin in the histogram. The values that fall out of the histogram will be ignored. 
     
-    The third value of the tuple is optional, it is a string of numba expression that modifies the time interval ``"time"``.
+    The third value of the tuple is optional, it is a string of numba expression wrapped by ``""`` that modifies the time intervala. It should take a variable of the old time interval named ``time`` as the input, and returns the new time interval, which will be used later for locating the index of bins in this dimension. 
 
  .. note::
     The product of the histogram parameters bin size and bin number gives you the maximum correlation length, if you are performing a correlational analysis. 
     
     If the histogram is multi-dimensional, specify one tuple for each dimension, like ``[(100,16),(200,16)]``.
 
-    If you need logarithmic binning, use ``HISTOGRAM(h1, [(100,24,"round(math.log(time))")])``.
+    If you need logarithmic binning, use ``HISTOGRAM(h1, [(100,24,"round(math.log(time))")])``.  The code actually works as if the time interval modifier is injected to every ``h1.record()`` throughout the recipe.
+    
+    If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
 
 - ``Extra Dimensions``
     The extra dimension before the histogram dimensions, usually used for making images.
