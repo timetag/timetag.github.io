@@ -130,7 +130,7 @@ Parameters
 
     If you need logarithmic binning, use ``HISTOGRAM(h1, [(100,24,"round(math.log(time))")])``.  The code actually works as if the time interval modifier is injected to every ``h1.record()`` throughout the recipe.
     
-    If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
+    If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. This would move the position of "time zero", thus truncate the histogram to a given position from left.  Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
 
 - ``Extra Dimensions``
     The extra dimension before the histogram dimensions, usually used for making images.
