@@ -112,14 +112,17 @@ HISTOGRAM
 ------------------------------
 ``HISTOGRAM(name,[(number of bins, width of bins in picoseconds, time interval modifier)),...]``
 
-Histogram generates statistics of time intervals or an arbitrary INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
+Histogram generates statistics of time intervals. The time intervals that fall out of the histogram will be ignored.  Histograms can be 1-dimensional or multi-dimensional, and each 1-d or multi-d histogram can be put into an array that is 1-d or multi-d.
+
 The histogram can be retrieved using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
+
+
 
 Parameters
 ......
 
 - ``[(Number of bins, Width of bins in picoseconds, time interval modifier),...]`` (required)
-    A list of dimension specification. One tuple is used per dimension. The first value of the tuple indicates the number of bins in the histogram. The second value of the tuple indicates the size of each bin in the histogram. The values that fall out of the histogram will be ignored. 
+    A list of dimension specification. One tuple is used per dimension. The first value of the tuple indicates the number of bins in the histogram. The second value of the tuple indicates the size of each bin in the histogram. 
     
     The third value of the tuple is optional, it is a string of numba expression wrapped by ``""`` that modifies the time intervala. It should take a variable of the old time interval named ``time`` as the input, and returns the new time interval, which will be used later for locating the index of bins in this dimension. 
 
@@ -133,14 +136,14 @@ Parameters
     If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. This would move the position of "time zero", thus truncate the histogram to a given position from left.  Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
 
 - ``Extra Dimensions``
-    The extra dimension before the histogram dimensions, usually used for making images.
+    Each 1-d or multi-d histogram can be put into an array that is 1-d or multi-d. The extra dimension adds before the histogram dimensions, usually used for making images.
 
 Actions
 ......
 
 - ``histogram.record(clock)``
     Record the time interval of ``clock`` into a 1-dimensional histogram. 
-
+    
 - ``histogram.record(clock1,clock2,...)``
     Record the time interval of ``clock1`` and ``clock2`` into a multi-dimensional histogram. The order of clock should be the same as the order of dimension. 
 
