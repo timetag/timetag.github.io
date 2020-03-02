@@ -110,7 +110,7 @@ Performing a start-stop measurement:
 
 HISTOGRAM
 ------------------------------
-``HISTOGRAM(name,[(number of bins, width of bins in picoseconds)),...]``
+``HISTOGRAM(name,[(number of bins, width of bins in picoseconds, time interval modifier)),...]``
 
 Histogram generates statistics of time intervals or an arbitrary INTEGER. Histograms can be 1-dimensional or multi-dimensional. 
 The histogram can be retrieved using its name from the returned dictionary from eta.run() in the Script Panel for further processing and plotting.
@@ -118,15 +118,17 @@ The histogram can be retrieved using its name from the returned dictionary from 
 Parameters
 ......
 
-- ``[(Number of bins, Width of bins in picoseconds),...]`` (required)
-    This parameter has to be specified in a pair, like ``(100,16)``. The first value of the pair indicates the number of bins in the histogram. The second value of the pair indicates the size of each bin in the histogram. 
+- ``[(Number of bins, Width of bins in picoseconds, time interval modifier),...]`` (required)
+    A list of dimension specification. One tuple is used per dimension. The first value of the tuple indicates the number of bins in the histogram. The second value of the tuple indicates the size of each bin in the histogram. The values that fall out of the histogram will be ignored. 
     
-    If the histogram is multi-dimensional, specify value for each dimension, like ``[(100,16),(200,16)]``.
+    The third value of the tuple is optional, it is a string of numba expression that modifies the time interval ``"time"``.
 
  .. note::
     The product of the histogram parameters bin size and bin number gives you the maximum correlation length, if you are performing a correlational analysis. 
     
-    The values that fall out of the histogram will be ignored.
+    If the histogram is multi-dimensional, specify one tuple for each dimension, like ``[(100,16),(200,16)]``.
+
+    If you need logarithmic binning, use ``HISTOGRAM(h1, [(100,24,"round(math.log(time))")])``.
 
 - ``Extra Dimensions``
     The extra dimension before the histogram dimensions, usually used for making images.
