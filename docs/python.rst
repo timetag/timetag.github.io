@@ -48,17 +48,19 @@ eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout
         Please note that for performance consideration, the provided Clip ``modify_clip`` will be modified. The ``modify_clip`` will contain timetag events from a new window in the timetag file after calling this function. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
 
 - ``read_events``
-    The number of events in the returned Clip. Setting it to 0 will make ETA read the entire file.
+    The number of desired events to be loaded into the returned Clip. Setting it to 0 will make ETA read the entire file.
     
-    If the number exceeds the size of the time-tag file, ETA will wait until the file grows to that size. This is particularly useful in a real-time analysis where the time-tag file is continouslys growing.
+    If the number exceeds the size of the time-tag file, and ``wait_timeout`` is configured, ETA will wait until the file grows to that size. This is particularly useful in a real-time analysis where the time-tag file is continouslys growing.
+    
+    If file failed to grow to the desired size, a shortened Clip to the current ending of the file will be loaded. If no records can be loaded at all, a False will be returned indicating a failure, and the ``modify_clip`` will not be modified.
     
     .. note::
         You can also set a negative value, then the number of records in this Clip will be calculated as the number of records between the ending of the last Clip to the current end of file minus the absolute value of this negative number. 
 
         The time tag file that serves as the FIFO when you perform a real-time analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
     
-- ``timeout``
-    Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If the time is out before that, a False will be returned indicating a failure, and the ``modify_clip`` will not be modified.
+- ``wait_timeout``
+    Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If file failed to grow to the desired size, a shortened Clip to the current ending of the file will be loaded.
     
 - ``format``
     Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto detection of PicoQuant devices. You can also use the constant ``eta.FORMAT_SI`` for Swabian Instrument binary format, ``eta.quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format,  ``eta.quTAG_FORMAT_COMPRESSED`` for compressed quTAG binary format, or ``eta.bh_spc_4bytes`` for Becker & Hickl  SPC-134/144/154/830 format.
