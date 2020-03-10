@@ -24,17 +24,15 @@ Parameters
 ......
 
 - ``signal channels`` (default:[0,1,2,3])
-    This parameter specifies the signal channels mapped from the timetag source. You should always put all availble channels in the physical device here, even if you are not currenlty using this channel.
+    This parameter specifies the signal channels mapped from the timetag source. ``[0,1,...]`` reads as ``[first real channel, second real channel, ...]``. You should always put *ALL* availble channels on the timetagger device in the list, even if some of the channels wasn't plugged-in. 
     
 - ``marker channels`` (default:[])
-    Simialr to ``signal channels``, but this parameter specifies the marker channels. This is only for HydraHarp devices.
+    Simialr to ``signal channels``, but this parameter specifies the marker channels. This parameter is only for HydraHarp devices.
 
 .. note::
     The RFILE Tool can be defined on any Virtual Instrument graph. You just need to define it once, and it works as if the the signals are emitted the signal from that Virtual Instrument. 
     
-    
-     
-    Channel numbers in RFILE should be continously ascending, like ``[1,2,3]`` or ``[2,3,4]``. The should also be smaller than any virtual channel number.  There should be a clear boundary between them.
+    Channel numbers in RFILE should be continously ascending, like ``[1,2,3]`` or ``[2,3,4]``, and any of them should be smaller than any virtual channel number.  There should be a clear boundary between virtual channel numbers and real channel (signal and markers channel) numbers.
 
 
 CLOCK
