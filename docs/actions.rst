@@ -237,7 +237,7 @@ Actions
     
     This is useful for implementing time-based cutting or region-of-interesting cutting. 
     
-    You can use ``interrupt()`` to pause the analysis, when a certian event happens or a certian state is reached. Then, from the Python side you can get the current positions for every timetag Clips, which was provided as the sources in ``eta.run({sources},...)``. With those positions, you can later run analysis using some new clips constructed form the same file but with ``eta.clip_file(..., seek_record=the_interrupted_position)``
+    You can use ``interrupt()`` to pause the analysis, when a certian event happens or a certian state is reached. Then, from the Python side you can get the current positions for every timetag Clips, which was from multiple time taggers and was provided in the sources of ``eta.run()``. With those positions, you can later run analysis using some new clips constructed form the same file but with ``eta.clip_file(..., seek_record=the_interrupted_position)``
     
     .. note::
     
