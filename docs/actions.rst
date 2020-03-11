@@ -243,9 +243,9 @@ Actions
     
         Please note that ``interrupt()`` will **NOT** do anything if auto-feed is enabled. Set ``max_autofeed=1`` to disable it.
         
-        For time-based clipping or ROI (region-of-interest) clipping, keep the reference to all of the provided clips in ``result,task=eta.run({'timetagger1':clip,...},return_task=True,max_autofeed=1,...)``, so that you can get absoulte positions of the original timetag file using ``your_pos = clip.get_pos()`` when ``interrupt()`` happens and ``eta.run`` returns.
+        For time-based clipping or ROI (region-of-interest) clipping, when ``interrupt()`` happens, ``result,task=eta.run({'timetagger1':generator1,...},return_task=True,max_autofeed=1,...)`` will return, so that you can get absoulte positions of the original timetag file using ``your_pos1 = result['timetagger1'].get_pos()`` .
         
-        Discard ``result`` if you are performing time-based cutting, and use the ``result`` to decide if you would need to perform ``clip.get_pos()`` if you are doing ROI cutting. You may also need to keep the ``task`` discriptor, if you want to resume this paused analysis to find the second cutting point. Then you can either truncate the original timetag files into many small ones, or save this absolute position list for later use with ``eta.clip_file(...,read_records=your_pos2-your_pos1,seek_record=your_pos1)``
+        Discard ``result`` if you are performing time-based cutting, and use the histograms in the ``result`` to decide if you would need to perform ``clip.get_pos()`` if you are doing ROI cutting. You may also need to keep the ``task`` discriptor, if you want to resume this paused analysis to find the second cutting point. Then you can either truncate the original timetag files into many small ones, or save this absolute position list for later use with ``eta.clip_file(...,read_records=your_pos2-your_pos1,seek_record=your_pos1)``
     
         Please note that ROI cutting and time-based cutting should be viewed as advanced alternative to ``eta.split_file()`` and ``eta.clips``. In most of the cases, you can built a event router with conditional ``emit()``,  which can be easily integerated into existing analsys and run in realtime.
 
