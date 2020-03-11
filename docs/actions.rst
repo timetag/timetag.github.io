@@ -235,15 +235,19 @@ Actions
 - ``interrupt()``
     Pause the current analysis and return to Python code in the Script Panel, if auto-feed is disabled. 
     
-    This is useful for implementing time-based cutting or region-of-interesting cutting. 
+    This is useful for implementing time-based clipping or ROI (region-of-interest) clipping. 
     
-    You can use ``interrupt()`` to pause the analysis, when a certian event happens or a certian state is reached. Then, from the Python side you can get the current positions for every timetag Clips, which was from multiple time taggers and was provided in the sources of ``eta.run()``. With those positions, you can later run analysis using some new clips constructed form the same file but with ``eta.clip_file(..., seek_record=the_interrupted_position)``
+    You can use ``interrupt()`` to pause the analysis, when a certian event happens or a certian state is reached.  Then, from the Python side you can get the current positions for every timetag Clips, which was from multiple time taggers and provided in  ``eta.run()`` as sources. With those positions, you can later run analysis using some new clips constructed form the same file. 
     
     .. note::
     
-        Please note that ``interrupt()`` will **NOT** do anything if auto-feed is enabled. Set ``max_autofeed=1`` and keep the reference to all of the provided clips in the sources, so that you can get the positions in the file.
+        Please note that ``interrupt()`` will **NOT** do anything if auto-feed is enabled. Set ``max_autofeed=1`` to disable it.
+        
+        For time-based clipping or ROI (region-of-interest) clipping, keep the reference to all of the provided clips in ``result,task=eta.run({'timetagger1':clip},return_task=True)``, so that you can get absoulte positions of the original timetag file using ``your_pos = clip.get_pos()`` when ``interrupt()`` happens and ``eta.run`` returns.
+        
+        Discard ``result`` if you are performing time-based cutting, and use the ``result`` to decide if you would need to perform ``clip.get_pos()`` if you are doing ROI cutting. You may also need to keep the ``task`` discriptor, if you want to resume this paused analysis to find the second cutting point. Then you can either truncate the original timetag files into many small ones, or save this absolute position list for later use with ``eta.clip_file(...,seek_record=your_pos)``
     
-        You may also need to keep the task discriptor, if you want to resume this analysis .
+        Please note that ROI cutting and time-based cutting should be viewed as advanced alternative to ``eta.split_file()`` and ``eta.clips``. In most of the cases, you can built a event router with conditional ``emit()``,  which can be easily integerated into existing analsys and run in realtime.
 
 - ``abort()``
     Abort the analysis and return to Python code in the Script Panel, leaving the results at their current states. Unlike ``interrupt()``, the analysis task can neither be resumed by auto-feed nor by manual resumption.  
