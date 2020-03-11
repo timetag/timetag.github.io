@@ -28,7 +28,7 @@ For users who are not familiar with generators, we use Python generator to imple
 
 You can also implement your own generator using Clip class or a lower-level API `eta.clip_file`. One example is that you can poll a timetagger library to see if there is new records in memory ready for analysis, when performing ETA streaming analysis.
 
-eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout=0)
+eta.clip_file(filename, modify_clip=None, read_events=0, seek_event=-1, format=-1, wait_timeout=0)
 ......
 ``eta.clip_file`` takes the previous Clip and number of events to be read as input, and generates a new Clip by sliding the cut window in the time tag file.
 
@@ -42,10 +42,12 @@ eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout
     The path to the time tag file. Please note that if you run ETA Backend on a remote computer, you need to specify the path to file on that computer.
     
 - ``modify_clip``
-    If provided, this previous Clip will be modifed. ETA will slide the cut window in the time-tag file, starting from the ending position of the prevoius Clip.  It is useful for implementing real-time analysis by iteratively feeding the returned Clip to fetch newly generated events.
-
+    If provided, ETA will modifed this previous Clip instead of creating a new Clip object, for performance consideration. The ``modify_clip`` will contain timetag events from a new window in the timetag file after calling this function. 
+    
     .. note::
-        Please note that for performance consideration, the provided Clip ``modify_clip`` will be modified. The ``modify_clip`` will contain timetag events from a new window in the timetag file after calling this function. If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
+        When used together with ``seek_event=-1``, ETA will slide the a window with length ``read_events`` in the time-tag file, starting from the ending position of the prevoius Clip. It is useful for implementing real-time analysis by iteratively feeding the returned Clip to fetch newly generated events.
+        
+        If you would like to keep the old Clip, please make a deep copy of the Clip object before calling this function.
 
 - ``read_events``
     The number of desired events to be loaded into the returned Clip. Setting it to 0 will make ETA read the entire file.
@@ -58,6 +60,14 @@ eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout
         You can also set a negative value, then the number of records in this Clip will be calculated as the number of records between the ending of the last Clip to the current end of file minus the absolute value of this negative number. 
 
         The time tag file that serves as the FIFO when you perform a real-time analysis might have pre-initialized-but-not-yet-written areas, and the negative value here can help you get rid of that.
+
+
+- ``seek_event``
+    Setting the starting event number for reading. Setting to it ``0`` will force ETA to read from the first event after the file header. 
+    
+     .. note::
+        You shouldn't seek to arbitrary position in HdraHarp T3-like file, as the file format supports only continuous sequential read.
+
     
 - ``wait_timeout``
     Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If file failed to grow to the desired size, a shortened Clip to the current ending of the file will be loaded.
@@ -73,12 +83,12 @@ eta.clip_file(filename, modify_clip=None, read_events=0, format=-1, wait_timeout
         If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
 
 
-eta.clips(filename, modify_clip=None, rec_per_cut=1024*1024*10, format=-1, wait_timeout=0,  reuse_clips=True, keep_indexes=None)
+eta.clips(filename, modify_clip=None, read_events=1024*1024*10, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
 ``eta.clips`` makes a generator that yields Clips with a specified amount of new record read from the file. It is wrapper on top of `eta.clip_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_file()`, and also adds some new parameters.
 
-- ``rec_per_cut``
-    This amount of events will be read each time. This replaces the ``read_events`` in ``eta.clip_file``. 
+- ``read_events``
+    This amount of events will be read for each Clip that this generator yields. 
 
 - ``reuse_clips``
     If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. 
