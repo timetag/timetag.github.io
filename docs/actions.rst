@@ -231,6 +231,24 @@ Actions
 
     Cancelling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
 
+
+
+- ``interrupt()``
+    Pause the current analysis and return to Python code in the Script Panel, if auto-feed is disabled. 
+    
+    This is useful for implementing time-based cutting or region-of-interesting cutting. 
+    
+    You can use ``interrupt()`` to pause the analysis, when a certian event happens or a certian state is reached. Then, from the Python side you can get the current positions for every timetag Clips, which was provided as the sources in ``eta.run({sources},...)``. With those positions, you can later run analysis using some new clips constructed form the same file but with ``eta.clip_file(...,offest=the_interrupted_position)``
+    
+    .. note::
+    Please note that ``interrupt()`` will **NOT** do anything if auto-feed is enabled. Set ``max_autofeed=1`` and keep the reference to all of the provided clips in the sources, so that you can get the positions in the file.
+    
+    You may also need to keep the task discriptor, if you want to resume this analysis .
+
+- ``abort()``
+    Abort the analysis and return to Python code in the Script Panel, leaving the results at their current states. Unlike ``interrupt()``, the analysis task can neither be resumed by auto-feed nor by manual resumption.  
+
+    Cancelling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
 Examples
 ......
 
