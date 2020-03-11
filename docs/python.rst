@@ -65,9 +65,6 @@ eta.clip_file(filename, modify_clip=None, read_events=0, seek_event=-1, format=-
 - ``seek_event``
     Setting the starting event number for reading. Setting to it ``0`` will force ETA to read from the first event after the file header. 
     
-     .. note::
-        You shouldn't seek to arbitrary position in HdraHarp T3-like file, as the file format supports only continuous sequential read.
-
     
 - ``wait_timeout``
     Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If file failed to grow to the desired size, a shortened Clip to the current ending of the file will be loaded.
@@ -76,12 +73,12 @@ eta.clip_file(filename, modify_clip=None, read_events=0, seek_event=-1, format=-
     Format specifies the time-tag file format that you want to use in the analysis. The default is set to the auto detection of PicoQuant devices. You can also use the constant ``eta.FORMAT_SI`` for Swabian Instrument binary format, ``eta.quTAG_FORMAT_BINARY`` for quTAG 10-byte Binary format,  ``eta.quTAG_FORMAT_COMPRESSED`` for compressed quTAG binary format, or ``eta.bh_spc_4bytes`` for Becker & Hickl  SPC-134/144/154/830 format.
     
     .. note::
-        The format of time-tag you use might influence the time tag analysis results.
+        The format of time-tag you use might influence the analysis results in unexpected ways, through the nature of timing system it uses.
         
-        If the original file is recorded with absolute timing (like in HHT2 mode), then every cut should keep the same absolute timing. 
+        If the timetag file is recorded with absolute timing (default for most of the time taggers), then every cut should keep the same absolute timing. 
 
-        If the original file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero.
-
+        If the timetag file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero. You should be extremely careful when using ``seek_event`` to seek to arbitrary position, as the file format supports only continuous sequential read.
+        
 
 eta.clips(filename, modify_clip=None, read_events=1024*1024*10, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
