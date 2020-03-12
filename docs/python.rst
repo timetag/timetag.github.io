@@ -202,7 +202,7 @@ eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
         Users can also set this value to False and get a list of dict returned instead. Then they can use their own data aggregation methods, like concatenating to generate large images.
         
 - ``include_timing``
-    Specifies if the timing information ``eta_total_time``, ``eta_compute_time``, ``max_eta_total_time``, ``eta_compute_time`` should be appended into the results.
+    Specifies if the timing information ``eta_total_time``, ``eta_compute_time``, ``max_eta_total_time``, ``max_eta_compute_time`` should be appended into the results.
     
 
  Examples:
