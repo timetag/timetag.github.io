@@ -182,7 +182,7 @@ The analysis will block the execution of Python script until the **results are r
 - ``stop_with_source``
     Stop the analysis when any of the sources reaches its end. Set it to False if you want to run simulation without any source.
 
-eta.aggregrate(list_of_tasks, sum_results=True):
+eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
 ......
 ``eta.aggregrate`` will gather data form previous multi-threading anlaysis tasks started with ``return_results=False`` and put them together as the final results. If all previously anlaysis tasks haven't finished, ETA will block until all of them are finished. 
 
@@ -201,11 +201,16 @@ eta.aggregrate(list_of_tasks, sum_results=True):
         
         Users can also set this value to False and get a list of dict returned instead. Then they can use their own data aggregation methods, like concatenating to generate large images.
         
+- ``include_timing``
+    Specifies if the timing information ``eta_total_time``, ``eta_compute_time``, ``max_eta_total_time``, ``eta_compute_time`` should be appended into the results.
+    
+
  Examples:
 
     .. code-block:: python    
     
-            import os,math
+            import os,math,logging
+            logger = logging.getLogger('etabackend.frontend')
             threads = 4
             read_events = 1024*512
             file_byte_per_record = 4
@@ -220,7 +225,8 @@ eta.aggregrate(list_of_tasks, sum_results=True):
                 # keep the reference to the task descriptor
             results = eta.aggregrate(tasks)
             # block until all threads join, and aggregrate results 
-
+            logger.info("max_total_time: {0:.2f}s".format( results["max_eta_total_time"]))
+            logger.info("max_compute_time: {0:.2f}s".format( results["max_eta_compute_time"]))
         
 Interacting with ETA GUI
 -----
