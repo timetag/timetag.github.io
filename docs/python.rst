@@ -201,7 +201,27 @@ eta.aggregrate(list_of_tasks, sum_results=True):
         
         Users can also set this value to False and get a list of dict returned instead. Then they can use their own data aggregation methods, like concatenating to generate large images.
         
+ Examples:
 
+    .. code-block:: python    
+    
+            import os,math
+            threads = 4
+            read_events = 1024*512
+            file_byte_per_record = 4
+            index_range = int(math.ceil(os.path.getsize(str(file))/(file_byte_per_record*threads*read_events)))
+            tasks = []
+            for threadid in range(0,threads):
+                cutfile = eta.clips(file, read_events=read_events,keep_indexes=list(range(threadid*index_range,(threadid+1)*index_range)))
+                # assign different index_range to different clip generators, so that they read different parts of the original file
+                task1 = eta.run({'UniBuf1':cutfile}, group='compile',return_task=True,return_results=False)
+                # start a thread in the background
+                tasks.append(task1)
+                # keep the reference to the task descriptor
+            results = eta.aggregrate(tasks)
+            # block until all threads join, and aggregrate results 
+
+        
 Interacting with ETA GUI
 -----
 
