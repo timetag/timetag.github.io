@@ -210,8 +210,7 @@ eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
     .. code-block:: python    
     
             import os,math,logging
-            logger = logging.getLogger('etabackend.frontend')
-            threads = 4
+            threads = os.cpu_count()*2
             read_events = 1024*512
             file_byte_per_record = 4
             index_range = int(math.ceil(os.path.getsize(str(file))/(file_byte_per_record*threads*read_events)))
@@ -225,6 +224,8 @@ eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
                 # keep the reference to the task descriptor
             results = eta.aggregrate(tasks)
             # block until all threads join, and aggregrate results 
+            logger = logging.getLogger('etabackend.frontend')
+            logger.setLevel(logging.INFO)
             logger.info("max_total_time: {0:.2f}s".format( results["max_eta_total_time"]))
             logger.info("max_compute_time: {0:.2f}s".format( results["max_eta_compute_time"]))
         
