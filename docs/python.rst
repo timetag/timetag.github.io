@@ -222,7 +222,7 @@ eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
                 # start a thread in the background
                 tasks.append(task1)
                 # keep the reference to the task descriptor
-            results = eta.aggregrate(tasks)
+            results = eta.aggregrate(tasks,include_timing=True)
             # block until all threads join, and aggregrate results 
             logger = logging.getLogger('etabackend.frontend')
             logger.setLevel(logging.INFO)
