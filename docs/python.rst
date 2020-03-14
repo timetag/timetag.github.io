@@ -100,22 +100,6 @@ eta.clips(filename, modify_clip=None, read_events=1024*1024*10, seek_event=-1, f
 - ``keep_indexes``
     A list of indexes of the sliding windows for Clips that will be actually yielded. Other Clips will be skipped. Indexes start from 0 for the first window of ``[0,read_events]``, and index 1 means [read_events,read_events*2].
     
-    Examples:
-
-    .. code-block:: python    
-
-        #stop evaluation of timetag stream after 2%
-        cutfile = eta.split_file(file,100,keep_indexes=[1,2])
-        result = eta.run(cutfile)
-
-
-eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
-......
-
-``eta.split_file`` makes a generator yields Clips, that will split the file into a desired amount of equal size sections. It is wrapper on top of `eta.clips()`. It inherts most of the parameters from `eta.clips()`, and use ``cuts`` parameter that replaces the ``rec_per_cut`` in ``eta.clips``.
-
-- ``cuts``
-    The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. 
 
 eta.clips_list(filename, read_events=1024*1024, format=-1, threads=os.cpu_count()*2)
 ......
@@ -124,7 +108,28 @@ eta.clips_list(filename, read_events=1024*1024, format=-1, threads=os.cpu_count(
 Unlike ``eta.split_file``, which makes one single generator that splits the file into a certain number of equal size Clips and yield them one by one, ``eta.clips_list`` would return a list of generators, and each of them can ``eta.clips`` the file into a configurable ``read_events`` size.
 
 - ``threads``
-How many threads you want to use. It will decide how many sections you want to split the file into, and how many clips generators are returned.
+    How many threads you want to use. It will decide how many sections you want to split the file into, and how many clips generators are returned.
+
+
+eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
+......
+
+ **DEPRECATED** ``eta.split_file``  is simple wrapper on top of `eta.clips()`, that makes a generator yields Clips, that will split the file into a desired amount of equal size sections. It inherts most of the parameters from `eta.clips()`.
+
+- ``cuts``
+    The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. 
+       
+- ``keep_indexes``
+    A list of indexes of the sliding windows for Clips that will be actually yielded. Other Clips will be skipped. Indexes start from 0 for the first window of ``[0,read_events]``, and index 1 means [read_events,read_events*2].
+    
+    Examples:
+
+    .. code-block:: python    
+
+        #stop evaluation of timetag stream after 2%
+        cutfile = eta.split_file(file,100,keep_indexes=[1,2])
+        result = eta.run(cutfile)
+
 
 Executing Analysis
 -----
