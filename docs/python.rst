@@ -65,7 +65,6 @@ eta.clip_file(filename, modify_clip=None, read_events=0, seek_event=-1, format=-
 - ``seek_event``
     Setting the starting event number for reading. Setting to it ``0`` will force ETA to read from the first event after the file header. 
     
-    
 - ``wait_timeout``
     Value in seconds specifies the maximum waiting time. ETA will wait until the file grows to desired size. If file failed to grow to the desired size, a shortened Clip to the current ending of the file will be loaded.
     
@@ -80,13 +79,16 @@ eta.clip_file(filename, modify_clip=None, read_events=0, seek_event=-1, format=-
         If the timetag file is recorded with relative timing (like in HHT3 mode), then the absolute timing for each cut will take the first event in this cut as the reference of zero. You should be extremely careful when using ``seek_event`` to seek to arbitrary position, as the file format supports only continuous sequential read.
         
 
-eta.clips(filename, modify_clip=None, read_events=1024*1024*10, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
+eta.clips(filename, modify_clip=None, read_events=1024*1024*10, seek_event=-1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
 ``eta.clips`` makes a generator that yields Clips with a specified amount of new record read from the file. It is wrapper on top of `eta.clip_file()`. Instead of returning only one Clip object, it will return a generator that yields a Clip every time it called. It inherts most of the parameters from `eta.clip_file()`, and also adds some new parameters.
 
 - ``read_events``
     This amount of events will be read for each Clip that this generator yields. 
 
+- ``seek_event``
+    Setting the starting event number for reading the first clip. This parameter will be ignored starting from the second clip, as the second second clip would slide a window of ``read_events``. If you want to skip some windows, use ``keep_indexes`` instead.
+    
 - ``reuse_clips``
     If set to False, the previous Clip will not be modifed, and a new Clip will be created everytime it is called. 
 
@@ -96,7 +98,7 @@ eta.clips(filename, modify_clip=None, read_events=1024*1024*10, format=-1, wait_
         Please be careful when setting this to False, as it may cause memory leaking if the references are not handeled properly.
         
 - ``keep_indexes``
-    A list of indexes of Clips that will be actually yields. Other Clips will be discarded. Indexes start from 0 when first called.
+    A list of indexes of the sliding windows for Clips that will be actually yielded. Other Clips will be skipped. Indexes start from 0 for the first window of ``[0,read_events]``, and index 1 means [read_events,read_events*2].
     
     Examples:
 
@@ -105,7 +107,7 @@ eta.clips(filename, modify_clip=None, read_events=1024*1024*10, format=-1, wait_
         #stop evaluation of timetag stream after 2%
         cutfile = eta.split_file(file,100,keep_indexes=[1,2])
         result = eta.run(cutfile)
-  
+
 
 eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, reuse_clips=True, keep_indexes=None)
 ......
@@ -115,6 +117,14 @@ eta.split_file(filename,  modify_clip=None, cuts=1, format=-1, wait_timeout=0, r
 - ``cuts``
     The number of Clips that you want to generate. Default value is set to 1, thus the full time-tag will be returned in one cut descriptor. 
 
+eta.clips_list(filename, read_events=1024*1024, format=-1, threads=os.cpu_count()*2)
+......
+``eta.clips_list`` makes a list of generators using ``eta.clips`` for parallel analysis. It sets the ``keep_indexes`` or ``seek_event`` automatically for each of the generators, so that the file is splited into roughly equal sizes for each generators. 
+
+Unlike ``eta.split_file``, which makes one single generator that splits the file into a certain number of equal size Clips and yield them one by one, ``eta.clips_list`` would return a list of generators, and each of them can ``eta.clips`` the file into a configurable ``read_events`` size.
+
+- ``threads``
+How many threads you want to use. It will decide how many sections you want to split the file into, and how many clips generators are returned.
 
 Executing Analysis
 -----
@@ -209,25 +219,14 @@ eta.aggregrate(list_of_tasks, sum_results=True, include_timing=False):
 
     .. code-block:: python    
     
-            import os,math,logging
-            threads = os.cpu_count()*2
-            read_events = 1024*512
-            file_byte_per_record = 4
-            index_range = int(math.ceil(os.path.getsize(str(file))/(file_byte_per_record*threads*read_events)))
+            clipgens=eta.clips_list(file)
+            # assign different index_range to different clip generators, so that they read different parts of the original file
             tasks = []
-            for threadid in range(0,threads):
-                cutfile = eta.clips(file, read_events=read_events,keep_indexes=list(range(threadid*index_range,(threadid+1)*index_range)))
-                # assign different index_range to different clip generators, so that they read different parts of the original file
-                task1 = eta.run({'UniBuf1':cutfile}, group='compile',return_task=True,return_results=False)
-                # start a thread in the background
-                tasks.append(task1)
-                # keep the reference to the task descriptor
+            for cutfile in clipgens:
+                tasks.append( eta.run({'UniBuf1':cutfile}, group='compile',return_task=True,return_results=False))
+                # start a thread in the background for each clip generator
+                # and keep the reference to the task descriptor
             results = eta.aggregrate(tasks,include_timing=True)
-            # block until all threads join, and aggregrate results 
-            logger = logging.getLogger('etabackend.frontend')
-            logger.setLevel(logging.INFO)
-            logger.info("max_total_time: {0:.2f}s".format( results["max_eta_total_time"]))
-            logger.info("max_compute_time: {0:.2f}s".format( results["max_eta_compute_time"]))
         
 Interacting with ETA GUI
 -----
