@@ -128,7 +128,11 @@ Parameters
     The product of the histogram parameters bin size and bin number gives you the maximum correlation length, if you are performing a correlational analysis. 
     
     If the histogram is multi-dimensional, specify one tuple for each dimension, like ``[(100,16),(200,16)]``.
-
+    
+ .. note::
+ 
+    By default, the Nth bin in the histogram with bin width ``binsize`` includes the ``N*binsize`` and excludes the ``(N+1)*binsize``. Time interval modifier would be handy if you want want to flip this default policy. For example, if you have 16ps as binsize, and you want to exclude ``0ps, 16ps, ...`` and include ``16ps, 32ps,...`` form the ``fisrt, second, ...`` bins, simply put ``HISTOGRAM(h1,num_of_bins,16,"time-1")``.
+    
     If you need logarithmic binning, use ``HISTOGRAM(h1, [(100,24,"round(math.log(time))")])``.  The code actually works as if the time interval modifier is injected to every ``h1.record()`` throughout the recipe.
     
     If you need a super long linear histogram that exceeds the memory, try making a histogram with the time interval modifier ``"time-`histogramoffset`"``. This would move the position of "time zero", thus truncate the histogram to a given position from left.  Then you can set different the histogramoffet with Parameter on the main GUI, or from the Script Panel. You may run the same analysis many times with the same timetag file source but different ``histogramoffset``, and glue the histogram results together on a disk. 
@@ -199,6 +203,25 @@ Actions
 
 - ``coincidence.clear()``
     Clear all coincidence slots.
+
+
+INTEGER
+------------------------------
+``INTEGER(int_name, init_value)``
+
+Integer is a Tool that records a integer value. It will be shared across actions, embedded code, and it will be returned in the results.
+
+Parameters
+......
+
+- ``init_value`` (default: 0 )
+    The initial value for the integer that will be assigend right after starting a new analysis, before feeding in the fisrt Clip.
+
+Actions
+......
+
+- ``int_name=<liter_value>``
+    Assign value to an INTEGER tool. You can also use it in the embedded code.
 
 
 SELF
