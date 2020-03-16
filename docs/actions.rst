@@ -5,7 +5,7 @@ Virtual Instruments are used to perform timetag analysis in an ETA recipe. As me
 
 Each Action belongs to a certain Tool. Tools can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted. 
 
-For example, if you want to record a time interval of two events, you will need to create a Tool called CLOCK first, and then do Action clock.start() to start this clock.
+For example, if you want to record a time interval of two events, you can create a CLOCK Tool called ``clock`` first, and then do Action clock.start() to start this clock.
 
 In the following documentation, we list the built-in Tools and their Actions in the current version of ETA. 
 
