@@ -41,7 +41,9 @@ Currently, ETA supports the timetag format of devices from PicoQuant (HydraHarp 
 
 ETA provides support to the format of quTAG, HydraHarp, and Swebian Instrument time-tagger devices, with tested real-time g(2) analysis recipes that could help you with the diagnosis of experiment setups (e.g. the alignment of the optical path).
 
-[![ETA for realtime analysis](https://img.youtube.com/vi/EtHMVqtiPIA/0.jpg)](https://www.youtube.com/watch?v=EtHMVqtiPIA")
+Cick the video below to see how it works!
+
+[![ETA for realtime analysis](https://img.youtube.com/vi/jZfEFNOJwpM/0.jpg)](https://www.youtube.com/embed/jZfEFNOJwpM)
 
 ### Correlating data from multiple timetagers (NEW!)
 
