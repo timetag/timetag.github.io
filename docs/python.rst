@@ -289,6 +289,13 @@ You can also modify recipes programmatically. The recipe uploaded will be availb
 
 As an example, you can upload the template recipe from your LabVIEW program to ETA Backend via WebSocket (see Advanced Usages), and then change the parameters (like bin size for histograms) to get different results.
 
+eta.load_recipe(jsonobj=None)
+......
+Converting the ``jsonobj`` to a Recipe object and save it into eta.recipe. Then refresh compling cache if eta.recipe is modified.
+
+- ``jsonobj``
+    A JSON object parsed from ``.eta`` file. If not provided, the current ``eta.recipe`` will not be modifed.
+
 eta.recipe.get_parameter(name)
 ......
 Get a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be returned.
@@ -306,6 +313,9 @@ Set value of a parameter in a recipe using the name of the parameter. If there a
 - ``value``
     Value of the parameter, as shown in the ETA GUI.
     
+.. note::
+    The updated parameters will be applied to the next Run. Call ``eta.load_recipe()`` after finishing updating parameters and before ``eta.run`` if you want to apply it immediately.
+
 Using Third-party Libraries
 -----
 
