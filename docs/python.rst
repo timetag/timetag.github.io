@@ -298,24 +298,31 @@ Converting the ``jsonobj`` to a Recipe object and save it into eta.recipe. Then 
 
 eta.recipe.get_parameter(name)
 ......
-Get a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be returned.
+Get the value of a parameter in the recipe, given the name of the parameter. If there are multiple parameters with the same name, only the first one will be returned.
 
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
 eta.recipe.set_parameter(name, value)
 ......
-Set value of a parameter in a recipe using the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
+Set the value of a parameter in the recipe, given the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
 
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
 - ``value``
-    Value of the parameter, as shown in the ETA GUI.
+    The value of this parameter.
     
 .. note::
     The updated parameters will be applied to the next Run. Call ``eta.load_recipe()`` after finishing updating parameters and before ``eta.run`` if you want to apply it immediately.
 
+eta.recipe.del_parameter(name)
+......
+Delete a parameter in the recipe, given the name of the parameter. If there are multiple parameters with the same name, only the first one will be deleted.
+
+- ``name``
+    Name of the parameter, as shown in the ETA GUI.
+    
 Using Third-party Libraries
 -----
 
