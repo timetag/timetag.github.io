@@ -303,15 +303,18 @@ Get the value of a parameter in the recipe, given the name of the parameter. If 
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
-eta.recipe.set_parameter(name, value)
+eta.recipe.set_parameter(name, value=None, group=None)
 ......
-Set the value of a parameter in the recipe, given the name of the parameter. If there are multiple parameters with the same name, only the first one will be changed.
+Set the value (and group) of parameters in the recipe, given the name of the parameters. 
 
 - ``name``
     Name of the parameter, as shown in the ETA GUI.
     
 - ``value``
-    The value of this parameter.
+    The new value of this parameter. If None is given, the value will not be modified.
+    
+- ``group``
+    The new group of this parameter. If None is given, the group will not be modified.
     
 .. note::
     The updated parameters will be applied to the next Run. Call ``eta.load_recipe()`` after finishing updating parameters and before ``eta.run`` if you want to apply it immediately.
