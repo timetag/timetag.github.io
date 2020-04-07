@@ -58,6 +58,10 @@ Parameters
 .. note::
 
     Max Stop Times should be set to 1, and Max Start Times should be set to a very large number when doing correlational measurements, so that you correlate each signal on one channel to every signal on the other channel.
+    
+    The performance will NOT be influence if this value is very large, since only part of the clock will actually read during ``h1.record(c1)``, which is decided by the histogram size at compiling time.
+    
+    Auto-expanding of this valued **was removed** for performance consideration.  Because expanding will make the analysis stuck completely everytime it moves old recording to a new continuous memeory, and a linked-list based solution is not suitable here as it breaks the  caching for further analysis.
 
 Actions
 ......
