@@ -54,7 +54,7 @@ The latest version of ETA makes it easier to import and correlate timetag files 
 
 For a full installation, [download and install](https://eta.readthedocs.io/en/latest/installation.html) GUI and backend. Make sure to grab the latest [release](https://github.com/timetag/ETA/releases).
 
-If you are on Linux or MAC, get our backend via [pypi](https://pypi.org/project/etabackend/) and use the [ETA Web GUI](https://timetag.github.io/ETA/gui/src/renderer/) [(instructions)](https://eta.readthedocs.io/en/latest/installation.html#try-eta-without-installation) as a installation-free frontend. Of course, Windows users are free to do the same.
+If you are using Linux or Mac OS, our backend is also available on [pypi](https://pypi.org/project/etabackend/) and you can use your favorite web browser to launch the [ETA GUI (instructions)](https://eta.readthedocs.io/en/latest/installation.html) as a installation-free frontend. Of course, Windows users are free to do the same.
 
 ### Recipies
 
