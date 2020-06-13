@@ -1,4 +1,4 @@
-Customizing Script Panel
+Script Panel
 ===============================
 
 In the ETA recipe, Script Panel provides the user interface for each experiment. 
