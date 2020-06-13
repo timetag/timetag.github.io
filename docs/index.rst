@@ -13,8 +13,8 @@ Index
 
    intro
    installation
-   workflow
    recipes
+   workflow
    actions
    python
    advanced
