@@ -12,7 +12,7 @@ Add Virtual Instruments to perform analysis
 
 Click the ``Virtual Instruments`` button on the main screen to create a new analysis routine and open it in the Instrument Designer. 
 
-This is the place where you define how exactly the ETAbackend analyses your data.
+This is the place where you define how exactly the ETA backend analyses your data.
 
 You create an analysis instrument in two steps:
 
@@ -47,6 +47,15 @@ the chairs.
    The labelling mode for states can be entered the same way but names can be any string of allowed characters (alphanumeric and most special characters, but not spaces and commas).
    
    All states and transitions must be labelled.
+
+
+*  Add your time-tagger in Virtual Instruments
+
+Make an RFILE in the action panel.
+
+Specify the name for RFILE, assign the physically available channels and the number of marker channels.
+
+TODO: explain how to do it with  PicoQuant HydraHarp400
 
 *  We can use the state diagram described above to analyze a time tag file with two channels in a start-stop manner. For this we need to add a histogram into which we save the time differences between events. We also need a clock to record these time differences. Both these entities can be created with the help of the “Create” menu in the top bar of the Instrument Designer. You can also directly type into the code panel: 
   
@@ -135,14 +144,6 @@ TODO: explain all the analysis actions
           clear(coinci1,1)
           Clear coincidence event of coincidence tool coinci1.
 
-Add your time-tagger in Virtual Instruments
---------------------------
-
-Make an RFILE in the action panel.
-
-Specify the name for RFILE, assign the physically available channels and the number of marker channels.
-
-TODO: explain how to do it with  PicoQuant HydraHarp400
 
 Add Script Panel
 -----------------------
