@@ -15,6 +15,7 @@ Index
    installation
    recipes
    workflow
+   graph
    actions
    python
    advanced
