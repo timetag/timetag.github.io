@@ -1,7 +1,7 @@
 Tools and Actions
 ===============================
 
-Virtual Instruments are used to perform timetag analysis in an ETA recipe. As mentioned before, each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side. Actions can be put in the code panel to specify what should be done when there is a state change on the graph. 
+As mentioned before, Virtual Instruments are used to perform timetag analysis in an ETA recipe, and each Virtual Instrument consists of a graph on the left-hand side and a code panel on the right-hand side. Tools and Actions can be put in the code panel to specify what should be done when there is a state change on the graph. 
 
 Each Action belongs to a certain Tool. Tools can be created with a user-specified name and some other parameters. The name is used to refer to the Tool later when performing Actions. The parameters that have default values can be omitted. 
 
