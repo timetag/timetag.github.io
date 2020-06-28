@@ -101,7 +101,7 @@ The computer which runs the ETA Backend will do the number crunching and it migh
 Try ETA without installation
 --------
 
-You can access the  `ETA Web GUI <https://timetag.github.io/ETA/gui/src/renderer/>`_ on any platform with a Web browser. 
+You can access the  `ETA Web GUI <https://github.com/timetag/ETA/tree/master/etabackend/static>`_ on any platform with a Web browser. 
 
 .. note::
     Please note that the Web GUI will always follow the current master branch, and it may not match your ETA Backend version. 
