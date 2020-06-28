@@ -279,7 +279,7 @@ Actions
 - ``abort()``
     Abort the analysis and return to Python code in the Script Panel, leaving the results at their current states. Unlike ``interrupt()``, the analysis task can neither be resumed by auto-feed nor by manual resumption.  
 
-    Cancelling emitting a real channel from a timetag file will terminate the analysis before the ETA reaches the ending of the current section of the file.
+    
 Examples
 ......
 
