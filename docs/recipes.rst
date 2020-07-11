@@ -80,13 +80,7 @@ Frequently asked questions
 
 How are the channel number assigned in ETA?
 ......
-In order to easily migrate recipes between different time tagger hardware, ETA unifies the physical channels and virtual channels in the same "address space".
-
-* The physical channels start from 0.
-
-* The virtual channel can start anything between physical channels and 255 (255 is the +infinity in ETA). 
-
-* Markers are also physical channels, and they starts on 16 (on Hydraharp and quTAG) if they are enabled.
+In order to easily migrate recipes between different time tagger hardware, ETA unifies the physical channels and virtual channels in the same "address space". See RFILE in Tools.
 
 How is HHT3 mode different from other modes?
 ......
