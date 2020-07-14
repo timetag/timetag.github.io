@@ -112,7 +112,7 @@ Performing a start-stop measurement:
 
 HISTOGRAM
 ------------------------------
-``HISTOGRAM(name,[(number of bins, width of bins in picoseconds, time interval modifier)),...]``
+``HISTOGRAM(`name`,[(`number_of_bins`, `width_of_bins_in_picoseconds`, `time_interval_modifier`),...], [`image_pixels_x`, `image_pixels_y`])``
 
 Histogram generates statistics of time intervals. The time intervals that fall out of the histogram will be ignored.  Histograms can be 1-dimensional or multi-dimensional, and it can be put into an array that is 1-d or multi-d.
 
@@ -123,7 +123,7 @@ The histogram can be retrieved using its name from the returned dictionary from 
 Parameters
 ......
 
-- ``[(Number of bins, Width of bins in picoseconds, time interval modifier),...]`` (required)
+- ``[(`number_of_bins`, `width_of_bins_in_picoseconds`, `time_interval_modifier`),...]`` (required)
     A list of dimension specification. One tuple is used per dimension. The first value of the tuple indicates the number of bins in the histogram. The second value of the tuple indicates the size of each bin in the histogram. 
     
     The third value of the tuple is optional, it is a string of numba expression wrapped by ``""`` that modifies the time intervala. It should take a variable of the old time interval named ``time`` as the input, and returns the new time interval, which will be used later for locating the index of bins in this dimension. 
