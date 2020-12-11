@@ -44,11 +44,11 @@ For offical Python distribution:
 For Anaconda/Miniconda in separate environment:
 ,,,,
 
-*     Open the Anaconda promt and type the following lines. This will create a conda environment for ETA.
+*     Open the Anaconda promt and type the following lines. This will create a conda environment for ETA with python newer than 3.8 but not 3.9, yet (incompatible with llvmlite).
     
     .. code::
     
-        conda create -n ETA python=3
+        conda create -n ETA python=3.8
         conda install -n ETA pip
         activate ETA
         pip install etabackend
