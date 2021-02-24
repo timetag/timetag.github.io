@@ -167,6 +167,9 @@ Actions
 
 - ``histogram[x][y][...].record_all(clock,...)``
     Combination of ``histogram[x][y].record(clock,...)`` and ``histogram.record_all(clock)``
+    
+- ``histogram.clear()``
+    Zero-out the histogram. Useful for making a histogram of a given period of time. 
 
 Examples
 ......
