@@ -11,6 +11,8 @@ Extensible Timetag Analyzer
 [![ETA](https://eta.readthedocs.io/en/latest/_static/logo.png)
 ](https://eta.readthedocs.io/en/latest/?badge=latest)
 
+Our newly published [article (Z. Lin et al 2021 JINST 16 T08016)](https://doi.org/10.1088/1748-0221/16/08/T08016) explains the ideas underpinning ETA.
+
 ## Introduction
 
 ### What is time resolved measurements
@@ -59,3 +61,9 @@ If you are using Linux or Mac OS, our backend is also available on [pypi](https:
 ### Recipies
 
 Check out the pre-made [recipies](https://eta.readthedocs.io/en/latest/recipes.html) 🎉 that could be used immediately in your experiments.
+
+### Citing ETA
+
+ETA is a result of our scientific research. A Zenodo entry ([![DOI](https://zenodo.org/badge/125106142.svg)](https://zenodo.org/badge/latestdoi/125106142)) tracks every released version and can be cited in the 
+Methods section to help readers to identify the specific software version. We discuss the concepts behind ETA in our [recent article (Z. Lin et al 2021 JINST 16 T08016)](https://doi.org/10.1088/1748-0221/16/08/T08016)
+and would appreciate it if you cited it in your work.
