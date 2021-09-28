@@ -41,7 +41,7 @@ Currently, ETA supports timetag formats of devices from PicoQuant (HydraHarp T2&
 
 ### Realtime streaming analysis 
 
-ETA provides support to file formats of quTAG, HydraHarp, and Swabian Instruments time-to-digital devices, with tested real-time g(2) analysis recipes that could help you with diagnosing your experiment setup (e.g. the alignment of the optical path).
+ETA provides support to file formats of a wide range of time-to-digital devices, with tested real-time g(2) analysis recipes that could help you with diagnosing your experiment setup (e.g. the alignment of the optical path).
 
 Cick the video below to see how it works!
 
